@@ -7,8 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Accept" Label="appbarbutton"/>
+            <AppBarButton Icon="Cancel" Label="appbarbutton"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="74,155,0,0" TextWrapping="Wrap" Text="Testing 1234" VerticalAlignment="Top" Height="97" Width="205" TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Page>

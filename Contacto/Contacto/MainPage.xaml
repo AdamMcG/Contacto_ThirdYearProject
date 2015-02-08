@@ -8,7 +8,44 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="Header"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left" 
+                    Height="80"
+                    VerticalAlignment="Top"
+                    Width="400">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="HeaderImg1"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
+                <Image x:Name="HeaderImg2"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
+                <Image x:Name="HeaderImg3"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
+                <Image x:Name="HeaderImg4"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
+            </StackPanel>
+
+        </StackPanel>
+        <Pivot x:Name="ContentArea"  Grid.Row="1" Margin="0,-1,0,28">
+            <PivotItem x:Name="firstPage">
+                <Rectangle Fill="Crimson" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167" />
+            </PivotItem>
+            <PivotItem x:Name ="SecondPage">
+                <Rectangle Fill="Beige" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+            </PivotItem>
+            <PivotItem x:Name="ThirdPage">
+                <Rectangle Fill="Chocolate" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+            </PivotItem>
+            <PivotItem x:Name ="FourthPage">
+                <Rectangle Fill="DarkSlateGray" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+            </PivotItem>
+        </Pivot>
+
+
+
+
 
     </Grid>
 </Page>

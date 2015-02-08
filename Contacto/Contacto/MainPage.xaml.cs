@@ -44,5 +44,42 @@ namespace Contacto
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sender.Equals(HeaderImg1))
+            {
+                ContentArea.SelectedIndex = 0;
+            }
+            else if (sender.Equals(HeaderImg2))
+            {
+
+                ContentArea.SelectedIndex = 1;
+
+            }
+
+            else if (sender.Equals(HeaderImg3))
+            {
+
+                ContentArea.SelectedIndex = 2;
+            }
+            else
+            {
+
+                ContentArea.SelectedIndex = 3;
+            }
+
+        }
+
+ 
     }
 }

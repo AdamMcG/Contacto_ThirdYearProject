@@ -8,9 +8,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton Icon="Accept" Label="appbarbutton"/>
+            <AppBarButton Icon="Cancel" Label="appbarbutton"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
@@ -21,30 +28,101 @@
                     VerticalAlignment="Top"
                     Width="400">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="HeaderImg1"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
-                <Image x:Name="HeaderImg2"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
-                <Image x:Name="HeaderImg3"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
-                <Image x:Name="HeaderImg4"  Height="80" Width="100" Stretch="Fill" Source="ms-appx:///Assets/example_image.png"   Tapped="Image_Tapped"></Image>
+                <StackPanel.Background>
+                    <ImageBrush Stretch="Fill"/>
+                </StackPanel.Background>
+
+                <Canvas  x:Name="HeaderImg1" Width="100" Height="80" Background="#363951" Tapped="HeaderImg1_Tapped">
+                    <Path Width="50" Height="50" Canvas.Left="22" Canvas.Top="15" Stretch="Fill" Fill="#838192" Data="F1 M 24.0033,56.0078L 24.0033,38.0053L 22.0031,40.0056L 19.0027,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.0029L 49.0068,28.6882L 57.008,35.0049L 54.0075,40.0056L 52.0073,38.0053L 52.0073,56.0078L 24.0033,56.0078 Z M 38.0053,26.9204L 27.0038,36.005L 27.0038,53.0074L 33.0046,53.0074L 33.0046,42.006L 43.006,42.006L 43.006,53.0074L 49.0068,53.0074L 49.0068,36.005L 38.0053,26.9204 Z "/>
+                </Canvas>
+                <Canvas  x:Name="HeaderImg2" Width="100" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
+                    <Path Width="50" Height="50" Canvas.Left="22" Canvas.Top="15" Stretch="Fill" Fill="#838192" Data="F1 M 22,19L 24,19L 24,57L 22,57L 22,19 Z M 26,57L 26,19.0001L 53.9999,19.0001L 53.9999,57L 26,57 Z M 30,24L 30,27L 50,27L 50,24L 30,24 Z M 30,32L 30,35L 33,35L 33,32L 30,32 Z M 36,32L 36,35L 49,35L 49,32L 36,32 Z M 30,40L 30,43L 33,43L 33,40L 30,40 Z M 36,40L 36,43L 48,43L 48,40L 36,40 Z M 30,48L 30,51L 33,51L 33,48L 30,48 Z M 36,48L 36,51L 50,51L 50,48L 36,48 Z "/>
+                </Canvas>
+                <Canvas  x:Name="HeaderImg3" Width="100" Height="80" Background="#363951" Tapped="HeaderImg3_Tapped">
+                    <Path Width="50" Height="50" Canvas.Left="22" Canvas.Top="15" Stretch="Fill" Fill="#838192" Data="F1 M 38,26.9167C 42.618,26.9167 44.5972,29.5555 43.9312,35.0945C 44.5262,35.4358 44.9271,36.0773 44.9271,36.8125C 44.9271,37.7121 44.3269,38.4715 43.5051,38.7122C 43.1618,39.9358 42.6286,41.0191 41.9583,41.8856L 41.9583,46.0486C 44.1574,46.4884 45.9167,46.7083 48.5555,48.0278C 51.1944,49.3472 52.0741,50.5567 53.8333,52.316L 53.8333,58.5833L 22.1667,58.5833L 22.1666,52.316C 23.9259,50.5567 24.8055,49.3472 27.4444,48.0278C 30.0833,46.7083 31.8426,46.4884 34.0417,46.0486L 34.0417,41.8856C 33.3714,41.0191 32.8382,39.9358 32.4949,38.7121C 31.6731,38.4715 31.0729,37.7121 31.0729,36.8125C 31.0729,36.0773 31.4737,35.4358 32.0688,35.0945C 31.4028,29.5555 33.3819,26.9167 38,26.9167 Z M 25.8611,46.8403C 23.6735,47.9341 23.8824,47.7648 22.6094,49.0834L 12.6667,49.0833L 12.6667,42.816C 14.4259,41.0567 15.3056,39.8472 17.9444,38.5278C 20.5833,37.2083 22.3426,36.9884 24.5417,36.5486L 24.5417,32.3856C 23.8714,31.5191 23.3382,30.4359 22.9949,29.2122C 22.1731,28.9715 21.5729,28.2121 21.5729,27.3125C 21.5729,26.5773 21.9738,25.9358 22.5688,25.5945C 21.9028,20.0556 23.8819,17.4167 28.5,17.4167C 32.8315,17.4167 34.8414,20.9258 34.5246,25.7844C 31.6667,26.9167 30.0833,28.5 30.0896,33.1153C 29.4946,33.4566 29.0938,34.0982 29.0938,34.8333C 29.0938,35.7329 29.2981,36.8882 30.1199,37.1288C 30.4632,38.3525 30.9964,39.4358 31.6667,40.3023L 31.6667,44.8611C 29.4676,45.3009 28.5,45.5208 25.8611,46.8403 Z M 50.1389,46.8403C 47.5,45.5208 46.5324,45.3009 44.3333,44.8611L 44.3333,40.3023C 45.0036,39.4358 45.5368,38.3525 45.8801,37.1288C 46.7019,36.8882 46.9062,35.7329 46.9062,34.8333C 46.9062,34.0982 46.5054,33.4566 45.9104,33.1153C 45.9167,28.5 44.3333,26.9167 41.4754,25.7844C 41.1585,20.9257 43.1685,17.4167 47.5,17.4167C 52.118,17.4167 54.0972,20.0555 53.4312,25.5945C 54.0262,25.9358 54.4271,26.5773 54.4271,27.3125C 54.4271,28.2121 53.8269,28.9715 53.0051,29.2121C 52.6618,30.4358 52.1286,31.5191 51.4583,32.3856L 51.4583,36.5486C 53.6574,36.9884 55.4166,37.2083 58.0555,38.5278C 60.6944,39.8472 61.5741,41.0567 63.3333,42.816L 63.3333,49.0833L 53.3906,49.0833C 52.1176,47.7648 52.3265,47.9341 50.1389,46.8403 Z " UseLayoutRounding="False"/>
+                </Canvas>
+                <Canvas  x:Name="HeaderImg4" Width="100" Height="80" Background="#363951" Tapped="HeaderImg4_Tapped">
+                    <Path Width="50" Height="50" Canvas.Left="22" Canvas.Top="15" Stretch="Fill" Fill="#838192" Data="F1 M 49.0833,33.25C 53.4555,33.25 57,36.7944 57,41.1666C 57,45.5389 53.3723,48.9999 49,49L 23,49.0001C 20.8139,49 19,47.3111 19,45.125C 19,43.1866 20.3931,41.5737 22.2327,41.233C 22.1892,40.9533 22.1667,40.6667 22.1667,40.3749C 22.1667,37.3993 24.5122,34.9712 27.4553,34.8389C 28.7579,31.1462 32.2782,28.4999 36.4167,28.4999C 40.3458,28.4999 43.7179,30.8853 45.1637,34.2868C 46.3193,33.627 47.6573,33.25 49.0833,33.25 Z "/>
+                </Canvas>
+
             </StackPanel>
 
         </StackPanel>
-        <Pivot x:Name="ContentArea"  Grid.Row="1" Margin="0,-1,0,28">
+        <Pivot x:Name="ContentArea" Margin="0,0.5,0,-1" HorizontalAlignment="Left" Width="400" Grid.Row="1">
             <PivotItem x:Name="firstPage">
-                <Rectangle Fill="Crimson" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167" />
+                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="FirstPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
+                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               VerticalAlignment="Top"
+                               Height="412" 
+                               Width="380" 
+                               FontSize="14"/>
+                </Grid>
+
             </PivotItem>
-            <PivotItem x:Name ="SecondPage">
-                <Rectangle Fill="Beige" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+
+            <PivotItem x:Name="SecondPage">
+                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SecondPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
+                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               VerticalAlignment="Top"
+                               Height="412" 
+                               Width="380" 
+                               FontSize="14"/>
+
+                </Grid>
+
             </PivotItem>
+
             <PivotItem x:Name="ThirdPage">
-                <Rectangle Fill="Chocolate" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="ThirdPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
+                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               VerticalAlignment="Top"
+                               Height="412" 
+                               Width="380" 
+                               FontSize="14"/>
+                </Grid>
+
             </PivotItem>
-            <PivotItem x:Name ="FourthPage">
-                <Rectangle Fill="DarkSlateGray" HorizontalAlignment="Left" Height="526" Stroke="Black" VerticalAlignment="Top" Width="362" Margin="0,0,-0.333,-0.167"/>
+
+            <PivotItem x:Name="FourthPage">
+                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="FourthPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
+                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               VerticalAlignment="Top"
+                               Height="412" 
+                               Width="380" 
+                               FontSize="14"/>
+                </Grid>
+
             </PivotItem>
+
         </Pivot>
-
-
-
 
 
     </Grid>

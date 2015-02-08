@@ -45,38 +45,35 @@ namespace Contacto
             // this event is handled for you.
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+
+        private void CommandBar_Opened(object sender, object e)
         {
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
+
+            ContentArea.SelectedIndex = 0;
         }
 
-        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        private void HeaderImg2_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (sender.Equals(HeaderImg1))
-            {
-                ContentArea.SelectedIndex = 0;
-            }
-            else if (sender.Equals(HeaderImg2))
-            {
 
-                ContentArea.SelectedIndex = 1;
+            ContentArea.SelectedIndex = 1;
 
-            }
+        }
 
-            else if (sender.Equals(HeaderImg3))
-            {
+        private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ContentArea.SelectedIndex = 2;
 
-                ContentArea.SelectedIndex = 2;
-            }
-            else
-            {
+        }
 
-                ContentArea.SelectedIndex = 3;
-            }
+        private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ContentArea.SelectedIndex = 3;
 
         }
 

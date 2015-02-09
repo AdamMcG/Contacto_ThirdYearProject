@@ -77,8 +77,20 @@ namespace Contacto
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddContactPage));
-               
+          //  Frame.Navigate(typeof(AddContactPage));
+
+            NavigationContext nav = new NavigationContext()
+            {
+
+                ID = 1,
+                Name = "Test",
+                Description = "This is a test"
+
+            };
+
+            Frame.Navigate(typeof(AddContactPage), nav);
+   
+
         }
 
 

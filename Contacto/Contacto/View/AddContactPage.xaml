@@ -10,7 +10,7 @@
   
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton x:Name ="Back"  Icon="Back" Label="Add Contact" Click="AppBarButton_Click"/>
+            <AppBarButton x:Name ="Back"  Icon="Back" Label="Back" Click="AppBarButton_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -65,5 +65,6 @@
 
         <Button Content="Remove field" HorizontalAlignment="Left" Margin="185,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="133"/>
         <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="46,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="109" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
+        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,344.667,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
     </Grid>
 </Page>

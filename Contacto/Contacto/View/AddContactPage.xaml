@@ -28,12 +28,12 @@
             </Paragraph>
         </RichTextBlock>
 
-        <ScrollViewer HorizontalAlignment="Left" Height="319" Margin="30,20.833,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="364" Margin="30,20.833,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360"/>
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" Height="65" 
                     Margin="30,20.5,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" >
         		<Run Text="First"/>
         		<Run Text=" "/>
         		<Run Text="Name:"/>
@@ -55,14 +55,14 @@
         	HorizontalAlignment="Left" Height="65" 
         	Margin="30,179.5,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Phone"/>
         		<Run Text=" "/>
         		<Run Text="Number:"/>
             </TextBlock>
             <TextBox TextWrapping="Wrap" Text="Field 3"/>
         </StackPanel>
-
+  
         <Button Content="Remove field" HorizontalAlignment="Left" Margin="185,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="133"/>
         <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="46,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="109" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
     </Grid>

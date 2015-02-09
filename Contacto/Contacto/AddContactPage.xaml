@@ -29,29 +29,30 @@
             </Paragraph>
         </RichTextBlock>
         <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="46,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="109" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
-        <StackPanel Orientation="Horizontal" 
-                    HorizontalAlignment="Left" Height="41" 
-                    Margin="30,124.5,0,0" Grid.Row="1" 
-                    VerticalAlignment="top" Width="360">
-            <TextBlock Margin="10,0,0,0" FontSize="20" RenderTransformOrigin="0.142,2.869">
-        		<Run Text="First "/>
-        		<Run Text="Name:"/>
-            </TextBlock>
-            <TextBox Margin="20,0,0,0" TextWrapping="Wrap" Text="Field example 2" Width="231"/>
-        </StackPanel>
 
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" Height="65" 
-                    Margin="30,199.5,0,0" Grid.Row="1" 
+                    Margin="30,20.5,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Last"/>
         		<Run Text=" "/>
         		<Run Text="Name:"/>
             </TextBlock>
-            <TextBox TextWrapping="Wrap" Text="Field example 2"/>
+            <TextBox TextWrapping="Wrap" Text="Field 1"/>
         </StackPanel>
         <Button Content="Remove field" HorizontalAlignment="Left" Margin="185,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="133"/>
+        <StackPanel Orientation="Vertical" 
+        	HorizontalAlignment="Left" Height="65" 
+        	Margin="30, 100.5,0,0" Grid.Row="1" 
+        	VerticalAlignment="top" Width="360">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
+        		<Run Text="Last"/>
+        		<Run Text=" "/>
+        		<Run Text="Name:"/>
+            </TextBlock>
+            <TextBox TextWrapping="Wrap" Text="Field 2"/>
+        </StackPanel>
 
     </Grid>
 </Page>

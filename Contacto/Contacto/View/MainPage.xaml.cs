@@ -47,11 +47,6 @@ namespace Contacto
 
         
 
-        private void CommandBar_Opened(object sender, object e)
-        {
-
-        }
-
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
@@ -63,11 +58,13 @@ namespace Contacto
 
             ContentArea.SelectedIndex = 1;
 
+
         }
 
         private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentArea.SelectedIndex = 2;
+
 
         }
 
@@ -75,7 +72,15 @@ namespace Contacto
         {
             ContentArea.SelectedIndex = 3;
 
+
         }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AddContactPage));
+               
+        }
+
 
   
 

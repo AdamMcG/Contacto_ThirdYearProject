@@ -83,6 +83,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NavigationContext.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="View\AddContactPage.xaml.cs">
       <DependentUpon>AddContactPage.xaml</DependentUpon>
     </Compile>

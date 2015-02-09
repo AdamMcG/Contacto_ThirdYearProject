@@ -10,8 +10,8 @@
 
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Icon="Accept" Label="appbarbutton"/>
-            <AppBarButton Icon="Cancel" Label="appbarbutton"/>
+            <AppBarButton x:Name ="addContact"  Icon="AddFriend" Label="Add Contact" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Find" Label="Find Contact"   />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -32,7 +32,7 @@
                     <ImageBrush Stretch="Fill"/>
                 </StackPanel.Background>
 
-                <Canvas  x:Name="HeaderImg1" Width="100" Height="80" Background="#363951" Tapped="HeaderImg1_Tapped">
+                <Canvas  x:Name="HeaderImg1" Width="100" Height="80" Background="#363951"  Tapped="HeaderImg1_Tapped">
                     <Path Width="50" Height="50" Canvas.Left="22" Canvas.Top="15" Stretch="Fill" Fill="#838192" Data="F1 M 24.0033,56.0078L 24.0033,38.0053L 22.0031,40.0056L 19.0027,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.0029L 49.0068,28.6882L 57.008,35.0049L 54.0075,40.0056L 52.0073,38.0053L 52.0073,56.0078L 24.0033,56.0078 Z M 38.0053,26.9204L 27.0038,36.005L 27.0038,53.0074L 33.0046,53.0074L 33.0046,42.006L 43.006,42.006L 43.006,53.0074L 49.0068,53.0074L 49.0068,36.005L 38.0053,26.9204 Z "/>
                 </Canvas>
                 <Canvas  x:Name="HeaderImg2" Width="100" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
@@ -48,20 +48,21 @@
             </StackPanel>
 
         </StackPanel>
-        <Pivot x:Name="ContentArea" Margin="0,0.5,0,-1" HorizontalAlignment="Left" Width="400" Grid.Row="1">
+        <Pivot x:Name="ContentArea" Margin="0,104,0,-1" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2">
+
             <PivotItem x:Name="firstPage">
-                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
+                <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="FirstPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Home Page" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
-                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               Text="This is the home page, it will be used to display relevant notifications and will serve as a landing page when the user starts up this application." 
                                VerticalAlignment="Top"
-                               Height="412" 
-                               Width="380" 
+                               Height="366" 
+                               Width="339" 
                                FontSize="14"/>
                 </Grid>
 
@@ -74,12 +75,12 @@
                         <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SecondPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
-                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Contacts List" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                                Text="This page will be used to display the contacts that the user has stored on the phone."
                                VerticalAlignment="Top"
-                               Height="412" 
-                               Width="380" 
+                               Height="402" 
+                               Width="351" 
                                FontSize="14"/>
 
                 </Grid>
@@ -93,12 +94,12 @@
                         <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="ThirdPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
-                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Group List" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                               Text="This will be used to display the various lists that the user has defined."
                                VerticalAlignment="Top"
-                               Height="412" 
-                               Width="380" 
+                               Height="402" 
+                               Width="350" 
                                FontSize="14"/>
                 </Grid>
 
@@ -111,12 +112,12 @@
                         <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="FourthPage" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Uploads" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
-                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere porta augue, vel feugiat sapien pulvinar vel. Duis risus enim, venenatis ut vulputate vitae, posuere quis lorem. Praesent blandit scelerisque tortor, non elementum urna auctor et. Nulla laoreet odio dolor, vel aliquam felis imperdiet scelerisque. Phasellus sed porttitor felis. Sed varius efficitur urna sed semper. Suspendisse quis pharetra magna. Pellentesque magna nibh, convallis id purus ac, gravida viverra tortor. Etiam tristique scelerisque ex, at tempus sapien convallis eu. Donec quam eros, dapibus quis orci a, facilisis rutrum orci. Vestibulum aliquam ligula ac mauris imperdiet pretium. Aliquam pulvinar fermentum nulla ut facilisis. Vestibulum pulvinar dictum vulputate. Nulla facilisi." 
+                               Text = "This page will be used to facilitate upload/download functionality."
                                VerticalAlignment="Top"
-                               Height="412" 
-                               Width="380" 
+                               Height="373" 
+                               Width="365" 
                                FontSize="14"/>
                 </Grid>
 

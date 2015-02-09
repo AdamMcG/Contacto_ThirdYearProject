@@ -14,7 +14,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid>
+    <Grid Background="#0C0B15">
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="106*" />

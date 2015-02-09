@@ -48,7 +48,7 @@
             </StackPanel>
 
         </StackPanel>
-        <Pivot x:Name="ContentArea" Margin="0,104,0,-1" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2">
+        <Pivot x:Name="ContentArea" Margin="1,27.5,-1,-2" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.Row="1">
 
             <PivotItem x:Name="firstPage">
                 <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
@@ -124,7 +124,5 @@
             </PivotItem>
 
         </Pivot>
-
-
     </Grid>
 </Page>

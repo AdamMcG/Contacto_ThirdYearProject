@@ -18,7 +18,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="106*" />
-            <RowDefinition Height="2*"/>
             <RowDefinition Height="20*"/>
 
         </Grid.RowDefinitions>
@@ -28,20 +27,19 @@
 
             </Paragraph>
         </RichTextBlock>
-        <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="46,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="109" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
 
+        <ScrollViewer HorizontalAlignment="Left" Height="319" Margin="30,20.833,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360"/>
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" Height="65" 
                     Margin="30,20.5,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
-        		<Run Text="Last"/>
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+        		<Run Text="First"/>
         		<Run Text=" "/>
         		<Run Text="Name:"/>
             </TextBlock>
             <TextBox TextWrapping="Wrap" Text="Field 1"/>
         </StackPanel>
-        <Button Content="Remove field" HorizontalAlignment="Left" Margin="185,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="133"/>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
         	Margin="30, 100.5,0,0" Grid.Row="1" 
@@ -53,6 +51,19 @@
             </TextBlock>
             <TextBox TextWrapping="Wrap" Text="Field 2"/>
         </StackPanel>
+        <StackPanel Orientation="Vertical" 
+        	HorizontalAlignment="Left" Height="65" 
+        	Margin="30,179.5,0,0" Grid.Row="1" 
+        	VerticalAlignment="top" Width="360">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+        		<Run Text="Phone"/>
+        		<Run Text=" "/>
+        		<Run Text="Number:"/>
+            </TextBlock>
+            <TextBox TextWrapping="Wrap" Text="Field 3"/>
+        </StackPanel>
 
+        <Button Content="Remove field" HorizontalAlignment="Left" Margin="185,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="133"/>
+        <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="46,-3,0,0" Grid.Row="3" VerticalAlignment="Top" Height="58" Width="109" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
     </Grid>
 </Page>

@@ -48,7 +48,7 @@
             </StackPanel>
 
         </StackPanel>
-        <Pivot x:Name="ContentArea" Margin="1,27.5,-1,-2" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.Row="1">
+        <Pivot x:Name="ContentArea" Margin="0,104,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2">
 
             <PivotItem x:Name="firstPage">
                 <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
@@ -58,17 +58,17 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Home Page" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,-0.333" TextWrapping="Wrap" 
                                Text="This is the home page, it will be used to display relevant notifications and will serve as a landing page when the user starts up this application." 
                                VerticalAlignment="Top"
-                               Height="366" 
-                               Width="339" 
+                               Height="382" 
+                               Width="360" 
                                FontSize="14"/>
                 </Grid>
 
             </PivotItem>
 
-            <PivotItem x:Name="SecondPage">
+            <PivotItem x:Name="SecondPage" Margin="0,0,0,1">
                 <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -76,11 +76,11 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Contacts List" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="22,10,0,0" TextWrapping="Wrap" 
                                 Text="This page will be used to display the contacts that the user has stored on the phone."
                                VerticalAlignment="Top"
                                Height="402" 
-                               Width="351" 
+                               Width="339" 
                                FontSize="14"/>
 
                 </Grid>

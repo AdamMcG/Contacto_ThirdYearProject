@@ -106,6 +106,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\appbar.console.scale-100.png" />
+    <Content Include="Assets\appbar.group.png" />
     <Content Include="Assets\example_image.png" />
     <Content Include="Assets\NavBG.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />

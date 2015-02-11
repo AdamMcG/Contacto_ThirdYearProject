@@ -33,7 +33,7 @@
                     HorizontalAlignment="Left" Height="65" 
                     Margin="30,20.5,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="First"/>
         		<Run Text=" "/>
         		<Run Text="Name:"/>
@@ -55,7 +55,7 @@
         	HorizontalAlignment="Left" Height="65" 
         	Margin="30,179.5,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" SelectionChanged="TextBlock_SelectionChanged">
+            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" >
         		<Run Text="Phone"/>
         		<Run Text=" "/>
         		<Run Text="Number:"/>

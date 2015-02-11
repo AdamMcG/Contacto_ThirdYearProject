@@ -34,6 +34,9 @@ namespace Contacto
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            var nav = (NavigationContext)e.Parameter;
+            sampleData.Text = nav.Description;
+
         }
 
         private void AddField(object sender, RoutedEventArgs e)
@@ -44,6 +47,11 @@ namespace Contacto
         private void AddContact(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

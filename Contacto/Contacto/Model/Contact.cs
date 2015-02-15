@@ -8,28 +8,10 @@ namespace Contacto
 {
     class ContactModel
     {
-        private string _firstName;
-        public string firstName
-        {
-            get { return _firstName; }
-            set { 
-
-            
-            }
-        }
-        private string _lastName;
-        public string lastName
-        {
-            get { return _lastName; }
-            set { }
+        private Dictionary<string, string> contactList = new Dictionary<string,string>();
+        ContactModel()
+        { 
         
         }
-        private string _phoneNumber;
-        public string phoneNumber
-        {
-            get { return phoneNumber; }
-            set { }
-        }
-    
     }
 }

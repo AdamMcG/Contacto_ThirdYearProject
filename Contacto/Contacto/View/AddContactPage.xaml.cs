@@ -53,5 +53,10 @@ namespace Contacto
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

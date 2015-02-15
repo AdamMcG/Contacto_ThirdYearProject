@@ -10,29 +10,31 @@
 
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton x:Name ="Back"  Icon="Back" Label="Back" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Add" Label="Add field" Click="AppBarButton_Click_1"/>
+            <AppBarButton Icon="Remove" Label="RemoveField"/>
+            <AppBarButton Icon="Accept" Label="Add Contact"/>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid Background="#0C0B15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="73*"/>
-            <RowDefinition Height="399*" />
+            <RowDefinition  Height="53*" />
+            <RowDefinition Height="419*" />
             <RowDefinition Height="143*"/>
 
         </Grid.RowDefinitions>
-        <RichTextBlock Margin="0,0,0,8.333">
-            <Paragraph FontSize="45">
-                <Run Text="Adding a Contact"/>
+        <Grid Background="#363951" Margin="0,0,0,1.333">
+            <RichTextBlock Height="73" VerticalAlignment="Top">
+                <Paragraph FontSize="45">
+                    <Run Text="Adding a Contact"/>
+                </Paragraph>
+            </RichTextBlock>
+        </Grid>
+        <ScrollViewer HorizontalAlignment="Left" Height="287" Margin="30,23.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" RenderTransformOrigin="0.5,0.5"/>
 
-            </Paragraph>
-        </RichTextBlock>
-
-        <ScrollViewer HorizontalAlignment="Left" Height="287" Margin="30,20.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" RenderTransformOrigin="0.5,0.5"/> 
-        
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" Height="65" 
-                    Margin="30,20.667,0,0" Grid.Row="1" 
+                    Margin="30,23.667,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" >
         		<Run Text="First"/>
@@ -43,7 +45,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,100.667,0,0" Grid.Row="1" 
+        	Margin="30,103.667,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Last"/>
@@ -54,7 +56,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,179.667,0,0" Grid.Row="1" 
+        	Margin="30,182.667,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Phone"/>
@@ -64,8 +66,7 @@
             <TextBox TextWrapping="Wrap" Text="Field 3"/>
         </StackPanel>
 
-        <Button Content="Remove field" HorizontalAlignment="Left" Margin="198,-4.5,0,0" Grid.Row="2" VerticalAlignment="Top" Height="58" Width="133"/>
-        <Button x:Name="Add_field_button" Content="Add field" HorizontalAlignment="Left" Margin="35,-4.5,0,0" Grid.Row="2" VerticalAlignment="Top" Height="58" Width="133" RenderTransformOrigin="0.374,0.175" Click="AddField"/>
-        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,32.5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
+       
+        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,30.5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
     </Grid>
 </Page>

@@ -18,23 +18,23 @@
 
     <Grid Background="#0C0B15">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="53*" />
-            <RowDefinition Height="419*" />
+            <RowDefinition  Height="60*" />
+            <RowDefinition Height="412*" />
             <RowDefinition Height="143*"/>
 
         </Grid.RowDefinitions>
-        <Grid Background="#363951" Margin="0,0,0,1.333">
-            <RichTextBlock Height="73" VerticalAlignment="Top">
+        <Grid Background="#363951" Margin="0,0,0,2">
+            <RichTextBlock Height="58" VerticalAlignment="Top">
                 <Paragraph FontSize="45">
                     <Run Text="Adding a Contact"/>
                 </Paragraph>
             </RichTextBlock>
         </Grid>
-        <ScrollViewer HorizontalAlignment="Left" Height="287" Margin="30,23.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" RenderTransformOrigin="0.5,0.5"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="287" Margin="30,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" RenderTransformOrigin="0.5,0.5"/>
 
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" Height="65" 
-                    Margin="30,23.667,0,0" Grid.Row="1" 
+                    Margin="30,23,0,0" Grid.Row="1" 
                     VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" >
         		<Run Text="First"/>
@@ -45,7 +45,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,103.667,0,0" Grid.Row="1" 
+        	Margin="30,103,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Last"/>
@@ -56,7 +56,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,182.667,0,0" Grid.Row="1" 
+        	Margin="30,182,0,0" Grid.Row="1" 
         	VerticalAlignment="top" Width="360">
             <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
         		<Run Text="Phone"/>
@@ -66,7 +66,7 @@
             <TextBox TextWrapping="Wrap" Text="Field 3"/>
         </StackPanel>
 
-       
-        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,30.5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
+
+        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,29.333,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
     </Grid>
 </Page>

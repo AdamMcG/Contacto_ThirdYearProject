@@ -9,8 +9,12 @@ namespace Contacto.ViewModel
 {
     class ContactViewModel: INotifyPropertyChanged
     {
+        public ContactViewModel(){ 
+        
+        }
+
       Dictionary<string,string> Contact = new Dictionary<string, string>();
-      public void testDic()
+      public void AddContact()
       {
           Contact.Add("First name", "Adam");
 

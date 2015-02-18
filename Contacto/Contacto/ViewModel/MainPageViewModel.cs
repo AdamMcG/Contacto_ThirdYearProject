@@ -19,5 +19,7 @@ namespace Contacto.ViewModel
             { handle(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+
     }
 }

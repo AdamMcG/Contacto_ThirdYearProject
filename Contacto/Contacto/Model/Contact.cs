@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Contacto
 {
+    //This class is used to create a contact object to be added to the contact list. 
     class Contact
     {
         private int _uniqueContactID;

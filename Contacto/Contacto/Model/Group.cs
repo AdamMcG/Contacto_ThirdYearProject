@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Contacto.Model
 {
+    //This class is used to create a group made up of select contacts from the contact list. 
+    //contacts should be able to be a member of many groups. 
     class Group
     {
         private int uniqueGroupID;

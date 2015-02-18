@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace Contacto.ViewModel
 {
+    //This class is used to hold the business logic of the "add a contact" feature. 
+    //The add, update and delete methods should be in this class. 
     class ContactViewModel: INotifyPropertyChanged
     {
         public ContactViewModel(){ 
         
         }
 
-      Dictionary<string,string> Contact = new Dictionary<string, string>();
-      public void AddContact()
-      {
-          Contact.Add("First name", "Adam");
-
-      }
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

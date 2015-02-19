@@ -22,6 +22,7 @@ namespace Contacto
             set { firstName = value; }
         }
         private Dictionary<string, string> contactList = new Dictionary<string,string>();
+
       public  Contact(string first, string last, int uniqueID)
         {
             firstName = first;

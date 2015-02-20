@@ -24,7 +24,7 @@
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid Background="#363951" Margin="0,0,0,2">
-            <TextBlock Text ="Create A Contact" FontSize="40" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+            <TextBlock Text ="{Binding testing}" FontSize="40" FontWeight="SemiBold" HorizontalAlignment="Center"/>
         </Grid>
 
         <!--<StackPanel Margin="10,10.333,10,446" Orientation="Horizontal" Grid.Row="1">

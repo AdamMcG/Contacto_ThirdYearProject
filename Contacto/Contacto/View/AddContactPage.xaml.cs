@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Contacto.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -22,8 +23,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class AddContactPage : Page
     {
-
-
+        ContactViewModel c = new ContactViewModel();
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
 
@@ -88,6 +88,8 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var nav = (NavigationContext)e.Parameter;
+            var text = c;
+            this.DataContext = text;
         }
 
 
@@ -133,7 +135,7 @@ namespace Contacto
 
               // This adds the controls to the form (you will need to specify thier co-ordinates etc. first)
 
-              List.Items.Add(stackPan);;  
+              List.Items.Add(stackPan); 
             }
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)

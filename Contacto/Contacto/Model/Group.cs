@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Contacto.Model
@@ -12,6 +13,12 @@ namespace Contacto.Model
     //contacts should be able to be a member of many groups. 
     class Group
     {
+        Group(int ID, string name, ObservableCollection<Contact> myContacts)
+        {
+            uniqueGroupID = ID;
+            groupName = name;
+            myGroup = myContacts;
+        }
         private int uniqueGroupID;
         public int muGroup{ 
         get {return uniqueGroupID;}
@@ -23,12 +30,6 @@ namespace Contacto.Model
         set { groupName = value; }
         }
 
-        private string groupType;
-        public string muGroupType
-        {
-            get { return groupType; }
-            set { groupType = value; }
-        }
         private ObservableCollection<Contact> myGroup = new ObservableCollection<Contact>();
 
     }

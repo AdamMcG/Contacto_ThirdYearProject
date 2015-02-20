@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contacto
+namespace Contacto.Model
 {
     //This class is used to create a contact object to be added to the contact list. 
     class Contact
     {
-        private int _uniqueContactID;
-     public int uniqueContactID
+        private string _uniqueContactID;
+     public string uniqueContactID
         {
         get { return _uniqueContactID; }
         set { _uniqueContactID = value; }
@@ -21,15 +21,15 @@ namespace Contacto
             get { return firstName; }
             set { firstName = value; }
         }
-        private Dictionary<string, string> contactList = new Dictionary<string,string>();
 
-      public  Contact(string first, string last, int uniqueID)
+
+        private Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
+      public  Contact(string first, string last, string uniqueID)
         {
-            firstName = first;
+            this.firstName = first;
             uniqueContactID = uniqueID;
-            contactList.Add("first name:", "");
-            contactList.Add("last name:", "");
-            contactList.Add("Phone number:", "");
+            contactAttributes.Add("Unique ID", uniqueContactID);
+            contactAttributes.Add("First Name:", firstName);
         }
 
       public Contact()

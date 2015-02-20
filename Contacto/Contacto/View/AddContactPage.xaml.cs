@@ -23,7 +23,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class AddContactPage : Page
     {
-        ContactViewModel c = new ContactViewModel();
+        public ContactViewModel c = new ContactViewModel();
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
 

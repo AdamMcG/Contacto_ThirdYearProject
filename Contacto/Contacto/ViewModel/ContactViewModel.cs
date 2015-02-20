@@ -13,7 +13,22 @@ namespace Contacto.ViewModel
     //The add, update and delete methods should be in this class. 
     class ContactViewModel: INotifyPropertyChanged
     {
-        ObservableCollection<Contact> myContacts;
+        private string test = "this is databinding working";
+        public string testing
+        {
+            get { return test; }
+            set { 
+        if(value != test)
+        {
+            test = value;
+            NotifyPropertyChanged("testMe");
+        }
+        }}
+        public ContactViewModel()
+        {}
+
+
+        ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
 
         public ContactViewModel(Contact aContact){
             myContacts.Add(aContact);

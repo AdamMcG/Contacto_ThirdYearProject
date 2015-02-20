@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
+using Contacto.ViewModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -22,7 +23,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class AddContactPage : Page
     {
-        public ContactViewModel c = new ContactViewModel();
+        ContactViewModel c = new ContactViewModel();
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
 
@@ -87,6 +88,8 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var nav = (NavigationContext)e.Parameter;
+            var item = c;
+            this.DataContext = item;
         }
 
 

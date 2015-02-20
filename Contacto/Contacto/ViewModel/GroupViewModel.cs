@@ -12,7 +12,7 @@ namespace Contacto.ViewModel
     //Add group, update group and delete group should be implimented in this class. 
     class GroupViewModel
     {
-        ObservableCollection<Group> myGroup;
+         ObservableCollection<Group> myGroup =new ObservableCollection<Group>();
         GroupViewModel(Group aGroup){
             myGroup.Add(aGroup);
         }

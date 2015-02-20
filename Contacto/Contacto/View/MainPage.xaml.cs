@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Contacto.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -22,6 +23,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class MainPage : Page
     {
+         MainPageViewModel myMain = new MainPageViewModel();
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,13 +45,14 @@ namespace Contacto
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+            this.DataContext = myMain;
         }
 
         
 
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            
             ContentArea.SelectedIndex = 0;
         }
 

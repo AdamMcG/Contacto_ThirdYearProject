@@ -10,8 +10,12 @@ namespace Contacto.ViewModel
     //This handles the main page business logic. It should 
     class MainPageViewModel:INotifyPropertyChanged
     {
-        MainPageViewModel()
+        string testing;
+        public MainPageViewModel()
         { }
+
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

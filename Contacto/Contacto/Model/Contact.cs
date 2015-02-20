@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Contacto.Data;
 namespace Contacto.Model
 {
     //This class is used to create a contact object to be added to the contact list. 
@@ -29,17 +29,18 @@ namespace Contacto.Model
             set { phoneNumber = value; }
         }
         private string lastName;
-        public string mufirstName
+        public string muLastName
         {
             get { return lastName; }
             set { lastName = value; }
         }
     
         private Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
+
+        public Contact(Dictionary<string, string> myNewContact)
+        { contactAttributes = myNewContact; }
         
-        
-        
-        public  Contact(string first, string last, string uniqueID)
+        public Contact(string first, string last, string uniqueID)
         {
             firstName = first;
             uniqueContactID = uniqueID;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Contacto.Model
 {
@@ -31,6 +32,9 @@ namespace Contacto.Model
         }
 
         private ObservableCollection<Contact> myGroup = new ObservableCollection<Contact>();
-
+        public void SerialiseToJson(ObservableCollection<Contact> serialisedContacts)
+        {
+            MemoryStream m = new MemoryStream();
+        }
     }
 }

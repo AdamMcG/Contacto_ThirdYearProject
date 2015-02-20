@@ -10,11 +10,9 @@ namespace Contacto.ViewModel
 {
    //this class is used to handle the business logic of the Group function
     //Add group, update group and delete group should be implimented in this class. 
-   public class GroupViewModel
+    class GroupViewModel
     {
-       public GroupViewModel()
-       { }
-        ObservableCollection<Group> myGroup = new ObservableCollection<Group>();
+        ObservableCollection<Group> myGroup;
         GroupViewModel(Group aGroup){
             myGroup.Add(aGroup);
         }

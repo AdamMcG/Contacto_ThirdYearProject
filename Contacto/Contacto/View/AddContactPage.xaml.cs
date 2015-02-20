@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Contacto.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -88,8 +87,6 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var nav = (NavigationContext)e.Parameter;
-            var text = c;
-            this.DataContext = text;
         }
 
 
@@ -102,7 +99,7 @@ namespace Contacto
             textBoxes.Width = 180;
             textBoxes.VerticalAlignment = VerticalAlignment.Center;
             textBoxes.HorizontalAlignment = HorizontalAlignment.Right;
-            
+
 
             TextBox textBlocks = new TextBox();
             textBoxes.PlaceholderText = "Details";
@@ -122,20 +119,20 @@ namespace Contacto
             stackPan.Orientation = Orientation.Horizontal;
             fieldCounter++;
             indexLocation++;
-             
+
 
             
 
                 // Here you can modify the value of the textbox which is at textBoxes[i]
 
-           stackPan.Children.Add(textBlocks);
+                stackPan.Children.Add(textBlocks);
            stackPan.Children.Add(spacer);     
-           stackPan.Children.Add(textBoxes);
+                stackPan.Children.Add(textBoxes);
               
 
               // This adds the controls to the form (you will need to specify thier co-ordinates etc. first)
 
-              List.Items.Add(stackPan); 
+              List.Items.Add(stackPan);;  
             }
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
@@ -151,7 +148,7 @@ namespace Contacto
                 return;
             }
         }
-
+ 
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
             int numElements = List.Items.Count();

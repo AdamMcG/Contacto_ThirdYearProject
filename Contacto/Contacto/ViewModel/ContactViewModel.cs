@@ -27,6 +27,12 @@ namespace Contacto.ViewModel
         public ContactViewModel()
         {}
 
+        public string addContactToGroups(Contact myContact)
+        {
+            Group addingMyList = new Group(myContact);
+            return "Successful";
+        }
+
 
         ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
 

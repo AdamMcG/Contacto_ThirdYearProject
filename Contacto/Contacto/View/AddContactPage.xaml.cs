@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Contacto.ViewModel;
+using Contacto.Model;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -159,6 +161,9 @@ namespace Contacto
             for (int i = 0; i < numElements; i++){
                 List.Items.CopyTo(elements, i);
             }
+            Contact newContact = new Contact();
+            //newContact.add(some dictionary value to its dictionary)
+            c.addContactToGroups(newContact);
         }
  
     }

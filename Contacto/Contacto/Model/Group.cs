@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.IO;
 
@@ -20,6 +20,14 @@ namespace Contacto.Model
             groupName = name;
             myGroup = myContacts;
         }
+
+        public Group(Contact myContact)
+        {
+            this.myContact = myContact;
+            addToMainGroup(myContact);
+            writeSerialiseToJson(myContactList);
+        }
+
         private int uniqueGroupID;
         public int muGroup{ 
         get {return uniqueGroupID;}
@@ -32,9 +40,20 @@ namespace Contacto.Model
         }
 
         private ObservableCollection<Contact> myGroup = new ObservableCollection<Contact>();
-        public void SerialiseToJson(ObservableCollection<Contact> serialisedContacts)
+        private ObservableCollection<Contact> myContactList;
+        private Contact myContact;
+
+        public void addToMainGroup(Contact c)
         {
-            MemoryStream m = new MemoryStream();
+            myContactList.Add(c);
+        }
+        
+        public void writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
+        {
+            Stream jsonStream ;
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
+            ser.WriteObject(jsonStream,serialisedContacts);
+           
         }
     }
 }

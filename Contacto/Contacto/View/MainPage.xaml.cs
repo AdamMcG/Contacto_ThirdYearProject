@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
+using Contacto.ViewModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -22,6 +23,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        GroupViewModel g = new GroupViewModel();
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,6 +45,8 @@ namespace Contacto
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+            var item = g;
+            this.DataContext = item;
         }
 
         

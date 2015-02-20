@@ -22,31 +22,14 @@ namespace Contacto.Model
             set { firstName = value; }
         }
 
-        private string phoneNumber;
-        public string muPhoneNumber
-        {
-            get { return phoneNumber; }
-            set { phoneNumber = value; }
-        }
-        private string lastName;
-        public string mufirstName
-        {
-            get { return lastName; }
-            set { lastName = value; }
-        }
-    
+
         private Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
-        
-        
-        
-        public  Contact(string first, string last, string uniqueID)
+      public  Contact(string first, string last, string uniqueID)
         {
-            firstName = first;
+            this.firstName = first;
             uniqueContactID = uniqueID;
             contactAttributes.Add("Unique ID", uniqueContactID);
             contactAttributes.Add("First Name:", firstName);
-            contactAttributes.Add("Last Name:", lastName);
-            contactAttributes.Add("Phone Number:", phoneNumber);
         }
     }
 }

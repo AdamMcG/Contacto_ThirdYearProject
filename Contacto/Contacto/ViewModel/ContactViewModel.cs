@@ -11,12 +11,29 @@ namespace Contacto.ViewModel
 {
     //This class is used to hold the business logic of the "contact" feature. 
     //The add, update and delete methods should be in this class. 
-    class ContactViewModel: INotifyPropertyChanged
+   public class ContactViewModel: INotifyPropertyChanged
     {
-        ObservableCollection<Contact> myContacts;
-
+        private ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
+        private string testme= "This is working!";
+        public string testing
+        {
+            get { return testme; }
+            set {
+                if (value != testme)
+                {
+                    testme = value;
+                    NotifyPropertyChanged("testme");
+                }
+            }
+        }
         public ContactViewModel(Contact aContact){
+           
             myContacts.Add(aContact);
+        }
+
+        public ContactViewModel()
+        {
+
         }
 
         public void addContact(){

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Contacto.View;
 using Contacto.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -80,19 +81,15 @@ namespace Contacto
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-          //  Frame.Navigate(typeof(AddContactPage));
 
-            NavigationContext nav = new NavigationContext()
-            {
-
-                ID = 1,
-                Name = "Test",
-                Description = "This is a test"
-
-            };
-
-            Frame.Navigate(typeof(AddContactPage), nav);
+            Frame.Navigate(typeof(AddContactPage));
    
+
+        }
+
+        private void addGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(View.AddGroupPage));
 
         }
 

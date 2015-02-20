@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Contacto.View.BasicPage1"
+    x:Class="Contacto.View.AddGroupPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Contacto.View"
@@ -11,8 +11,7 @@
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton x:Name="FinishBtn" Icon="Accept" Label="Add Contact" Click="FinishBtn_Click"/>
-            <AppBarButton x:Name="AddFieldBtn" Label="Add field" Icon="Add" Click="AddFieldBtn_Click"></AppBarButton>
-            <AppBarButton x:Name="RemoveFieldBtn" Icon="Remove" Label="Remove Field" Click="RemoveFieldBtn_Click"/>
+            <AppBarButton x:Name="CancelBtn" Icon="Cancel" Label="Cancel" Click="CancelBtn_Click"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -29,18 +28,26 @@
 
 
         <ListView x:Name="Grouplist"
+                  Background="Tomato"
                   HorizontalAlignment="Stretch"
-                  Height="351"
-                  Margin="10,162.5,10,0"
+                  Height="307"
+                  Margin="10,206.5,10,0"
                   Grid.Row="1"
-                  VerticalAlignment="Top"
-                  />
-        <StackPanel HorizontalAlignment="Left" Height="71" Margin="10,10.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380">
+                  VerticalAlignment="Top"/>
 
-            <TextBlock Text="Group Name:"></TextBlock>
-            
+
+        <StackPanel HorizontalAlignment="Left" Height="71" Margin="10,10.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380" Orientation="Horizontal">
+
+            <TextBlock Text=" Group Name" Width="160" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+            <TextBox x:Name="groupNameTextBox" Width="200" PlaceholderText="enter Name" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBox>
+
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="71" Margin="10,86.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380"/>
+        <StackPanel HorizontalAlignment="Left" Height="120" Margin="10,81.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380" Orientation="Vertical">
+
+            <TextBlock Text="  Group Description" Width="300" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+            <TextBox x:Name = "groupDescription"  Width="360" PlaceholderText="Enter Description" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Margin="10,0" />
+
+        </StackPanel>
 
 
 

@@ -1,12 +1,14 @@
 ﻿using System;
 using Contacto;
 using System.Collections.Generic;
+using Windows.Storage;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.IO;
+using Contacto.Data;
 
 namespace Contacto.Model
 {
@@ -48,12 +50,16 @@ namespace Contacto.Model
             myContactList.Add(c);
         }
         
-        public void writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
+        public async void writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
         {
-            Stream jsonStream ;
+      /*      string jsonFile = "ContactData.json";
+            StorageFolder folder = new StorageFolder();
+            folder.GetFolder("ms-appx:///Data");
+            
+            Stream jsonStream = new Stream();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
             ser.WriteObject(jsonStream,serialisedContacts);
-           
+           */
         }
     }
 }

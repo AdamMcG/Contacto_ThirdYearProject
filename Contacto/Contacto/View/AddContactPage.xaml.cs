@@ -100,14 +100,19 @@ namespace Contacto
             textBoxes.Width = 180;
             textBoxes.VerticalAlignment = VerticalAlignment.Center;
             textBoxes.HorizontalAlignment = HorizontalAlignment.Right;
+            
 
-            TextBlock textBlocks = new TextBlock();
-            textBoxes.Text = "World";
-            textBlocks.Text = "Hello:\t";
+            TextBox textBlocks = new TextBox();
+            textBoxes.PlaceholderText = "Details";
+            textBlocks.PlaceholderText = "Field Name";
             textBlocks.FontSize = 20;
-            textBlocks.Width = 180;
+            textBlocks.Width = 160;
             textBlocks.VerticalAlignment = VerticalAlignment.Center;
             textBlocks.HorizontalAlignment = HorizontalAlignment.Left;
+
+            TextBlock spacer = new TextBlock();
+            spacer.Width = 20;
+            spacer.Opacity = 0;
 
             StackPanel stackPan = new StackPanel();
             stackPan.Height = 80;
@@ -115,12 +120,15 @@ namespace Contacto
             stackPan.Orientation = Orientation.Horizontal;
             fieldCounter++;
             indexLocation++;
+             
 
+            
 
                 // Here you can modify the value of the textbox which is at textBoxes[i]
 
-                stackPan.Children.Add(textBlocks);
-                stackPan.Children.Add(textBoxes);
+           stackPan.Children.Add(textBlocks);
+           stackPan.Children.Add(spacer);     
+           stackPan.Children.Add(textBoxes);
               
 
               // This adds the controls to the form (you will need to specify thier co-ordinates etc. first)
@@ -139,6 +147,15 @@ namespace Contacto
             else
             {
                 return;
+            }
+        }
+
+        private void FinishBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int numElements = List.Items.Count();
+            StackPanel[] elements = new StackPanel[numElements];
+            for (int i = 0; i < numElements; i++){
+                List.Items.CopyTo(elements, i);
             }
         }
  

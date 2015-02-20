@@ -31,5 +31,10 @@ namespace Contacto
             contactList.Add("last name:", "");
             contactList.Add("Phone number:", "");
         }
+
+      public Contact()
+      {
+      
+      }
     }
 }

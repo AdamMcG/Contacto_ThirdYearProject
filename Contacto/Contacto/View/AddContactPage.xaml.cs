@@ -162,7 +162,7 @@ namespace Contacto
                 List.Items.CopyTo(elements, i);
             }
             Contact newContact = new Contact();
-            //newContact.add(some dictionary value to its dictionary)
+            newContact.add();
             c.addContactToGroups(newContact);
         }
  

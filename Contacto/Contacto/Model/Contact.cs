@@ -35,7 +35,7 @@ namespace Contacto.Model
             set { lastName = value; }
         }
     
-        private Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
+        public Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
 
         public Contact(Dictionary<string, string> myNewContact)
         { contactAttributes = myNewContact; }

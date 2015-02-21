@@ -26,8 +26,8 @@ namespace Contacto.Model
         public Group(Contact myContact)
         {
             this.myContact = myContact;
-            addToMainGroup(myContact);
-            writeSerialiseToJson(myContactList);
+            myContactList.Add(myContact);
+           
         }
 
         private int uniqueGroupID;
@@ -42,24 +42,47 @@ namespace Contacto.Model
         }
 
         private ObservableCollection<Contact> myGroup = new ObservableCollection<Contact>();
-        private ObservableCollection<Contact> myContactList;
+        private ObservableCollection<Contact> myContactList = new ObservableCollection<Contact>();
         private Contact myContact;
 
-        public void addToMainGroup(Contact c)
+        private async Task writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
         {
-            myContactList.Add(c);
-        }
-        
-        public async void writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
-        {
-      /*      string jsonFile = "ContactData.json";
-            StorageFolder folder = new StorageFolder();
-            folder.GetFolder("ms-appx:///Data");
-            
-            Stream jsonStream = new Stream();
+         string jsonFile = "ContactData.json";
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
-            ser.WriteObject(jsonStream,serialisedContacts);
-           */
+                using (var stream = await ApplicationData.Current
+                .LocalFolder.OpenStreamForWriteAsync(jsonFile, CreationCollisionOption.ReplaceExisting)){
+               ser.WriteObject(stream,serialisedContacts);
+            } 
         }
+
+
+        private async Task readFromSerialisedJson(ObservableCollection<Contact>myContactList) 
+        {
+            String myString = "";
+            var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("ContactData.json");
+            using (StreamReader reader = new StreamReader(myStream))
+            {
+                myString = await reader.ReadToEndAsync();
+
+            }
+        }
+
+        private async void deserialiseJson(string a)
+        { String content = string.Empty;
+        ObservableCollection<Contact> contList;
+        var jsonSerialiser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
+        var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("ContactData.json");
+        contList = (ObservableCollection<Contact>)jsonSerialiser.ReadObject(myStream);
+        foreach (var contact in contList)
+        {
+            content += String.Format("ID:{0}, Firstname:{1},Lastname:{2},phoneNumber{3}", 
+                contact.contactAttributes.ContainsKey("Unique ID"),
+                contact.contactAttributes.ContainsKey("First Name:"),
+                contact.contactAttributes.ContainsKey("Last Name:"), 
+                contact.contactAttributes.ContainsKey("Phone Number: "));
+        }
+        a = content;
+        }
+    
     }
 }

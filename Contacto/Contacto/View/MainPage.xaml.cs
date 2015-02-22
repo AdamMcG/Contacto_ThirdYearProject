@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -45,18 +46,22 @@ namespace Contacto
             // this event is handled for you.
         }
 
+ 
         
 
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
             ContentArea.SelectedIndex = 0;
+            SelectOpacity1.Begin();
+
         }
 
         private void HeaderImg2_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
             ContentArea.SelectedIndex = 1;
+            
 
 
         }
@@ -64,6 +69,8 @@ namespace Contacto
         private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentArea.SelectedIndex = 2;
+
+
 
 
         }
@@ -77,22 +84,60 @@ namespace Contacto
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-          //  Frame.Navigate(typeof(AddContactPage));
+       
 
-            NavigationContext nav = new NavigationContext()
-            {
-
-                ID = 1,
-                Name = "Test",
-                Description = "This is a test"
-
-            };
-
-            Frame.Navigate(typeof(AddContactPage), nav);
+            Frame.Navigate(typeof(AddContactPage));
    
 
         }
 
+        private void ContentArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ContentArea.SelectedIndex == 0)
+            {
+
+                HeaderIcon1.Opacity = 100;
+                HeaderIcon2.Opacity = 0;
+                HeaderIcon3.Opacity = 0;
+                HeaderIcon4.Opacity = 0;
+
+            }
+            else if (ContentArea.SelectedIndex == 1)
+            {
+
+                HeaderIcon1.Opacity = 0;
+                HeaderIcon2.Opacity = 100;
+                HeaderIcon3.Opacity = 0;
+                HeaderIcon4.Opacity = 0;
+
+
+            }
+            else if (ContentArea.SelectedIndex == 2)
+            {
+
+
+                HeaderIcon1.Opacity = 0;
+                HeaderIcon2.Opacity = 0;
+                HeaderIcon3.Opacity = 100;
+                HeaderIcon4.Opacity = 0;
+
+            }
+            else
+            {
+
+                HeaderIcon1.Opacity = 0;
+                HeaderIcon2.Opacity = 0;
+                HeaderIcon3.Opacity = 0;
+                HeaderIcon4.Opacity = 100;
+
+            }
+            
+            
+
+
+        }
+
+      
 
   
 

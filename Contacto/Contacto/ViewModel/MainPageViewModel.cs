@@ -12,6 +12,8 @@ namespace Contacto.ViewModel
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handle = PropertyChanged;

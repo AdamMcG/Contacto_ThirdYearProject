@@ -12,7 +12,7 @@
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Icon="Add" Label="Add field" Click="AppBarButton_Click_1"/>
             <AppBarButton Icon="Remove" Label="RemoveField"/>
-            <AppBarButton Icon="Accept" Label="Add Contact"/>
+            <AppBarButton Icon="Accept" Label="Add Contact" Click="AppBarButton_Click_2"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -24,7 +24,7 @@
 
         </Grid.RowDefinitions>
         <Grid Background="#363951" Margin="0,0,0,1.333">
-            <RichTextBlock Height="73" VerticalAlignment="Top">
+            <RichTextBlock Height="52" VerticalAlignment="Top" Margin="10,0">
                 <Paragraph FontSize="45">
                     <Run Text="Adding a Contact"/>
                 </Paragraph>
@@ -41,7 +41,7 @@
         		<Run Text=" "/>
         		<Run Text="Name:"/>
             </TextBlock>
-            <TextBox TextWrapping="Wrap" Text="Field 1"/>
+            <TextBox x:Name="FNameField" TextWrapping="Wrap" Text="Field 1"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
@@ -52,7 +52,7 @@
         		<Run Text=" "/>
         		<Run Text="Name:"/>
             </TextBlock>
-            <TextBox TextWrapping="Wrap" Text="Field 2"/>
+            <TextBox x:Name="LNameField" TextWrapping="Wrap" Text="Field 2"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" 
         	HorizontalAlignment="Left" Height="65" 
@@ -63,10 +63,10 @@
         		<Run Text=" "/>
         		<Run Text="Number:"/>
             </TextBlock>
-            <TextBox TextWrapping="Wrap" Text="Field 3"/>
+            <TextBox x:Name="PNumField" TextWrapping="Wrap" Text="Field 3"/>
         </StackPanel>
 
-       
+
         <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,30.5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
     </Grid>
 </Page>

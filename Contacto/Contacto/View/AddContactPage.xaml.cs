@@ -35,7 +35,6 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var nav = (NavigationContext)e.Parameter;
-            sampleData.Text = nav.Description;
 
         }
 
@@ -56,6 +55,15 @@ namespace Contacto
 
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            string firstName = FNameField.Text;
+            string lastName = LNameField.Text;
+            string phoneNum = PNumField.Text;
+         
 
         }
     }

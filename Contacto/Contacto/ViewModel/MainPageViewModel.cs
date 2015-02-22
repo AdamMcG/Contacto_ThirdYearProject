@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Contacto.ViewModel
 {
+    //This handles the main page business logic. It should 
     class MainPageViewModel:INotifyPropertyChanged
     {
-
-
+        public MainPageViewModel()
+        { }
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -21,5 +22,7 @@ namespace Contacto.ViewModel
             { handle(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+
     }
 }

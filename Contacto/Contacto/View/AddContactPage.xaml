@@ -9,64 +9,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Icon="Add" Label="Add field" Click="AppBarButton_Click_1"/>
-            <AppBarButton Icon="Remove" Label="RemoveField"/>
-            <AppBarButton Icon="Accept" Label="Add Contact" Click="AppBarButton_Click_2"/>
-        </CommandBar>
+        <CommandBar ClosedDisplayMode="Compact">
+            <AppBarButton x:Name="FinishBtn" Icon="Accept" Label="Add Contact" Click="FinishBtn_Click"/>
+            <AppBarButton x:Name="Cancel" Icon="Cancel" Label="Cancel" Click="Cancel_Click"></AppBarButton>
+            <AppBarButton x:Name="AddFieldBtn" Label="Add field" Icon="Add" Click="AddFieldBtn_Click"></AppBarButton>
+            <AppBarButton x:Name="RemoveFieldBtn" Icon="Remove" Label="Remove Field" Click="RemoveFieldBtn_Click"/>
+        </CommandBar> 
     </Page.BottomAppBar>
+
+
 
     <Grid Background="#0C0B15">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="53*" />
-            <RowDefinition Height="419*" />
-            <RowDefinition Height="143*"/>
-
+            <RowDefinition  Height="0.5*" />
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
-        <Grid Background="#363951" Margin="0,0,0,1.333">
-            <RichTextBlock Height="52" VerticalAlignment="Top" Margin="10,0">
-                <Paragraph FontSize="45">
-                    <Run Text="Adding a Contact"/>
-                </Paragraph>
-            </RichTextBlock>
+        <Grid Background="#363951" Margin="0,0,0,2">
+            <TextBlock Text ="{Binding testing}" FontSize="40" FontWeight="SemiBold" HorizontalAlignment="Center"/>
         </Grid>
-        <ScrollViewer HorizontalAlignment="Left" Height="287" Margin="30,23.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" RenderTransformOrigin="0.5,0.5"/>
 
-        <StackPanel Orientation="Vertical" 
-                    HorizontalAlignment="Left" Height="65" 
-                    Margin="30,23.667,0,0" Grid.Row="1" 
-                    VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869" >
-        		<Run Text="First"/>
-        		<Run Text=" "/>
-        		<Run Text="Name:"/>
-            </TextBlock>
-            <TextBox x:Name="FNameField" TextWrapping="Wrap" Text="Field 1"/>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" 
-        	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,103.667,0,0" Grid.Row="1" 
-        	VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
-        		<Run Text="Last"/>
-        		<Run Text=" "/>
-        		<Run Text="Name:"/>
-            </TextBlock>
-            <TextBox x:Name="LNameField" TextWrapping="Wrap" Text="Field 2"/>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" 
-        	HorizontalAlignment="Left" Height="65" 
-        	Margin="30,182.667,0,0" Grid.Row="1" 
-        	VerticalAlignment="top" Width="360">
-            <TextBlock FontSize="20" RenderTransformOrigin="0.142,2.869">
-        		<Run Text="Phone"/>
-        		<Run Text=" "/>
-        		<Run Text="Number:"/>
-            </TextBlock>
-            <TextBox x:Name="PNumField" TextWrapping="Wrap" Text="Field 3"/>
-        </StackPanel>
+        <!--<StackPanel Margin="10,10.333,10,446" Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="Hello:   " VerticalAlignment="Center" FontSize="36" />
+            <TextBox Width="200"></TextBox>
+        </StackPanel>-->
+
+        <ListView x:Name="List"
+                  HorizontalAlignment="Stretch"
+                  Height="503"
+                  Margin="10,10.333,10,0"
+                  Grid.Row="1"
+                  VerticalAlignment="Top"
+                  />
 
 
-        <TextBlock x:Name="sampleData" HorizontalAlignment="Left" Margin="30,30.5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="110"/>
+
     </Grid>
 </Page>

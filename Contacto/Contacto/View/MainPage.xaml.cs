@@ -11,8 +11,9 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Contacto.View;
+using Contacto.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -23,11 +24,17 @@ namespace Contacto
     /// </summary>
     public sealed partial class MainPage : Page
     {
+         MainPageViewModel myMain = new MainPageViewModel();
         public MainPage()
         {
             this.InitializeComponent();
 
+
             this.NavigationCacheMode = NavigationCacheMode.Required;
+           
+       
+
+        
         }
 
         /// <summary>
@@ -44,24 +51,22 @@ namespace Contacto
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+            this.DataContext = myMain;
         }
 
- 
-        
+
+     
 
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            
             ContentArea.SelectedIndex = 0;
-            SelectOpacity1.Begin();
-
         }
 
         private void HeaderImg2_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
             ContentArea.SelectedIndex = 1;
-            
 
 
         }
@@ -69,8 +74,6 @@ namespace Contacto
         private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentArea.SelectedIndex = 2;
-
-
 
 
         }
@@ -84,60 +87,18 @@ namespace Contacto
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-       
 
             Frame.Navigate(typeof(AddContactPage));
    
 
         }
 
-        private void ContentArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void addGroup_Click(object sender, RoutedEventArgs e)
         {
-            if (ContentArea.SelectedIndex == 0)
-            {
-
-                HeaderIcon1.Opacity = 100;
-                HeaderIcon2.Opacity = 0;
-                HeaderIcon3.Opacity = 0;
-                HeaderIcon4.Opacity = 0;
-
-            }
-            else if (ContentArea.SelectedIndex == 1)
-            {
-
-                HeaderIcon1.Opacity = 0;
-                HeaderIcon2.Opacity = 100;
-                HeaderIcon3.Opacity = 0;
-                HeaderIcon4.Opacity = 0;
-
-
-            }
-            else if (ContentArea.SelectedIndex == 2)
-            {
-
-
-                HeaderIcon1.Opacity = 0;
-                HeaderIcon2.Opacity = 0;
-                HeaderIcon3.Opacity = 100;
-                HeaderIcon4.Opacity = 0;
-
-            }
-            else
-            {
-
-                HeaderIcon1.Opacity = 0;
-                HeaderIcon2.Opacity = 0;
-                HeaderIcon3.Opacity = 0;
-                HeaderIcon4.Opacity = 100;
-
-            }
-            
-            
-
+            Frame.Navigate(typeof(View.AddGroupPage));
 
         }
 
-      
 
   
 

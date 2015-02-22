@@ -24,6 +24,7 @@ namespace Contacto.ViewModel
             NotifyPropertyChanged("testMe");
         }
         }}
+       
         public ContactViewModel()
         {}
 
@@ -32,7 +33,6 @@ namespace Contacto.ViewModel
             Group addingMyList = new Group(myContact);
             return "Successful";
         }
-
 
         ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
 

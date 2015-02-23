@@ -23,7 +23,7 @@
         </Style>
 
         <Style TargetType="Path" x:Key="HeaderStyleSelected" x:Name="HeaderStyleSelected">
-            <Setter Property="Fill" Value="White"/>
+            <Setter Property="Fill" Value="Silver"/>
         </Style>
     </Page.Resources>
 

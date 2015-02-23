@@ -12,8 +12,10 @@ namespace Contacto
 
         //Sample Data
 
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        private int ID { get; set; }
+        private string FirstName { get; set; }
+        private string LastName { get; set; }
+        private string PhoneNumber { get; set; }
+
     }
 }

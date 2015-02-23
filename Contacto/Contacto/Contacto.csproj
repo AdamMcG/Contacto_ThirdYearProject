@@ -85,7 +85,6 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Data\ContactDataSource.cs" />
     <Compile Include="Model\Group.cs" />
-    <Compile Include="NavigationContext.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="View\AddContactPage.xaml.cs">

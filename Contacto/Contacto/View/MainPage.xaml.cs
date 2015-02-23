@@ -24,12 +24,26 @@ namespace Contacto
     /// </summary>
     public sealed partial class MainPage : Page
     {
-         MainPageViewModel myMain = new MainPageViewModel();
+
+        MainPageViewModel myMain = new MainPageViewModel();
+        
+
+
+
         public MainPage()
         {
             this.InitializeComponent();
 
+            HeaderIcon1.Style = HeaderStyleSelected;
+            HeaderIcon2.Style = HeaderStyleUnselected;
+            HeaderIcon3.Style = HeaderStyleUnselected;
+            
+
             this.NavigationCacheMode = NavigationCacheMode.Required;
+           
+       
+
+        
         }
 
         /// <summary>
@@ -49,7 +63,8 @@ namespace Contacto
             this.DataContext = myMain;
         }
 
-        
+
+     
 
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -69,15 +84,14 @@ namespace Contacto
         {
             ContentArea.SelectedIndex = 2;
 
-
         }
 
-        private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            ContentArea.SelectedIndex = 3;
+        //private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    ContentArea.SelectedIndex = 3;
 
 
-        }
+        //}
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -91,6 +105,42 @@ namespace Contacto
         {
             Frame.Navigate(typeof(View.AddGroupPage));
 
+        }
+
+        private void ContentArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ContentArea.SelectedIndex == 0)
+            {
+
+                HeaderIcon1.Style = HeaderStyleSelected;
+                HeaderIcon2.Style = HeaderStyleUnselected;
+                HeaderIcon3.Style = HeaderStyleUnselected;
+
+
+            }
+            else if (ContentArea.SelectedIndex == 1)
+            {
+
+                HeaderIcon1.Style = HeaderStyleUnselected;
+                HeaderIcon2.Style = HeaderStyleSelected;
+                HeaderIcon3.Style = HeaderStyleUnselected;
+
+
+            }
+            else if (ContentArea.SelectedIndex == 2)
+            {
+
+                HeaderIcon1.Style = HeaderStyleUnselected;
+                HeaderIcon2.Style = HeaderStyleUnselected;
+                HeaderIcon3.Style = HeaderStyleSelected;
+            }
+            else {
+
+                HeaderIcon1.Style = HeaderStyleSelected;
+                HeaderIcon2.Style = HeaderStyleUnselected;
+                HeaderIcon3.Style = HeaderStyleUnselected;
+            
+            }
         }
 
 

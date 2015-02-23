@@ -27,27 +27,83 @@
         </Grid>
 
 
-        <ListView x:Name="Grouplist"
-                  Background="Tomato"
-                  HorizontalAlignment="Stretch"
-                  Height="307"
-                  Margin="10,206.5,10,0"
-                  Grid.Row="1"
-                  VerticalAlignment="Top"/>
-
 
         <StackPanel HorizontalAlignment="Left" Height="71" Margin="10,10.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380" Orientation="Horizontal">
 
-            <TextBlock Text=" Group Name" Width="160" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
-            <TextBox x:Name="groupNameTextBox" Width="200" PlaceholderText="enter Name" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBox>
+            <TextBlock Text="Group Name" Width="170"  FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+            <TextBox x:Name="groupNameTextBox" Width="200" PlaceholderText="Enter Name" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBox>
 
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="120" Margin="10,81.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380" Orientation="Vertical">
 
-            <TextBlock Text="  Group Description" Width="300" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
-            <TextBox x:Name = "groupDescription"  Width="360" PlaceholderText="Enter Description" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Margin="10,0" />
+            <TextBlock Text="Group Description" Height="40" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBox x:Name = "groupDescription"  Width="360" TextWrapping="Wrap" PlaceholderText="Enter Description" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Margin="10,0" />
 
         </StackPanel>
+
+
+
+        <ListView x:Name="Grouplist"
+                  HorizontalAlignment="Stretch"
+                  Height="320"
+                  Margin="0,206.5,0,0"
+                  Grid.Row="1"
+                  VerticalAlignment="Top">
+
+            <StackPanel Orientation="Horizontal" Height="60" Width="400" Background="#363951">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="60" Width="400">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="60" Width="400" Background="#363951">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="60" Width="400">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+
+
+
+            <StackPanel Orientation="Horizontal" Height="60" Width="400" Background="#363951">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="60" Width="400">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="60" Width="400" Background="#363951">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="60" Width="400">
+
+                <TextBlock Width="180" Height="40" Text=" ContactName" FontSize="25"/>
+                <TextBlock Width="160" Height="40" Text="Placeholder" FontSize="25"/>
+                <CheckBox />
+            </StackPanel>
+        </ListView>
+
 
 
 

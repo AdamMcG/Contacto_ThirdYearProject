@@ -28,13 +28,29 @@ namespace Contacto
         ContactViewModel c = new ContactViewModel();
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
-
+        ListView addList = new ListView();
 
         public AddContactPage()
         {
 
 
             this.InitializeComponent();
+
+
+            addList.HorizontalAlignment = HorizontalAlignment.Stretch;
+            addList.Height = 500;
+            addList.VerticalAlignment = VerticalAlignment.Top;
+            toAddGrid.Children.Add(addList);
+
+
+                 //<ListView x:Name="List"
+                 // HorizontalAlignment="Stretch"
+                 // Height="503"
+                 // Margin="10,10.333,10,0"
+                 // Grid.Row="1"
+                 // VerticalAlignment="Top"
+                 // />
+
 
             int n = 3;
             StackPanel[] stackPan = new StackPanel[n];
@@ -78,7 +94,7 @@ namespace Contacto
 
             for (int i = 0; i < n; i++)
             {
-                List.Items.Add(stackPan[i]);
+                addList.Items.Add(stackPan[i]);
                 fieldCounter++;
                 indexLocation++;
 
@@ -89,7 +105,7 @@ namespace Contacto
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var nav = (NavigationContext)e.Parameter;
+        //    var nav = (NavigationContext)e.Parameter;
             var item = c;
             this.DataContext = item;
         }
@@ -100,19 +116,21 @@ namespace Contacto
         {
 
 
-            TextBox textBoxes = new TextBox();
-            textBoxes.Width = 180;
-            textBoxes.VerticalAlignment = VerticalAlignment.Center;
-            textBoxes.HorizontalAlignment = HorizontalAlignment.Right;
+            TextBox fieldEntry = new TextBox();
+            fieldEntry.PlaceholderText = "Field Name";
+            fieldEntry.FontSize = 20;
+            fieldEntry.Width = 160;
+            fieldEntry.VerticalAlignment = VerticalAlignment.Center;
+            fieldEntry.HorizontalAlignment = HorizontalAlignment.Left;
 
 
-            TextBox textBlocks = new TextBox();
-            textBoxes.PlaceholderText = "Details";
-            textBlocks.PlaceholderText = "Field Name";
-            textBlocks.FontSize = 20;
-            textBlocks.Width = 160;
-            textBlocks.VerticalAlignment = VerticalAlignment.Center;
-            textBlocks.HorizontalAlignment = HorizontalAlignment.Left;
+
+            TextBox detailsEntry = new TextBox();
+            detailsEntry.Width = 180;
+            detailsEntry.PlaceholderText = "Details";
+            detailsEntry.VerticalAlignment = VerticalAlignment.Center;
+            detailsEntry.HorizontalAlignment = HorizontalAlignment.Right;
+
 
             TextBlock spacer = new TextBlock();
             spacer.Width = 20;
@@ -128,23 +146,19 @@ namespace Contacto
 
             
 
-                // Here you can modify the value of the textbox which is at textBoxes[i]
-
-                stackPan.Children.Add(textBlocks);
+            stackPan.Children.Add(fieldEntry);
            stackPan.Children.Add(spacer);     
-                stackPan.Children.Add(textBoxes);
+            stackPan.Children.Add(detailsEntry);
               
 
-              // This adds the controls to the form (you will need to specify thier co-ordinates etc. first)
-
-              List.Items.Add(stackPan);;  
+           addList.Items.Add(stackPan);
             }
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
             if (fieldCounter > 3)
             {
-                List.Items.RemoveAt(indexLocation);
+                addList.Items.RemoveAt(indexLocation);
                 fieldCounter--;
                 indexLocation--;
             }
@@ -156,13 +170,17 @@ namespace Contacto
  
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
-            int numElements = List.Items.Count();
-            StackPanel[] elements = new StackPanel[numElements];
-            for (int i = 0; i < numElements; i++){
-                List.Items.CopyTo(elements, i);
-            }
+
+
+
             Contact newContact = new Contact();
+          //  newContact.add();
             c.addContactToGroups(newContact);
+        }
+ 
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
  
     }

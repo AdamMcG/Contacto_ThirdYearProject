@@ -29,6 +29,8 @@ namespace Contacto
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
         ListView addList = new ListView();
+        AddContactViewModel AddViewModel = new AddContactViewModel();
+
 
         public AddContactPage()
         {
@@ -43,62 +45,18 @@ namespace Contacto
             toAddGrid.Children.Add(addList);
 
 
-                 //<ListView x:Name="List"
-                 // HorizontalAlignment="Stretch"
-                 // Height="503"
-                 // Margin="10,10.333,10,0"
-                 // Grid.Row="1"
-                 // VerticalAlignment="Top"
-                 // />
+
+            
+            addList.Items.Add(AddViewModel.initalizePage("First Name"));
+            addList.Items.Add(AddViewModel.initalizePage("Last Name"));
+            addList.Items.Add(AddViewModel.initalizePage("Phone Number"));
+            
+            
 
 
-            int n = 3;
-            StackPanel[] stackPan = new StackPanel[n];
-            TextBlock[] textBlocks = new TextBlock[n];
-            TextBox[] textBoxes = new TextBox[n];
+            fieldCounter = fieldCounter + 3;
+            indexLocation = indexLocation + 3;
 
-            for (int i = 0; i < n; i++)
-            {
-                stackPan[i] = new StackPanel();
-                stackPan[i].Height = 80;
-                stackPan[i].Width = 370;
-                stackPan[i].Orientation = Orientation.Horizontal;
-
-                textBoxes[i] = new TextBox();
-                textBoxes[i].Width = 180;
-                textBoxes[i].VerticalAlignment = VerticalAlignment.Center;
-                textBoxes[i].HorizontalAlignment = HorizontalAlignment.Right;
-
-
-                textBlocks[i] = new TextBlock();
-                textBlocks[i].Width = 180;
-                textBlocks[i].FontSize = 20;
-                textBlocks[i].VerticalAlignment = VerticalAlignment.Center;
-                textBlocks[i].HorizontalAlignment = HorizontalAlignment.Right;
-
-            }
-
-
-            textBlocks[0].Text = "First Name:\t";
-
-            textBlocks[1].Text = "Last Name:\t";
-
-            textBlocks[2].Text = "Phone Number:\t";
-
-            for (int i = 0; i < n; i++)
-            {
-                stackPan[i].Children.Add(textBlocks[i]);
-                stackPan[i].Children.Add(textBoxes[i]);
-                
-            }
-
-            for (int i = 0; i < n; i++)
-            {
-                addList.Items.Add(stackPan[i]);
-                fieldCounter++;
-                indexLocation++;
-
-            }
 
         }
 
@@ -116,42 +74,12 @@ namespace Contacto
         {
 
 
-            TextBox fieldEntry = new TextBox();
-            fieldEntry.PlaceholderText = "Field Name";
-            fieldEntry.FontSize = 20;
-            fieldEntry.Width = 160;
-            fieldEntry.VerticalAlignment = VerticalAlignment.Center;
-            fieldEntry.HorizontalAlignment = HorizontalAlignment.Left;
-
-
-
-            TextBox detailsEntry = new TextBox();
-            detailsEntry.Width = 180;
-            detailsEntry.PlaceholderText = "Details";
-            detailsEntry.VerticalAlignment = VerticalAlignment.Center;
-            detailsEntry.HorizontalAlignment = HorizontalAlignment.Right;
-
-
-            TextBlock spacer = new TextBlock();
-            spacer.Width = 20;
-            spacer.Opacity = 0;
-
-            StackPanel stackPan = new StackPanel();
-            stackPan.Height = 80;
-            stackPan.Width = 370;
-            stackPan.Orientation = Orientation.Horizontal;
             fieldCounter++;
             indexLocation++;
 
-
+            StackPanel stackPan = AddViewModel.createList(); 
             
-
-            stackPan.Children.Add(fieldEntry);
-           stackPan.Children.Add(spacer);     
-            stackPan.Children.Add(detailsEntry);
-              
-
-           addList.Items.Add(stackPan);
+            addList.Items.Add(stackPan);
             }
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
@@ -171,11 +99,34 @@ namespace Contacto
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            
+
+            for (int i = 0; i <= indexLocation; i++)
+            {
 
 
-            Contact newContact = new Contact();
-          //  newContact.add();
-            c.addContactToGroups(newContact);
+                string s = AddViewModel.getFieldData(i);
+                string t = AddViewModel.getDetailsData(i);
+
+                TextBlock test = new TextBlock();
+                test.Text = s;
+                test.FontSize = 18;
+                test.Width = 100;
+                test.Height = 100;
+
+                TextBlock test2 = new TextBlock();
+                test2.Text = t;
+                test2.FontSize = 18;
+                test2.Width = 100;
+                test2.Height = 100;
+
+                addList.Items.Add(test);
+                addList.Items.Add(test2);
+            }
+
+              Contact newContact = new Contact();
+              //  newContact.add();
+                c.addContactToGroups(newContact);
         }
  
         private void Cancel_Click(object sender, RoutedEventArgs e)

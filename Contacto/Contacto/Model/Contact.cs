@@ -7,7 +7,7 @@ using Contacto.Data;
 namespace Contacto.Model
 {
     //This class is used to create a contact object to be added to the contact list. 
-    class Contact
+    public class Contact
     {
         private string _uniqueContactID;
      public string uniqueContactID
@@ -52,7 +52,13 @@ namespace Contacto.Model
 
       public Contact()
       {
-      
+          firstName = "test";
+          lastName = "testing";
+            phoneNumber = "0000112";
+            contactAttributes.Add("Unique ID","1");
+          contactAttributes.Add("First name: ", firstName);
+          contactAttributes.Add("Last Name:" , lastName);
+          contactAttributes.Add("Phone number", phoneNumber);
       }
     }
 }

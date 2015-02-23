@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Contacto.Model;
 using System.Threading.Tasks;
+using Contacto.Data;
 
 namespace Contacto.ViewModel
 {
@@ -28,13 +29,15 @@ namespace Contacto.ViewModel
         public ContactViewModel()
         {}
 
-        public string addContactToGroups(Contact myContact)
+        public async void addContactToGroups(Contact myContact)
         {
             Group addingMyList = new Group(myContact);
-            return "Successful";
+            ContactDataSource a = new ContactDataSource(addingMyList);
+            await a.writeSerialiseToJson(addingMyList);
+            
         }
 
-        ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> myContacts = new ObservableCollection<Contact>();
 
         public ContactViewModel(Contact aContact){
             myContacts.Add(aContact);

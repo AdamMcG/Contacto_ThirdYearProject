@@ -162,7 +162,6 @@ namespace Contacto
                 List.Items.CopyTo(elements, i);
             }
             Contact newContact = new Contact();
-            newContact.add();
             c.addContactToGroups(newContact);
         }
  

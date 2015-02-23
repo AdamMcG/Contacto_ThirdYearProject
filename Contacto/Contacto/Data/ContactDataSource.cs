@@ -18,19 +18,25 @@ namespace Contacto.Data
 {
       
         public sealed class ContactDataSource{
-            private async Task writeSerialiseToJson(ObservableCollection<Contact> serialisedContacts)
+            Group myGroup = new Group();
+            public ContactDataSource(Group myGroup)
+            {
+                this.myGroup = myGroup;
+            }
+
+            public async Task writeSerialiseToJson(Group myContact)
             {
                 string jsonFile = "ContactData.json";
-                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Group));
                 using (var stream = await ApplicationData.Current
                 .LocalFolder.OpenStreamForWriteAsync(jsonFile, CreationCollisionOption.ReplaceExisting))
                 {
-                    ser.WriteObject(stream, serialisedContacts);
+                    ser.WriteObject(stream, myContact);
                 }
             }
 
 
-            private async Task readFromSerialisedJson(ObservableCollection<Contact> myContactList)
+            public async Task readFromSerialisedJson()
             {
                 String myString = "";
                 var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("ContactData.json");
@@ -41,11 +47,11 @@ namespace Contacto.Data
                 }
             }
 
-            private async void deserialiseJson(string a)
+            public async void deserialiseJson(string a)
             {
                 String content = string.Empty;
                 ObservableCollection<Contact> contList;
-                var jsonSerialiser = new DataContractJsonSerializer(typeof(ObservableCollection<Contact>));
+                var jsonSerialiser = new DataContractJsonSerializer(typeof(Group));
                 var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("ContactData.json");
                 contList = (ObservableCollection<Contact>)jsonSerialiser.ReadObject(myStream);
                 foreach (var contact in contList)

@@ -4,4 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Contacto">
 
+    
+    <Application.Resources>
+        <DataTemplate x:Key="stackPanel">
+            <StackPanel Width="400" Height="400" Background="AliceBlue"></StackPanel>
+        </DataTemplate>
+        
+        
+    </Application.Resources>
+    
 </Application>

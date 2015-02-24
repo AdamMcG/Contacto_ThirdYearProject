@@ -33,7 +33,6 @@
             <RowDefinition />
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-
         <StackPanel x:Name="Header"
                     Grid.Row="0"
                     HorizontalAlignment="Left" 
@@ -117,9 +116,11 @@
 
             </PivotItem>
 
-            <PivotItem x:Name="SecondPage" Margin="0,0,0,1">
-                <ListView HorizontalAlignment="Left" Height="499" VerticalAlignment="Top" Width="400"/>
-
+            <PivotItem x:Name="SecondPage" Margin="0,0,0,1" DataContext="{Binding listOfContacts[1]}">
+                <ListView HorizontalAlignment="Left" 
+                          Height="499" VerticalAlignment="Top" Width="400">
+                    <TextBlock Text="{Binding mufirstName}" FontSize="34"></TextBlock>
+                </ListView>
             </PivotItem>
 
             <PivotItem x:Name="ThirdPage">

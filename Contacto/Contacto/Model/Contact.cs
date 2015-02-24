@@ -40,18 +40,19 @@ namespace Contacto.Model
         public Contact(Dictionary<string, string> myNewContact)
         { contactAttributes = myNewContact; }
         
-        public Contact(string first, string last, string uniqueID)
+        public Contact(string uniqueID,string first, string last, string phoneNumber)
         {
             firstName = first;
             uniqueContactID = uniqueID;
+            lastName = last;
+            this.phoneNumber = phoneNumber;
             contactAttributes.Add("Unique ID", uniqueContactID);
             contactAttributes.Add("First Name:", firstName);
             contactAttributes.Add("Last Name:", lastName);
             contactAttributes.Add("Phone Number:", phoneNumber);
         }
 
-      public Contact()
-      {
+      public Contact() {
           firstName = "test";
           lastName = "testing";
             phoneNumber = "0000112";

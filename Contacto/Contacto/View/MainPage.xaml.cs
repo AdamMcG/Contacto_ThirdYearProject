@@ -14,7 +14,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Contacto.View;
 using Contacto.ViewModel;
-
+using Contacto.Data;
+using Contacto.Model;
+using Contacto.Common;
+using Windows.ApplicationModel.Resources;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Contacto
@@ -25,11 +28,10 @@ namespace Contacto
     public sealed partial class MainPage : Page
     {
 
+        ContactDataSource cont = new ContactDataSource();
         MainPageViewModel myMain = new MainPageViewModel();
+        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         
-
-
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,12 +40,17 @@ namespace Contacto
             HeaderIcon2.Style = HeaderStyleUnselected;
             HeaderIcon3.Style = HeaderStyleUnselected;
             
-
+           
             this.NavigationCacheMode = NavigationCacheMode.Required;
            
        
 
         
+        }
+
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -64,8 +71,6 @@ namespace Contacto
         }
 
 
-     
-
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             
@@ -76,14 +81,12 @@ namespace Contacto
         {
 
             ContentArea.SelectedIndex = 1;
-
-
         }
+
 
         private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentArea.SelectedIndex = 2;
-
         }
 
         //private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)

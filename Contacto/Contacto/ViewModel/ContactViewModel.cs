@@ -14,6 +14,7 @@ namespace Contacto.ViewModel
     //The add, update and delete methods should be in this class. 
     class ContactViewModel: INotifyPropertyChanged
     {
+            ContactDataSource a = new ContactDataSource();
         private string test = "this is databinding working";
         public string testing
         {
@@ -31,9 +32,8 @@ namespace Contacto.ViewModel
 
         public async void addContactToGroups(Contact myContact)
         {
-            Group addingMyList = new Group(myContact);
-            ContactDataSource a = new ContactDataSource(addingMyList);
-            await a.writeSerialiseToJson(addingMyList);
+            myContacts.Add(myContact);
+            await a.writeSerialiseToJson(myContacts);
             
         }
 
@@ -43,17 +43,6 @@ namespace Contacto.ViewModel
             myContacts.Add(aContact);
         }
 
-        public void addContact(){
-        
-        }
-
-        public void updateContact(){ 
-        
-        }
-        public void deleteContact()
-        { 
-        
-        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

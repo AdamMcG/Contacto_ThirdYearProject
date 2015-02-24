@@ -170,12 +170,10 @@ namespace Contacto
  
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
-
-
-
             Contact newContact = new Contact();
           //  newContact.add();
             c.addContactToGroups(newContact);
+            Frame.Navigate(typeof(MainPage));
         }
  
         private void Cancel_Click(object sender, RoutedEventArgs e)

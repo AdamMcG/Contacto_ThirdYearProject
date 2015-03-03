@@ -16,6 +16,7 @@ namespace Contacto.ViewModel
         List<TextBox> fieldData = new List<TextBox>();
         List<TextBox> detailsData = new List<TextBox>();
 
+        //This for the static fields first name, last name and phone number
         public StackPanel initalizePage(string fieldText)
         {
 
@@ -60,9 +61,8 @@ namespace Contacto.ViewModel
 
             return stackPan;
         }
-
+        //This is for dynamic fields
         public StackPanel createList(){
-
             StackPanel stackPan = new StackPanel();
             stackPan.Height = 80;
             stackPan.Width = 370;

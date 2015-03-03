@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.BottomAppBar>
@@ -25,6 +26,8 @@
         <Style TargetType="Path" x:Key="HeaderStyleSelected" x:Name="HeaderStyleSelected">
             <Setter Property="Fill" Value="Silver"/>
         </Style>
+        
+        
     </Page.Resources>
 
 
@@ -116,10 +119,13 @@
 
             </PivotItem>
 
-            <PivotItem x:Name="SecondPage" Margin="0,0,0,1" DataContext="{Binding listOfContacts[1]}">
-                <ListView HorizontalAlignment="Left" 
-                          Height="499" VerticalAlignment="Top" Width="400">
-                    <TextBlock Text="{Binding mufirstName}" FontSize="34"></TextBlock>
+            <PivotItem x:Name="SecondPage" Margin="0,0,0,1" >
+                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Left" ItemsSource="{Binding listOfContacts}"
+                         Height="499" VerticalAlignment="Top" Width="400">
+                    <DataTemplate>
+                        <TextBlock Text="{Binding muLastName}"/>
+                        
+                    </DataTemplate>
                 </ListView>
             </PivotItem>
 

@@ -34,8 +34,20 @@ namespace Contacto.Model
             get { return lastName; }
             set { lastName = value; }
         }
-    
+
+        private string testing = "Testing";
+        public string test
+        {
+            get { return testing; }
+            set { testing = value; }
+        }
+
         public Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
+
+        public override string ToString()
+        {
+            return mufirstName;
+        }
 
         public Contact(Dictionary<string, string> myNewContact)
         { contactAttributes = myNewContact; }

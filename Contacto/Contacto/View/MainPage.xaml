@@ -26,8 +26,15 @@
         <Style TargetType="Path" x:Key="HeaderStyleSelected" x:Name="HeaderStyleSelected">
             <Setter Property="Fill" Value="Silver"/>
         </Style>
-        
-        
+
+        <DataTemplate x:Key="ImageTextListMailFolderTemplate">
+            <Grid Width="280">
+                <TextBlock Text="{Binding muPhoneNumber}" FontSize="24" FontWeight="Light" 
+                   Margin="10,10,0,0" HorizontalAlignment="Left"
+                   TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
     </Page.Resources>
 
 
@@ -121,10 +128,7 @@
 
             <PivotItem x:Name="SecondPage" Margin="0,0,0,1" >
                 <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Left" ItemsSource="{Binding listOfContacts}"
-                         Height="499" VerticalAlignment="Top" Width="400" >
-                    <DataTemplate>
-                        <TextBlock FontStyle="Italic" FontSize="30" Text="{Binding muLastName}" />
-                    </DataTemplate>
+                         Height="499" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>
             </PivotItem>
 

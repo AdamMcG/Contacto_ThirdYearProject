@@ -30,10 +30,10 @@ namespace Contacto.ViewModel
         public ContactViewModel()
         {}
 
-        public async void addContactToGroups(Contact myContact)
+        public void addContactToGroups(Contact myContact)
         {
             myContacts.Add(myContact);
-            await a.writeSerialiseToJson(myContacts);
+            
             
         }
 

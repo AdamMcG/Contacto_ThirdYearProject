@@ -42,15 +42,13 @@ namespace Contacto.Model
             set { testing = value; }
         }
 
-        public Dictionary<string, string> contactAttributes = new Dictionary<string,string>();
-
         public override string ToString()
         {
             return mufirstName;
         }
 
         public Contact(Dictionary<string, string> myNewContact)
-        { contactAttributes = myNewContact; }
+        { }
         
         public Contact(string uniqueID,string first, string last, string phoneNumber)
         {
@@ -58,20 +56,13 @@ namespace Contacto.Model
             uniqueContactID = uniqueID;
             lastName = last;
             this.phoneNumber = phoneNumber;
-            contactAttributes.Add("Unique ID", uniqueContactID);
-            contactAttributes.Add("First Name:", firstName);
-            contactAttributes.Add("Last Name:", lastName);
-            contactAttributes.Add("Phone Number:", phoneNumber);
         }
 
       public Contact() {
           firstName = "test";
           lastName = "testing";
             phoneNumber = "0000112";
-            contactAttributes.Add("Unique ID","1");
-          contactAttributes.Add("First name: ", firstName);
-          contactAttributes.Add("Last Name:" , lastName);
-          contactAttributes.Add("Phone number", phoneNumber);
+
       }
     }
 }

@@ -39,13 +39,13 @@ namespace Contacto.Data
             }
 
             //This method should return the contact that matches the uniqueID in the JSON file
-            public static async Task<Contact> getContactAsync(string uniqueID)
+         /*   public static async Task<Contact> getContactAsync(string uniqueID)
             {
                 await contData.getContactDataAsync();
                 var match = contData.contactList.Where((Contact) => Contact.contactAttributes.ContainsKey(uniqueID));
                 if (match.Count() == 1) { return match.First(); }
                 return null;
-            }
+            }*/
 
             //this is the method which pulls the data from the JSON file. 
             private async Task getContactDataAsync()
@@ -95,22 +95,10 @@ namespace Contacto.Data
                 }
             }
 
-            public async void deserialiseJson(string a)
+            public  void deserialiseJson(string a)
             {
-                String content = string.Empty;
-                ObservableCollection<Contact> contList;
-                var jsonSerialiser = new DataContractJsonSerializer(typeof(Group));
-                var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("ContactData.json");
-                contList = (ObservableCollection<Contact>)jsonSerialiser.ReadObject(myStream);
-                foreach (var contact in contList)
-                {
-                    content += String.Format("ID:{0}, Firstname:{1},Lastname:{2},phoneNumber{3}",
-                        contact.contactAttributes.ContainsKey("Unique ID"),
-                        contact.contactAttributes.ContainsKey("First Name:"),
-                        contact.contactAttributes.ContainsKey("Last Name:"),
-                        contact.contactAttributes.ContainsKey("Phone Number: "));
-                }
-                a = content;
+
+                return;
             }
     
         }

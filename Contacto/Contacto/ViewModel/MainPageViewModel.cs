@@ -12,6 +12,7 @@ using System.Collections;
 using Windows.Storage;
 using Windows.Data.Json;
 using System.IO;
+using Windows.Storage.Streams;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
@@ -34,9 +35,22 @@ namespace Contacto.ViewModel
                 Contact newCont = new Contact("2", "Joesph","Ad","5655");
                 addtolist(newCont);
                 pullFromFileAsync();
+                buildContactDataAsync();
                 pullFromJSON();
                                 
         }
+
+            private async void buildContactDataAsync()
+            {
+                StorageFolder local = ApplicationData.Current.LocalFolder;
+                string test = "{\"uniqueContactID\":\"13\",\"firstName\":\"Luke\",\"lastName\":\"McGee\",\"phoneNumber\":\"122332\"}";
+                StorageFile File = await local.CreateFileAsync("contacts.json", CreationCollisionOption.ReplaceExisting);
+              
+                await Windows.Storage.FileIO.WriteTextAsync(File, test);
+
+
+            }
+
 
             private async void pullFromFileAsync(){
                // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
@@ -44,7 +58,7 @@ namespace Contacto.ViewModel
                // StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 //StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
 
-                string JSONFILENAME = "ContactData.json";
+                string JSONFILENAME = "contacts.json";
                 string content = string.Empty;
                 
                 var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(JSONFILENAME);

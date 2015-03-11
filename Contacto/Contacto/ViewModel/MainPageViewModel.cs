@@ -58,7 +58,7 @@ namespace Contacto.ViewModel
                 string b = j.GetObject().GetNamedString("firstName");
                 string c = j.GetObject().GetNamedString("lastName");
                 string d = j.GetObject().GetNamedString("phoneNumber");
-                Contact newContact = new Contact(a,b,c,d);
+                Contact newContact = new Contact(a, b, c, d);
                 listOfContacts.Add(newContact);
             }
             

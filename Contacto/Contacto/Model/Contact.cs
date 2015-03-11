@@ -35,6 +35,19 @@ namespace Contacto.Model
             set { lastName = value; }
         }
 
+        private Dictionary<string, string> customFields = new Dictionary<string, string>();
+
+        public void addNewField(string fieldName, string fieldData)
+        {
+            customFields.Add(fieldName, fieldData);
+
+        }
+
+        public Dictionary<string, string> getDictionary() {
+
+            return customFields;
+        }
+
         private string testing = "Testing";
         public string test
         {
@@ -47,8 +60,7 @@ namespace Contacto.Model
             return mufirstName;
         }
 
-        public Contact(Dictionary<string, string> myNewContact)
-        { }
+
         
         public Contact(string uniqueID,string first, string last, string phoneNumber)
         {

@@ -29,7 +29,7 @@
 
         <DataTemplate x:Key="ImageTextListMailFolderTemplate">
             <Grid Width="280">
-                <TextBlock Text="{Binding muPhoneNumber}" FontSize="24" FontWeight="Light" 
+                <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Light" 
                    Margin="10,10,0,0" HorizontalAlignment="Left"
                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
             </Grid>

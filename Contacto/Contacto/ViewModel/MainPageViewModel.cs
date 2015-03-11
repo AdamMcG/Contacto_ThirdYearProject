@@ -31,9 +31,26 @@ namespace Contacto.ViewModel
             public MainPageViewModel() {
                 Contact newCont = new Contact("2", "Joesph","Ad","5655");
                 addtolist(newCont);
+                pullFromFile();
                 pullFromJSON();
                                 
         }
+
+            private async task pullFromFile(){
+               // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
+                //StorageFile jsonfile = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
+                StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
+                string text = await Windows.Storage.FileIO.ReadTextAsync(jsonfile);
+                JsonValue j = JsonValue.Parse(text);
+                string a = j.GetObject().GetNamedString("uniqueContactID");
+                string b = j.GetObject().GetNamedString("firstName");
+                string c = j.GetObject().GetNamedString("lastName");
+                string d = j.GetObject().GetNamedString("phoneNumber");
+                Contact newContact = new Contact(a,b,c,d);
+                listOfContacts.Add(newContact);
+            }
+            
 
             public void pullFromJSON()
             {
@@ -46,7 +63,10 @@ namespace Contacto.ViewModel
                 contactlist.Add(newCont);
             }
 
-
+            public void serialiseToJson()
+            { 
+            
+            }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

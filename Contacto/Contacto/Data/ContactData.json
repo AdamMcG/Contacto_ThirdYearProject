@@ -1,12 +1,6 @@
-﻿{"Contact":[{"uniqueID":"12",
-            "firstName":"Adam",
-            "lastName":"McGivern",
-            "phoneNumber":"0868965383"
-        },
-        {"uniqueContactID":"13",
+﻿      {"uniqueContactID":"13",
          "firstName":"Luke",
          "lastName":"McGee",
          "phoneNumber":"122332"
                 }   
-    ]
-}
+    

@@ -123,6 +123,8 @@ namespace Contacto
             Contact newContact = new Contact();
           //  newContact.add();
             c.addContactToGroups(newContact);
+
+            Frame.Navigate(typeof(MainPage));
         }
  
         private void Cancel_Click(object sender, RoutedEventArgs e)

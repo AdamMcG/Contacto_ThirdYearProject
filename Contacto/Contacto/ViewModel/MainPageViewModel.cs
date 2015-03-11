@@ -36,8 +36,9 @@ namespace Contacto.ViewModel
                                 
         }
 
-            private async task pullFromFile(){
-               // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
+            private async task pullFromFile()
+            {
+                // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
                 //StorageFile jsonfile = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
                 StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
@@ -47,7 +48,7 @@ namespace Contacto.ViewModel
                 string b = j.GetObject().GetNamedString("firstName");
                 string c = j.GetObject().GetNamedString("lastName");
                 string d = j.GetObject().GetNamedString("phoneNumber");
-                Contact newContact = new Contact(a,b,c,d);
+                Contact newContact = new Contact(a, b, c, d);
                 listOfContacts.Add(newContact);
             }
             

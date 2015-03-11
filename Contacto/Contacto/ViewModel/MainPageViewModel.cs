@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Contacto.Data;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using Contacto.Model;
 using System.Collections;
 using Windows.Storage;
 using Windows.Data.Json;
+using System.IO;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
@@ -31,18 +33,26 @@ namespace Contacto.ViewModel
             public MainPageViewModel() {
                 Contact newCont = new Contact("2", "Joesph","Ad","5655");
                 addtolist(newCont);
-                pullFromFile();
+                pullFromFileAsync();
                 pullFromJSON();
                                 
         }
 
-            private async task pullFromFile()
-            {
-                // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
+            private async void pullFromFileAsync(){
+               // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
                 //StorageFile jsonfile = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
-                StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
-                string text = await Windows.Storage.FileIO.ReadTextAsync(jsonfile);
+               // StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                //StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
+
+                string JSONFILENAME = "ContactData.json";
+                string content = string.Empty;
+                
+                var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(JSONFILENAME);
+                using (StreamReader reader = new StreamReader(myStream))
+                {
+                    content = await reader.ReadToEndAsync();
+                }
+                string text = content;
                 JsonValue j = JsonValue.Parse(text);
                 string a = j.GetObject().GetNamedString("uniqueContactID");
                 string b = j.GetObject().GetNamedString("firstName");

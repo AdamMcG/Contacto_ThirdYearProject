@@ -12,6 +12,7 @@ using System.Collections;
 using Windows.Storage;
 using Windows.Data.Json;
 using System.IO;
+using Newtonsoft.Json;
 using Windows.Storage.Streams;
 namespace Contacto.ViewModel
 {
@@ -27,73 +28,109 @@ namespace Contacto.ViewModel
 
         public void addtolist(Contact MyContact)
         {
-            Contact testContact = new Contact("1", "Carol","Ad","1232");
-            contactlist.Add(testContact);
             contactlist.Add(MyContact);
         }
             public MainPageViewModel() {
-                Contact newCont = new Contact("2", "Joesph","Ad","5655");
-                addtolist(newCont);
-                pullFromFileAsync();
-                buildContactDataAsync();
-                pullFromJSON();
+                buildWithJsonNetAsync();
+              //  SerialisingListWithJsonNetAsync();
+              //  buildMyListWithJson();
                                 
         }
-
+            String name = "contacts.json";
+        //This creates a contact, then serialises it into JSON and writes to the JSON file.
             private async void buildContactDataAsync()
             {
-                StorageFolder local = ApplicationData.Current.LocalFolder;
-                string test = "{\"uniqueContactID\":\"13\",\"firstName\":\"Luke\",\"lastName\":\"McGee\",\"phoneNumber\":\"122332\"}";
-                StorageFile File = await local.CreateFileAsync("contacts.json", CreationCollisionOption.ReplaceExisting);
-              
-
-
-                await Windows.Storage.FileIO.WriteTextAsync(File, test);
-
-
-            }
-
-
-            private async void pullFromFileAsync(){
-               // Uri dataUri = new Uri("ms-appx:///Data/ContactData.json");
-                //StorageFile jsonfile = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
-               // StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //StorageFile jsonfile = await folder.GetFileAsync("ContactData.json");
-
-                string JSONFILENAME = "contacts.json";
-                string content = string.Empty;
-                
-                var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(JSONFILENAME);
-                using (StreamReader reader = new StreamReader(myStream))
+                try
                 {
-                    content = await reader.ReadToEndAsync();
+                    Contact c = new Contact();
+                    string jsoncontent = JsonConvert.SerializeObject(c);
+                   
+                    StorageFile File = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+
+                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.ReadWrite)){
+                        using (DataWriter dwriter = new DataWriter(testStream)) {
+                            dwriter.WriteString(jsoncontent);
+                            await dwriter.StoreAsync();
+                            
+                        }
+                    }
                 }
-                string text = content;
-                JsonValue j = JsonValue.Parse(text);
-                string a = j.GetObject().GetNamedString("uniqueContactID");
-                string b = j.GetObject().GetNamedString("firstName");
-                string c = j.GetObject().GetNamedString("lastName");
-                string d = j.GetObject().GetNamedString("phoneNumber");
-                Contact newContact = new Contact(a, b, c, d);
-                listOfContacts.Add(newContact);
+                catch (IOException e)
+                { e.ToString(); }
             }
-            
 
-            public void pullFromJSON()
+        //This is serialising a list and adding to the json file. 
+            private async void SerialisingListWithJsonNetAsync()
             {
-                JsonValue j = JsonValue.Parse("{\"uniqueID\": \"800\", \"firstName\": \"Adam\", \"lastName\": \"View from 15th Floor\", \"phoneNumber\": \"12322\" }");
-                string a = j.GetObject().GetNamedString("uniqueID");
-                string b = j.GetObject().GetNamedString("firstName");
-                string c = j.GetObject().GetNamedString("lastName");
-                string d = j.GetObject().GetNamedString("phoneNumber");
-                Contact newCont = new Contact(a, b, c, d);
-                contactlist.Add(newCont);
-            }
+                ObservableCollection<Contact> list = listOfContacts;
 
-            public void serialiseToJson()
-            { 
-            
+                  // Serialize our Product class into a string
+            // Changed to serialze the List
+            string jsonContents = JsonConvert.SerializeObject(list);
+
+            // Get the app data folder and create or replace the file we are storing the JSON in.
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+
+            // Open the file...
+            using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                // write the JSON string!
+                using (DataWriter textWriter = new DataWriter(textStream))
+                {
+                    textWriter.WriteString(jsonContents);
+                    await textWriter.StoreAsync();
+                }
             }
+        }
+
+        //This method deserialises a list and sets it as the contact list.
+            private async void buildMyListWithJson()
+            {
+                ObservableCollection<Contact> list = new ObservableCollection<Contact>();
+                try
+                {
+                    string JSONFILENAME = "contacts.json";
+                    string content = " ";
+                    StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
+                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read))
+                    {
+                        using (DataReader dreader = new DataReader(testStream))
+                        {
+                            uint length = (uint)testStream.Size;
+                            await dreader.LoadAsync(length);
+                            content = dreader.ReadString(length);
+                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
+                        }
+                    }
+                    contactlist = list;
+                }
+                catch (Exception e)
+                { }
+            }
+            
+        //Deserialises the contact and adds xer to the list.
+            private async void buildWithJsonNetAsync()
+            {
+                Contact c = new Contact();
+                try {
+                    string JSONFILENAME = "contacts.json";
+                    string content = " ";
+                    StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
+                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read)){
+                        using (DataReader dreader = new DataReader(testStream)){
+                            uint length = (uint)testStream.Size;
+                            await dreader.LoadAsync(length);
+                            content = dreader.ReadString(length);
+                            c = JsonConvert.DeserializeObject<Contact>(content);       
+                        }
+                    }
+                }
+                catch (Exception e)
+                { }
+                addtolist(c);                
+            }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

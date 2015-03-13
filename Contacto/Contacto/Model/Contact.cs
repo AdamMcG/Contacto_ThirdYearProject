@@ -73,6 +73,7 @@ namespace Contacto.Model
       public Contact() {
           firstName = "test";
           lastName = "testing";
+          uniqueContactID = "12";
             phoneNumber = "0000112";
 
       }

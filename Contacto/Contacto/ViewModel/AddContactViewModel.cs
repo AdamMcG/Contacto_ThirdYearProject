@@ -138,8 +138,7 @@ namespace Contacto.ViewModel
 
 
 
-        public void addContact()
-        {
+        public void addContact() {
         }
     }
 }

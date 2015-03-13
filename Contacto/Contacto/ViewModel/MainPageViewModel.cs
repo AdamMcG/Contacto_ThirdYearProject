@@ -26,17 +26,28 @@ namespace Contacto.ViewModel
             get { return contactlist; }
         }
 
+        private ObservableCollection<Group> groupList = new ObservableCollection<Group>();
+        public ObservableCollection<Group> listOfGroups{
+            get { return groupList; }
+        }
         public void addtolist(Contact MyContact)
         {
             contactlist.Add(MyContact);
         }
             public MainPageViewModel() {
-                buildWithJsonNetAsync();
-              //  SerialisingListWithJsonNetAsync();
-              //  buildMyListWithJson();
+                Contact test1 = new Contact();
+                Contact test2 = new Contact("1", "adam", "mcgivern","123");
+                Group a = new Group();
+                listOfGroups.Add(a); 
+                addtolist( test1);
+                addtolist(test2);
+              SerialisingListWithJsonNetAsync();
+                buildMyListWithJson();
                                 
         }
-            String name = "contacts.json";
+ 
+        
+        String name = "contacts.json";
         //This creates a contact, then serialises it into JSON and writes to the JSON file.
             private async void buildContactDataAsync()
             {
@@ -100,7 +111,7 @@ namespace Contacto.ViewModel
                             uint length = (uint)testStream.Size;
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
-                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
+                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
                         }
                     }
                     contactlist = list;

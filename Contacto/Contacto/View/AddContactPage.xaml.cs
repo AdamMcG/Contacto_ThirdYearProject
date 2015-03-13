@@ -99,34 +99,27 @@ namespace Contacto
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            
+            string id = Guid.NewGuid().ToString();
+            string firstName = AddViewModel.getDetailsData(0);
+            string lastName = AddViewModel.getDetailsData(1);
+            string phoneNumber = AddViewModel.getDetailsData(2);
 
-            for (int i = 0; i <= indexLocation; i++)
-            {
 
 
-                string s = AddViewModel.getFieldData(i);
-                string t = AddViewModel.getDetailsData(i);
+            Contact toAdd = new Contact(id, firstName, lastName, phoneNumber);
 
-                TextBlock test = new TextBlock();
-                test.Text = s;
-                test.FontSize = 18;
-                test.Width = 100;
-                test.Height = 100;
 
-                TextBlock test2 = new TextBlock();
-                test2.Text = t;
-                test2.FontSize = 18;
-                test2.Width = 100;
-                test2.Height = 100;
+            //for (int i = 3; i <= indexLocation; i++)
+            //{
+            //    string field = AddViewModel.getFieldData(i);
+            //    string details = AddViewModel.getDetailsData(i);
 
-                addList.Items.Add(test);
-                addList.Items.Add(test2);
-            }
+            //    toAdd.addNewField(field, details);
 
-            Contact newContact = new Contact();
-          //  newContact.add();
-            c.addContactToGroups(newContact);
+
+            //}
+
+            c.addContactToGroups(toAdd);
 
             Frame.Navigate(typeof(MainPage));
         }

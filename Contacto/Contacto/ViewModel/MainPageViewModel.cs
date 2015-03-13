@@ -46,6 +46,8 @@ namespace Contacto.ViewModel
                 string test = "{\"uniqueContactID\":\"13\",\"firstName\":\"Luke\",\"lastName\":\"McGee\",\"phoneNumber\":\"122332\"}";
                 StorageFile File = await local.CreateFileAsync("contacts.json", CreationCollisionOption.ReplaceExisting);
               
+
+
                 await Windows.Storage.FileIO.WriteTextAsync(File, test);
 
 

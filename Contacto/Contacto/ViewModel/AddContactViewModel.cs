@@ -12,7 +12,6 @@ namespace Contacto.ViewModel
 {
     class AddContactViewModel
     {
-
         List<TextBox> fieldData = new List<TextBox>();
         List<TextBox> detailsData = new List<TextBox>();
 
@@ -40,7 +39,7 @@ namespace Contacto.ViewModel
             detailEntry.VerticalAlignment = VerticalAlignment.Center;
             detailEntry.HorizontalAlignment = HorizontalAlignment.Right;
             detailEntry.PlaceholderText = fieldText;
-            
+
             TextBlock spacer = new TextBlock();
             spacer.Width = 20;
             spacer.Opacity = 0;
@@ -53,7 +52,7 @@ namespace Contacto.ViewModel
 
             fieldData.Add(toAdd);
             detailsData.Add(detailEntry);
-            
+
             stackPan.Children.Add(fieldName);
             stackPan.Children.Add(spacer);
             stackPan.Children.Add(detailEntry);
@@ -62,7 +61,8 @@ namespace Contacto.ViewModel
             return stackPan;
         }
         //This is for dynamic fields
-        public StackPanel createList(){
+        public StackPanel createList()
+        {
             StackPanel stackPan = new StackPanel();
             stackPan.Height = 80;
             stackPan.Width = 370;
@@ -96,16 +96,17 @@ namespace Contacto.ViewModel
 
             fieldData.Add(fieldEntry);
             detailsData.Add(detailsEntry);
-            
+
 
             return stackPan;
 
         }
 
-        public string getFieldData(int i){
+        public string getFieldData(int i)
+        {
 
             string toGet;
-            if ( i < fieldData.Count())
+            if (i < fieldData.Count())
             {
                 toGet = fieldData.ElementAt<TextBox>(i).Text;
                 return toGet;
@@ -122,7 +123,7 @@ namespace Contacto.ViewModel
         {
 
             string toGet;
-            if ( i < fieldData.Count())
+            if (i < fieldData.Count())
             {
                 toGet = detailsData.ElementAt<TextBox>(i).Text;
                 return toGet;
@@ -135,5 +136,10 @@ namespace Contacto.ViewModel
 
         }
 
+
+
+        public void addContact()
+        {
+        }
     }
 }

@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Contacto.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,6 +19,8 @@ namespace Contacto.ViewModel
     {
         List<TextBox> fieldData = new List<TextBox>();
         List<TextBox> detailsData = new List<TextBox>();
+        private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> listOfContacts { get { return contactlist; } }
 
         //This for the static fields first name, last name and phone number
         public StackPanel initalizePage(string fieldText)
@@ -137,8 +144,34 @@ namespace Contacto.ViewModel
         }
 
 
-
-        public void addContact() {
+        public void addContact(Contact c) {
         }
+
+        private async void pullFromList()
+        {
+            ObservableCollection<Contact> list = new ObservableCollection<Contact>();
+            try
+            {
+                string JSONFILENAME = "contacts.json";
+                string content = " ";
+                StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
+                using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read))
+                {
+                    using (DataReader dreader = new DataReader(testStream))
+                    {
+                        uint length = (uint)testStream.Size;
+                        await dreader.LoadAsync(length);
+                        content = dreader.ReadString(length);
+                        list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
+                    }
+                }
+                contactlist = list;
+            }
+            catch (Exception e)
+            { }
+        }
+
+        private async void serialiseList()
+        { }
     }
 }

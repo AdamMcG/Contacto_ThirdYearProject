@@ -28,9 +28,7 @@ namespace Contacto
     public sealed partial class MainPage : Page
     {
 
-        ContactDataSource cont = new ContactDataSource();
         MainPageViewModel myMain = new MainPageViewModel();
-        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         
         public MainPage()
         {
@@ -63,6 +61,7 @@ namespace Contacto
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
             this.DataContext = myMain;
+            myMain.buildingList();
         }
 
 

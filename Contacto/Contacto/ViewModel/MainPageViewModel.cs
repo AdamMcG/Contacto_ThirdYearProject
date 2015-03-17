@@ -19,7 +19,6 @@ namespace Contacto.ViewModel
     //This handles the main page business logic.
     class MainPageViewModel:INotifyPropertyChanged
     {
-       private static MainPageViewModel contData = new MainPageViewModel();
         
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> listOfContacts{
@@ -30,19 +29,8 @@ namespace Contacto.ViewModel
         public ObservableCollection<Group> listOfGroups{
             get { return groupList; }
         }
-        public void addtolist(Contact MyContact)
-        {
-            contactlist.Add(MyContact);
-        }
+
             public MainPageViewModel() {
-                Contact test1 = new Contact();
-                Contact test2 = new Contact("1", "adam", "mcgivern","123");
-                Group a = new Group();
-                listOfGroups.Add(a); 
-                addtolist( test1);
-                addtolist(test2);
-              SerialisingListWithJsonNetAsync();
-                buildMyListWithJson();
                                 
         }
  
@@ -74,14 +62,12 @@ namespace Contacto.ViewModel
             private async void SerialisingListWithJsonNetAsync()
             {
                 ObservableCollection<Contact> list = listOfContacts;
-
-                  // Serialize our Product class into a string
             // Changed to serialze the List
             string jsonContents = JsonConvert.SerializeObject(list);
 
             // Get the app data folder and create or replace the file we are storing the JSON in.
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.OpenIfExists);
 
             // Open the file...
             using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -111,14 +97,20 @@ namespace Contacto.ViewModel
                             uint length = (uint)testStream.Size;
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
-                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
+                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
                         }
+                            foreach(Contact c in list)
+                            { contactlist.Add(c); }
                     }
-                    contactlist = list;
                 }
                 catch (Exception e)
-                { }
+                { e.ToString(); }
             }
+
+        public void buildingList()
+            {
+                
+            buildMyListWithJson();}
             
         //Deserialises the contact and adds xer to the list.
             private async void buildWithJsonNetAsync()
@@ -136,10 +128,10 @@ namespace Contacto.ViewModel
                             c = JsonConvert.DeserializeObject<Contact>(content);       
                         }
                     }
+                listOfContacts.Add(c);            
                 }
                 catch (Exception e)
                 { }
-                addtolist(c);                
             }
        
 

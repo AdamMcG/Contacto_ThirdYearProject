@@ -143,9 +143,8 @@ namespace Contacto.ViewModel
 
         }
 
-
-        public void addContact(Contact c) {
-        }
+        public void pullFromJson()
+        { pullFromList(); }
 
         private async void pullFromList()
         {
@@ -165,13 +164,38 @@ namespace Contacto.ViewModel
                         list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
                     }
                 }
-                contactlist = list;
+                        foreach (Contact c in list)
+                        { contactlist.Add(c); }
+                
             }
             catch (Exception e)
-            { }
+            { e.ToString(); }
         }
 
-        private async void serialiseList()
-        { }
+        //This is serialising a list and adding to the json file. 
+        private async void SerialiseNewList(){
+            string name = "contacts.json";
+            ObservableCollection<Contact> list = listOfContacts;
+            // Changed to serialze the List
+            string jsonContents = JsonConvert.SerializeObject(list);
+            // Get the app data folder and create or replace the file we are storing the JSON in.
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+            // Open the file...
+            using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite)){
+                // write the JSON string!
+                using (DataWriter textWriter = new DataWriter(textStream)) {
+                    textWriter.WriteString(jsonContents);
+                    await textWriter.StoreAsync();
+                }
+            }
+        }
+
+        public void createNewContactList()
+        { SerialiseNewList(); }
+
+
+
+
     }
 }

@@ -25,7 +25,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class AddContactPage : Page
     {
-        ContactViewModel c = new ContactViewModel();
+
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
         ListView addList = new ListView();
@@ -64,8 +64,7 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         //    var nav = (NavigationContext)e.Parameter;
-            var item = c;
-            this.DataContext = item;
+            AddViewModel.pullFromJson();
         }
 
 
@@ -126,8 +125,8 @@ namespace Contacto
 
             Contact newContact = new Contact();
           //  newContact.add();
-            c.addContactToGroups(newContact);
-
+            AddViewModel.listOfContacts.Add(newContact);
+            AddViewModel.createNewContactList();
             Frame.Navigate(typeof(MainPage));
         }
  

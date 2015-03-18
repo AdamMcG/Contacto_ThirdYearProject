@@ -25,7 +25,7 @@ namespace Contacto
     /// </summary>
     public sealed partial class AddContactPage : Page
     {
-
+        
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
         ListView addList = new ListView();
@@ -125,7 +125,7 @@ namespace Contacto
 
             Contact newContact = new Contact();
           //  newContact.add();
-            AddViewModel.listOfContacts.Add(newContact);
+            AddViewModel.addtocontactlist(newContact);
             AddViewModel.createNewContactList();
             Frame.Navigate(typeof(MainPage));
         }

@@ -142,7 +142,7 @@
             </PivotItem>
 
             <PivotItem x:Name="SecondPage" Margin="0,0,0,1" >
-                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts}"
+                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay}"
                          Height="499" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>
             </PivotItem>

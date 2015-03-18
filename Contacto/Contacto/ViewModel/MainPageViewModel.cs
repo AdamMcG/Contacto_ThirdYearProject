@@ -14,6 +14,7 @@ using Windows.Data.Json;
 using System.IO;
 using Newtonsoft.Json;
 using Windows.Storage.Streams;
+using System.Collections.Specialized;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
@@ -31,7 +32,7 @@ namespace Contacto.ViewModel
         }
 
             public MainPageViewModel() {
-                                
+              
         }
  
         
@@ -90,7 +91,8 @@ namespace Contacto.ViewModel
                     string JSONFILENAME = "contacts.json";
                     string content = " ";
                     StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
-                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read))
+                    IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
+                    using (testStream)
                     {
                         using (DataReader dreader = new DataReader(testStream))
                         {
@@ -98,14 +100,20 @@ namespace Contacto.ViewModel
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
                             list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
+                          
                         }
-                            foreach(Contact c in list)
-                            { contactlist.Add(c); }
+                        
                     }
+                    testStream.Dispose();
+                        contactlist = list;
+                       
                 }
                 catch (Exception e)
-                { e.ToString(); }
+                {
+                    e.ToString();
+                }
             }
+
 
         public void buildingList()
             {
@@ -125,15 +133,18 @@ namespace Contacto.ViewModel
                             uint length = (uint)testStream.Size;
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
-                            c = JsonConvert.DeserializeObject<Contact>(content);       
+                            c = JsonConvert.DeserializeObject<Contact>(content);
+                         
                         }
                     }
-                listOfContacts.Add(c);            
+                listOfContacts.Add(c);       
                 }
                 catch (Exception e)
                 { }
             }
-       
+
+            public event System.Collections.Specialized.NotifyCollectionChangedEventHandler ContactCollectionChanged;
+           
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

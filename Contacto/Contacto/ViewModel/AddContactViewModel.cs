@@ -143,6 +143,9 @@ namespace Contacto.ViewModel
 
         }
 
+        public void addtocontactlist(Contact c)
+        { contactlist.Add(c); }
+
         public void pullFromJson()
         { pullFromList(); }
 

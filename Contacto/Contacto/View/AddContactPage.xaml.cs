@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Contacto.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -119,7 +120,10 @@ namespace Contacto
 
             //}
 
-            c.addContactToGroups(toAdd);
+            MainPageViewModel mainPage = new MainPageViewModel();
+            JSON_work jwork = new JSON_work();
+            mainPage.addtolist(toAdd);
+            jwork.SerialisingListWithJsonNetAsync(mainPage.listOfContacts);
 
             Frame.Navigate(typeof(MainPage));
         }

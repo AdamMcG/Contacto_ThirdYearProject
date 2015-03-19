@@ -98,32 +98,25 @@ namespace Contacto
         private void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            
+            string ID = Guid.NewGuid().ToString();
+            string Fname = AddViewModel.getDetailsData(0);
+            string Lname = AddViewModel.getDetailsData(1);
+            string PNum = AddViewModel.getDetailsData(2);
 
-            for (int i = 0; i <= indexLocation; i++)
+            Contact newContact = new Contact(ID, Fname, Lname, PNum);
+
+            for (int i = 3; i <= indexLocation; i++)
             {
 
 
                 string s = AddViewModel.getFieldData(i);
                 string t = AddViewModel.getDetailsData(i);
 
-                TextBlock test = new TextBlock();
-                test.Text = s;
-                test.FontSize = 18;
-                test.Width = 100;
-                test.Height = 100;
+                newContact.addNewField(s, t);
 
-                TextBlock test2 = new TextBlock();
-                test2.Text = t;
-                test2.FontSize = 18;
-                test2.Width = 100;
-                test2.Height = 100;
 
-                addList.Items.Add(test);
-                addList.Items.Add(test2);
             }
 
-            Contact newContact = new Contact();
           //  newContact.add();
             AddViewModel.addtocontactlist(newContact);
             AddViewModel.createNewContactList();

@@ -31,7 +31,10 @@ namespace Contacto.ViewModel
             stackPan.Width = 370;
             stackPan.Orientation = Orientation.Horizontal;
 
-
+            Thickness margin = stackPan.Margin;
+            margin.Bottom = 10;
+            margin.Top = 10;
+            stackPan.Margin = margin;
 
             TextBlock fieldName = new TextBlock();
             fieldName.Width = 180;
@@ -39,18 +42,21 @@ namespace Contacto.ViewModel
             fieldName.VerticalAlignment = VerticalAlignment.Center;
             fieldName.HorizontalAlignment = HorizontalAlignment.Right;
             fieldName.Text = fieldText;
+            margin = fieldName.Margin;
+            margin.Right = 10;
+            margin.Left = 10;
+            fieldName.Margin = margin;
 
 
             TextBox detailEntry = new TextBox();
-            detailEntry.Width = 180;
+            detailEntry.Width = 160;
             detailEntry.VerticalAlignment = VerticalAlignment.Center;
             detailEntry.HorizontalAlignment = HorizontalAlignment.Right;
             detailEntry.PlaceholderText = fieldText;
-
-            TextBlock spacer = new TextBlock();
-            spacer.Width = 20;
-            spacer.Opacity = 0;
-
+            margin = detailEntry.Margin;
+            margin.Right = 10;
+            margin.Left = 10;
+            detailEntry.Margin = margin;
 
 
             TextBox toAdd = new TextBox();
@@ -61,7 +67,6 @@ namespace Contacto.ViewModel
             detailsData.Add(detailEntry);
 
             stackPan.Children.Add(fieldName);
-            stackPan.Children.Add(spacer);
             stackPan.Children.Add(detailEntry);
 
 
@@ -78,27 +83,31 @@ namespace Contacto.ViewModel
             TextBox fieldEntry = new TextBox();
             fieldEntry.PlaceholderText = "Field Name";
             fieldEntry.FontSize = 20;
-            fieldEntry.Width = 160;
+            fieldEntry.Width = 180;
             fieldEntry.VerticalAlignment = VerticalAlignment.Center;
             fieldEntry.HorizontalAlignment = HorizontalAlignment.Left;
 
 
+            Thickness margin = fieldEntry.Margin;
+            margin.Right = 10;
+            margin.Left = 10;
+            fieldEntry.Margin = margin;
+
 
             TextBox detailsEntry = new TextBox();
-            detailsEntry.Width = 180;
+            detailsEntry.Width = 160;
             detailsEntry.PlaceholderText = "Details";
             detailsEntry.VerticalAlignment = VerticalAlignment.Center;
             detailsEntry.HorizontalAlignment = HorizontalAlignment.Right;
 
 
-            TextBlock spacer = new TextBlock();
-            spacer.Width = 20;
-            spacer.Opacity = 0;
-
+            margin = detailsEntry.Margin;
+            margin.Right = 10;
+            margin.Left = 10;
+            detailsEntry.Margin = margin;
 
 
             stackPan.Children.Add(fieldEntry);
-            stackPan.Children.Add(spacer);
             stackPan.Children.Add(detailsEntry);
 
             fieldData.Add(fieldEntry);

@@ -35,6 +35,21 @@
             </Grid>
         </DataTemplate>
 
+        <DataTemplate x:Key="GridTemplate">
+            <Grid Background="DarkGray" Width="250" Height="250">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                    <TextBlock Text="Ay Lorem ipsum dolor site amet yed diam nonumy" 
+                       FontSize="24"  Margin="10,0,0,0" 
+                       TextTrimming="WordEllipsis" TextWrapping="Wrap" 
+                       HorizontalAlignment="Left"/>
+                    <TextBlock Text="Ay Phasellus faucibus" 
+                       FontSize="11" Margin="10,0,0,0" 
+                       TextTrimming="WordEllipsis" TextWrapping="Wrap" 
+                       HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
     </Page.Resources>
 
 
@@ -127,7 +142,7 @@
             </PivotItem>
 
             <PivotItem x:Name="SecondPage" Margin="0,0,0,1" >
-                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Left" ItemsSource="{Binding listOfContacts}"
+                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay}"
                          Height="499" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>
             </PivotItem>
@@ -138,14 +153,10 @@
                         <RowDefinition/>
                         <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Group List" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
-                               Text="This will be used to display the various lists that the user has defined."
-                               VerticalAlignment="Top"
-                               Height="402" 
-                               Width="350" 
-                               FontSize="14"/>
+                    <GridView x:Name ="GroupGridView" Header="My Groups" FontSize="43" HorizontalAlignment="left" ItemsSource="{Binding listOfGroups}"
+                              Height="499" ItemTemplate="{StaticResource GridTemplate}">
+                        
+                    </GridView>
                 </Grid>
 
             </PivotItem>

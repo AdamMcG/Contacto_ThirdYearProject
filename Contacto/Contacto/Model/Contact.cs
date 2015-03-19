@@ -29,7 +29,7 @@ namespace Contacto.Model
             set { phoneNumber = value; }
         }
         private string lastName;
-        public string muLastName
+        public string mulastName
         {
             get { return lastName; }
             set { lastName = value; }

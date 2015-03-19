@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    DataContext= "{Binding RelativeSource={RelativeSource Self}, UpdateSourceTrigger=PropertyChanged }"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.BottomAppBar>
@@ -27,12 +27,18 @@
             <Setter Property="Fill" Value="Silver"/>
         </Style>
 
-        <DataTemplate x:Key="ImageTextListMailFolderTemplate">
-            <Grid Width="280">
-                <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Light" 
+        <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
+
+            <StackPanel Orientation="Horizontal" Width="280" Margin="10,10,10,10">
+                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
                    Margin="10,10,0,0" HorizontalAlignment="Left"
                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-            </Grid>
+
+                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
+                   Margin="10,10,0,0" HorizontalAlignment="Left"
+                   TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+            </StackPanel>
+            
         </DataTemplate>
 
         <DataTemplate x:Key="GridTemplate">
@@ -61,7 +67,7 @@
         <StackPanel x:Name="Header"
                     Grid.Row="0"
                     HorizontalAlignment="Left" 
-                    Height="80"
+                    Height="77"
                     VerticalAlignment="Top"
                     Width="400">
             
@@ -142,9 +148,11 @@
             </PivotItem>
 
             <PivotItem x:Name="SecondPage" Margin="0,0,0,1" >
-                <ListView x:Name="ContactListView" Header="My contacts" FontSize="43" HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay}"
-                         Height="499" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
-                </ListView>
+                <StackPanel Orientation="Vertical" Width="400">
+                    <TextBlock Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44" />
+                    <ListView x:Name="ContactListView" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Height="499" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate }"/>
+                </StackPanel>
             </PivotItem>
 
             <PivotItem x:Name="ThirdPage">
@@ -155,7 +163,6 @@
                     </Grid.RowDefinitions>
                     <GridView x:Name ="GroupGridView" Header="My Groups" FontSize="43" HorizontalAlignment="left" ItemsSource="{Binding listOfGroups}"
                               Height="499" ItemTemplate="{StaticResource GridTemplate}">
-                        
                     </GridView>
                 </Grid>
 

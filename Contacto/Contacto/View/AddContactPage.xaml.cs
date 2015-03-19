@@ -112,7 +112,7 @@ namespace Contacto
                 string s = AddViewModel.getFieldData(i);
                 string t = AddViewModel.getDetailsData(i);
 
-                newContact.addNewField(s, t);
+               // newContact.addNewField(s, t);
 
 
             }

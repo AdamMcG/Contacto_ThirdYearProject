@@ -157,22 +157,24 @@ namespace Contacto.ViewModel
                 string JSONFILENAME = "contacts.json";
                 string content = " ";
                 StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
-                using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read))
+                using (IRandomAccessStream testS = await File.OpenAsync(FileAccessMode.Read))
                 {
-                    using (DataReader dreader = new DataReader(testStream))
+                    using (DataReader dreader = new DataReader(testS))
                     {
-                        uint length = (uint)testStream.Size;
+                        uint length = (uint)testS.Size;
                         await dreader.LoadAsync(length);
                         content = dreader.ReadString(length);
                         list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
+                        dreader.Dispose();
                     }
+                    testS.Dispose();
                 }
-                        foreach (Contact c in list)
-                        { contactlist.Add(c); }
-                
+                foreach (Contact c in list)
+                { contactlist.Add(c); }
             }
             catch (Exception e)
             { e.ToString(); }
+           
         }
 
         //This is serialising a list and adding to the json file. 
@@ -185,12 +187,14 @@ namespace Contacto.ViewModel
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
             // Open the file...
-            using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite)){
+            using (IRandomAccessStream text = await textFile.OpenAsync(FileAccessMode.ReadWrite)){
                 // write the JSON string!
-                using (DataWriter textWriter = new DataWriter(textStream)) {
+                using (DataWriter textWriter = new DataWriter(text)) {
                     textWriter.WriteString(jsonContents);
                     await textWriter.StoreAsync();
+                    textWriter.Dispose();
                 }
+                text.Dispose();
             }
         }
 

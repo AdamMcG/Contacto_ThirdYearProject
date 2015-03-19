@@ -32,7 +32,6 @@ namespace Contacto.ViewModel
         }
 
             public MainPageViewModel() {
-              
         }
  
         
@@ -78,6 +77,7 @@ namespace Contacto.ViewModel
                 {
                     textWriter.WriteString(jsonContents);
                     await textWriter.StoreAsync();
+
                 }
             }
         }
@@ -91,29 +91,24 @@ namespace Contacto.ViewModel
                     string JSONFILENAME = "contacts.json";
                     string content = " ";
                     StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
-                    IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
-                    using (testStream)
-                    {
-                        using (DataReader dreader = new DataReader(testStream))
-                        {
+                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.ReadWrite)){
+                        using (DataReader dreader = new DataReader(testStream)){
                             uint length = (uint)testStream.Size;
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
-                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
-                          
+                            dreader.Dispose();
                         }
-                        
+                        testStream.Dispose();
                     }
-                    testStream.Dispose();
-                        contactlist = list;
-                       
+                     list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content) as ObservableCollection<Contact>;
+                    contactlist = new ObservableCollection<Contact>();
+                    foreach (Contact c in list)
+                     contactlist.Add(c); 
+                     
                 }
                 catch (Exception e)
-                {
-                    e.ToString();
-                }
+                { e.Message.ToString(); }
             }
-
 
         public void buildingList()
             {
@@ -122,7 +117,7 @@ namespace Contacto.ViewModel
             
         //Deserialises the contact and adds xer to the list.
             private async void buildWithJsonNetAsync()
-            {
+           {
                 Contact c = new Contact();
                 try {
                     string JSONFILENAME = "contacts.json";
@@ -134,7 +129,7 @@ namespace Contacto.ViewModel
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
                             c = JsonConvert.DeserializeObject<Contact>(content);
-                         
+                           
                         }
                     }
                 listOfContacts.Add(c);       

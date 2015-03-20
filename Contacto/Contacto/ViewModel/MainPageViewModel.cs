@@ -20,10 +20,15 @@ namespace Contacto.ViewModel
     //This handles the main page business logic.
     class MainPageViewModel:INotifyPropertyChanged
     {
-        
+
+
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> listOfContacts{
             get { return contactlist; }
+            set { contactlist = value;
+
+            NotifyPropertyChanged("contactlist");
+            }
         }
 
         private ObservableCollection<Group> groupList = new ObservableCollection<Group>();
@@ -83,15 +88,16 @@ namespace Contacto.ViewModel
         }
 
         //This method deserialises a list and sets it as the contact list.
-            private async void buildMyListWithJson()
+            private async void initalizeListJson()
             {
-                ObservableCollection<Contact> list = new ObservableCollection<Contact>();
+                List<Contact> list = new List<Contact>();
                 try
                 {
                     string JSONFILENAME = "contacts.json";
                     string content = " ";
                     StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
                     IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
+
                     using (testStream)
                     {
                         using (DataReader dreader = new DataReader(testStream))
@@ -99,14 +105,24 @@ namespace Contacto.ViewModel
                             uint length = (uint)testStream.Size;
                             await dreader.LoadAsync(length);
                             content = dreader.ReadString(length);
-                            list = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(content);
-                          
+                            list = JsonConvert.DeserializeObject<List<Contact>>(content);
+                            dreader.Dispose();
                         }
                         
                     }
                     testStream.Dispose();
-                        contactlist = list;
-                       
+                    if (contactlist != null)
+                    {
+                        contactlist.Clear();
+                    }
+                    
+                    for (int i = 0; i < list.Count(); i++)
+                    {
+                        if(list.ElementAt<Contact>(i) != null)
+                         contactlist.Add(list.ElementAt<Contact>(i));
+                    }
+                    
+                    NotifyPropertyChanged("contactlist");
                 }
                 catch (Exception e)
                 {
@@ -115,10 +131,14 @@ namespace Contacto.ViewModel
             }
 
 
-        public void buildingList()
-            {
-                
-            buildMyListWithJson();}
+
+        public void initalizeList()
+        {
+           initalizeListJson();
+
+        }
+
+
             
         //Deserialises the contact and adds xer to the list.
             private async void buildWithJsonNetAsync()
@@ -140,15 +160,17 @@ namespace Contacto.ViewModel
                 listOfContacts.Add(c);       
                 }
                 catch (Exception e)
-                { }
+                {
+
+                    e.ToString();
+                }
             }
 
-            public event System.Collections.Specialized.NotifyCollectionChangedEventHandler ContactCollectionChanged;
-           
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
+
             PropertyChangedEventHandler handle = PropertyChanged;
             if (null != handle)
             { handle(this, new PropertyChangedEventArgs(propertyName));

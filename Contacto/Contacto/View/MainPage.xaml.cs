@@ -35,9 +35,9 @@ namespace Contacto
 
 
             this.InitializeComponent();
-            
 
-            myMain.buildingList();
+
+            ContactListView.ItemsSource = myMain.listOfContacts;
 
             HeaderIcon1.Style = HeaderStyleSelected;
             HeaderIcon2.Style = HeaderStyleUnselected;
@@ -46,7 +46,6 @@ namespace Contacto
             
            
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
 
 
         }
@@ -58,12 +57,14 @@ namespace Contacto
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+    
 
             this.InitializeComponent();
-
+            ContentArea.SelectedIndex = 0;
+            myMain.initalizeList();
             this.DataContext = myMain;
-            myMain.buildingList();
+
+            ContactListView.ItemsSource = myMain.listOfContacts;
 
 
         }
@@ -125,6 +126,12 @@ namespace Contacto
                 HeaderIcon1.Style = HeaderStyleUnselected;
                 HeaderIcon2.Style = HeaderStyleSelected;
                 HeaderIcon3.Style = HeaderStyleUnselected;
+                myMain.initalizeList();
+
+
+                this.DataContext = myMain;
+
+                ContactListView.ItemsSource = myMain.listOfContacts;
 
 
             }

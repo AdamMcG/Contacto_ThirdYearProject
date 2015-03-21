@@ -37,22 +37,12 @@ namespace Contacto.Model
 
         private Dictionary<string, string> customFields = new Dictionary<string, string>();
 
-        public void addNewField(string fieldName, string fieldData)
+        public Dictionary<string, string> muCustomFields 
         {
-            customFields.Add(fieldName, fieldData);
 
-        }
-
-        public Dictionary<string, string> getDictionary() {
-
-            return customFields;
-        }
-
-        private string testing = "Testing";
-        public string test
-        {
-            get { return testing; }
-            set { testing = value; }
+            get { return customFields; }
+            set { customFields = value;  }
+        
         }
 
         public override string ToString()
@@ -61,7 +51,6 @@ namespace Contacto.Model
         }
 
 
-        
         public Contact(string uniqueID,string first, string last, string phoneNumber)
         {
             firstName = first;

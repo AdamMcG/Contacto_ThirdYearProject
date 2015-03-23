@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="Contacto.View.ContactDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Contacto.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+    </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact">
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+    <Grid x:Name="addGrid" Background="#0C0B15">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="0.5*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid  Background="#363951" Margin="0,0,0,2">
+        
+        </Grid>
+
+        <Grid x:Name="toAddGrid" Margin="0,0,0,0" Grid.Row="1">
+            <ListView x:Name="AddList" ItemsSource="{Binding dynamic_fields,Mode=OneWay}"  >
+               
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="22">First Name:</TextBlock>
+                <TextBlock FontSize="22" Text="{Binding mufirstName}"></TextBlock>
+                
+            </StackPanel>
+           
+
+        </Grid>
+
+
+
+    </Grid>
+</Page>

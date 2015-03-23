@@ -155,12 +155,21 @@ namespace Contacto
         
         private void ContactListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            int index = ContactListView.SelectedIndex;
-            Contact toPass = myMain.listOfContacts.ElementAt<Contact>(index);
+            try
+            {
+
+                int index = ContactListView.SelectedIndex;
+                Contact toPass = myMain.listOfContacts.ElementAt<Contact>(index);
 
 
-            Frame.Navigate(typeof(ContactDetail), toPass);
-        
+                Frame.Navigate(typeof(ContactDetail), toPass);
+
+            }
+            catch (Exception ex)
+            {
+
+                ex.ToString();
+            }
 
         }
 

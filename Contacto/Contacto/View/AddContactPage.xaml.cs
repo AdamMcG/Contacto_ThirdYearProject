@@ -167,6 +167,7 @@ namespace Contacto
                 newContact.muCustomFields.Add(s, t);
             }
 
+                newContact.fillDynamicFields();
 
             AddViewModel.addtocontactlist(newContact);
             AddViewModel.createNewContactList();

@@ -36,7 +36,7 @@ namespace Contacto.Model
             set { lastName = value; }
         }
 
-        struct DynamicFields
+        public struct DynamicFields
         {
             private string key;
             public string muKey
@@ -44,26 +44,40 @@ namespace Contacto.Model
                 get { return key; }
                 set { key = value; }
             }
-            string dValue;
+            private string dValue;
             public string muValue
             {
                 get { return dValue; }
-                set { value = dValue; }
+                set { dValue = value; }
             }
-            public string toString()
-            { return "testing"; }
         }
 
-        private ObservableCollection<DynamicFields> Dynamic = new ObservableCollection<DynamicFields>();
+        public ObservableCollection<DynamicFields> Dynamic = new ObservableCollection<DynamicFields>();
+        public ObservableCollection<DynamicFields> dynamicProperty{ 
+            get { return Dynamic; }
+        }
+
+        public bool check(string checkKey)
+        {
+            bool checking = false;
+            for (int i = 0; i < Dynamic.Count; i++)
+            {
+                if (checkKey.Equals( Dynamic.ElementAt(i).muKey))
+                    checking = true;
+
+            }
+            return checking;
+        }
 
         public void fillDynamicFields()
         {
-            for (int i = 0; i < customFields.Count; i++)
+            for (int i = 0; i < customFields.Count-1; i++)
             {
                 DynamicFields myfields = new DynamicFields();
                 myfields.muKey = customFields.ElementAt(i).Key;
                 myfields.muValue = customFields.ElementAt(i).Value;
-                Dynamic.Add(myfields);
+               
+                    dynamicProperty.Add(myfields);
             }
         
         }

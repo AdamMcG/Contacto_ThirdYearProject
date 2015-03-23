@@ -24,7 +24,7 @@ namespace Contacto.View
     public sealed partial class ContactDetail : Page
     {
 
-        MainPageViewModel myMain;
+       
 
 
 
@@ -42,9 +42,9 @@ namespace Contacto.View
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            myContact = (Contact)e.Parameter;
-            myContact.fillDynamicFields();
-            this.DataContext = myContact;
+           DataContext = (Contact)e.Parameter;
+          
+            
 
            
 

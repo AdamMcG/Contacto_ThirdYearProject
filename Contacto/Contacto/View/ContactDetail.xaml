@@ -6,9 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+        <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
+
+            <StackPanel Orientation="Horizontal" Width="280" Margin="10,10,10,10">
+                <TextBlock Text="{Binding muKey}" FontSize="20" FontWeight="SemiBold" 
+        			Margin="10,10,0,0" HorizontalAlignment="Left"
+        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding muValue}" FontSize="20" FontWeight="SemiBold" 
+        			Margin="10,10,0,0" HorizontalAlignment="Left"
+        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+            </StackPanel>
+
+        </DataTemplate>
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -28,16 +42,13 @@
         </Grid>
 
         <Grid x:Name="toAddGrid" Margin="0,0,0,0" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,42,61,490" Width="329">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left"  >
                 <TextBlock FontSize="22">First Name:</TextBlock>
                 <TextBlock FontSize="22" Text="{Binding mufirstName}"></TextBlock>
-
             </StackPanel>
-            <ListView x:Name="AddList" ItemsSource="{Binding dynamic}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="222" Margin="15,174,11,163" RenderTransformOrigin="0.5,0.5" Width="374" >
-                <ListView.RenderTransform>
-                    <CompositeTransform ScaleY="-1" ScaleX="-1"/>
-                </ListView.RenderTransform>
-
+            <ListView x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty}" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center" 
+                          ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
             </ListView>
 
 

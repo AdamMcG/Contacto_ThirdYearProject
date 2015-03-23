@@ -151,7 +151,18 @@ namespace Contacto
             }
         }
 
+        private void OnClosePopup(object sender, RoutedEventArgs e)
+        {
+            string a = ToDelete.Text;
+            myMain.deleteUser(a);
+            
+            if (MyPopup.IsOpen) MyPopup.IsOpen = false;
+        }
 
+        private void OnShowPopup(object sender, RoutedEventArgs e)
+        {
+            if (!MyPopup.IsOpen) MyPopup.IsOpen = true;
+        }
        
 
  

@@ -116,11 +116,10 @@ namespace Contacto.ViewModel
                         contactlist.Clear();
                     }
                     
-                    for (int i = 0; i < list.Count(); i++)
-                    {
-                        if(list.ElementAt<Contact>(i) != null)
-                         contactlist.Add(list.ElementAt<Contact>(i));
-                    }
+                    foreach(Contact c in list)
+                        if(c != null)
+                         contactlist.Add(c);
+                    
                     
                     NotifyPropertyChanged("contactlist");
                 }
@@ -130,7 +129,20 @@ namespace Contacto.ViewModel
                 }
             }
 
-
+            public void deleteUser(String contactToRemove){
+                string check = null;
+                int a = 0;
+                foreach (Contact c in contactlist)
+                {
+                    if (c.mufirstName == contactToRemove)
+                    {
+                        check = "to delete";
+                        a = contactlist.IndexOf(c); }
+                }
+                if(check != null)
+                contactlist.RemoveAt(a);
+                NotifyPropertyChanged("contactlist");
+            }
 
         public void initalizeList()
         {

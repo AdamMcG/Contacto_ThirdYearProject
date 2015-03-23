@@ -141,7 +141,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\ContactData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

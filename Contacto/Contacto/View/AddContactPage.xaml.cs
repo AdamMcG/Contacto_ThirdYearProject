@@ -57,17 +57,68 @@ namespace Contacto
 
             fieldCounter = fieldCounter + 3;
             indexLocation = indexLocation + 3;
-
-
         }
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         //    var nav = (NavigationContext)e.Parameter;
+
+            fieldCounter = 3;
+            indexLocation = 2;
             AddViewModel.pullFromJson();
         }
 
+
+
+        public string getFieldData(int i)
+        {
+            try
+            {
+                string toGet;
+                if (i < AddViewModel.muFieldData.Count())
+                {
+                    toGet = AddViewModel.muFieldData.ElementAt<TextBox>(i).Text;
+                    return toGet;
+                }
+                else
+                {
+                    toGet = "";
+                    return toGet;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ex.ToString();
+            }
+
+            return "";
+        }
+
+        public string getDetailsData(int i)
+        {
+            try
+            {
+                string toGet;
+                if (i < AddViewModel.muDetailsData.Count())
+                {
+                    toGet = AddViewModel.muDetailsData.ElementAt<TextBox>(i).Text;
+                    return toGet;
+                }
+                else
+                {
+                    toGet = "";
+                    return toGet;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+
+            return "";
+        }
 
 
         private void AddFieldBtn_Click(object sender, RoutedEventArgs e)
@@ -79,8 +130,9 @@ namespace Contacto
 
             StackPanel stackPan = AddViewModel.createList(); 
 
-           addList.Items.Add(stackPan);
-            }
+            addList.Items.Add(stackPan);
+
+        }
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -100,33 +152,26 @@ namespace Contacto
         {
 
             string ID = Guid.NewGuid().ToString();
-            string Fname = AddViewModel.getDetailsData(0);
-            string Lname = AddViewModel.getDetailsData(1);
-            string PNum = AddViewModel.getDetailsData(2);
+            string Fname = getDetailsData(0);
+            string Lname = getDetailsData(1);
+            string PNum = getDetailsData(2);
 
             Contact newContact = new Contact(ID, Fname, Lname, PNum);
 
             for (int i = 3; i <= indexLocation; i++)
             {
 
+                string s = getFieldData(i);
+                string t = getDetailsData(i);
 
-                string s = AddViewModel.getFieldData(i);
-                string t = AddViewModel.getDetailsData(i);
-
-               // newContact.addNewField(s, t);
-
-
+                newContact.muCustomFields.Add(s, t);
             }
 
-          //  newContact.add();
+
             AddViewModel.addtocontactlist(newContact);
             AddViewModel.createNewContactList();
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Start();
-
             
-
             Frame.Navigate(typeof(MainPage));
         }
  

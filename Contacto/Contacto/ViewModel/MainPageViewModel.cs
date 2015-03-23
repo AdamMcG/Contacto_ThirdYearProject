@@ -73,7 +73,7 @@ namespace Contacto.ViewModel
 
             // Get the app data folder and create or replace the file we are storing the JSON in.
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.OpenIfExists);
+            StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
 
             // Open the file...
             using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -129,20 +129,51 @@ namespace Contacto.ViewModel
                 }
             }
 
-            public void deleteUser(String contactToRemove){
-                string check = null;
-                int a = 0;
-                foreach (Contact c in contactlist)
-                {
-                    if (c.mufirstName == contactToRemove)
-                    {
-                        check = "to delete";
-                        a = contactlist.IndexOf(c); }
-                }
-                if(check != null)
-                contactlist.RemoveAt(a);
+            public void deleteUser(int index_To_Delete)
+            {
+
+                contactlist.RemoveAt(index_To_Delete);
                 NotifyPropertyChanged("contactlist");
+                
+
+                List<Contact> temp = new List<Contact>();
+
+                for (int i = 0; i < contactlist.Count(); i++) {
+
+                    temp.Add(contactlist.ElementAt<Contact>(i));
+                }
+
+                contactlist.Clear();
+
+                for (int i = 0; i < temp.Count(); i++)
+                {
+                    contactlist.Add(temp.ElementAt<Contact>(i));
+                }
+
+
+                NotifyPropertyChanged("contactlist");
+                SerialisingListWithJsonNetAsync();
+
+
+                
             }
+
+
+
+            //public void deleteUser(String contactToRemove){
+            //    string check = null;
+            //    int a = 0;
+            //    foreach (Contact c in contactlist)
+            //    {
+            //        if (c.mufirstName == contactToRemove)
+            //        {
+            //            check = "to delete";
+            //            a = contactlist.IndexOf(c); }
+            //    }
+            //    if(check != null)
+            //    contactlist.RemoveAt(a);
+            //    NotifyPropertyChanged("contactlist");
+            //}
 
         public void initalizeList()
         {

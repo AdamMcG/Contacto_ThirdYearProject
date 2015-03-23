@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Contacto.Data;
+using System.Collections.ObjectModel;
 namespace Contacto.Model
 {
     //This class is used to create a contact object to be added to the contact list. 
@@ -35,6 +36,39 @@ namespace Contacto.Model
             set { lastName = value; }
         }
 
+        struct DynamicFields
+        {
+            private string key;
+            public string muKey
+            { 
+                get { return key; }
+                set { key = value; }
+            }
+            string dValue;
+            public string muValue
+            {
+                get { return dValue; }
+                set { value = dValue; }
+            }
+            public string toString()
+            { return "testing"; }
+        }
+
+        private ObservableCollection<DynamicFields> Dynamic = new ObservableCollection<DynamicFields>();
+
+        public void fillDynamicFields()
+        {
+            for (int i = 0; i < customFields.Count; i++)
+            {
+                DynamicFields myfields = new DynamicFields();
+                myfields.muKey = customFields.ElementAt(i).Key;
+                myfields.muValue = customFields.ElementAt(i).Value;
+                Dynamic.Add(myfields);
+            }
+        
+        }
+
+        
         private Dictionary<string, string> customFields = new Dictionary<string, string>();
 
         public Dictionary<string, string> muCustomFields 

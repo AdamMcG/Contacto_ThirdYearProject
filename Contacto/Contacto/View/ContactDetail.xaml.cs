@@ -26,29 +26,7 @@ namespace Contacto.View
 
         MainPageViewModel myMain;
 
-        ObservableCollection<myStruct> dynamic_fields = new ObservableCollection<myStruct>();
 
-        struct myStruct
-        {
-           private string key;
-           public string keyy
-           {
-               get { return key; }
-               set { key = value; }
-           }
-         private string valuee;
-         public string valueee
-         {
-             get { return valuee; }
-             set { valuee = value; }
-         }
-
-
-         public string toString()
-         { return "123323"; }
-            
-
-        }
 
 
         Contact myContact; 
@@ -65,17 +43,8 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myContact = (Contact)e.Parameter;
-
-
-            
-            for(int i = 0; i < myContact.muCustomFields.Count(); i++){
-
-                myStruct toAdd = new myStruct();
-                toAdd.keyy=(myContact.muCustomFields.Keys.ElementAt<String>(i));
-                toAdd.valueee=(myContact.muCustomFields.Values.ElementAt<String>(i));
-                dynamic_fields.Add(toAdd);
-
-            }
+            myContact.fillDynamicFields();
+            this.DataContext = myContact;
 
            
 

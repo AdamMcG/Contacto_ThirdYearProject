@@ -151,18 +151,40 @@ namespace Contacto
             }
         }
 
-        private void OnClosePopup(object sender, RoutedEventArgs e)
+        
+        
+        private void ContactListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            string a = ToDelete.Text;
-            myMain.deleteUser(a);
-            
-            if (MyPopup.IsOpen) MyPopup.IsOpen = false;
+            int index = ContactListView.SelectedIndex;
+            Contact toPass = myMain.listOfContacts.ElementAt<Contact>(index);
+
+
+            Frame.Navigate(typeof(ContactDetail), toPass);
+        
+
         }
 
-        private void OnShowPopup(object sender, RoutedEventArgs e)
+        private void ContactListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if (!MyPopup.IsOpen) MyPopup.IsOpen = true;
+            int index = ContactListView.SelectedIndex;
+            myMain.deleteUser(index);
+
         }
+
+        
+        //private void OnClosePopup(object sender, RoutedEventArgs e)
+        //{
+        //    string a = ToDelete.Text;
+        //    myMain.deleteUser(a);
+            
+        //    if (MyPopup.IsOpen) MyPopup.IsOpen = false;
+        //}
+
+        //private void OnShowPopup(object sender, RoutedEventArgs e)
+        //{
+        //    if (!MyPopup.IsOpen) MyPopup.IsOpen = true;
+        //}
+
        
 
  

@@ -17,8 +17,27 @@ namespace Contacto.ViewModel
 {
     class AddContactViewModel
     {
-        List<TextBox> fieldData = new List<TextBox>();
-        List<TextBox> detailsData = new List<TextBox>();
+        private  List<TextBox> fieldData = new List<TextBox>();
+
+        public List<TextBox> muFieldData
+        {
+            get { return fieldData;  }
+            set { fieldData = value; }
+
+        }
+
+        private List<TextBox> detailsData = new List<TextBox>();
+
+        public List<TextBox> muDetailsData
+        {
+            get { return detailsData; }
+            set { detailsData = value; }
+
+        }
+
+
+
+
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> listOfContacts { get { return contactlist; } }
 
@@ -118,39 +137,6 @@ namespace Contacto.ViewModel
 
         }
 
-        public string getFieldData(int i)
-        {
-
-            string toGet;
-            if (i < fieldData.Count())
-            {
-                toGet = fieldData.ElementAt<TextBox>(i).Text;
-                return toGet;
-            }
-            else
-            {
-                toGet = "";
-                return toGet;
-            }
-
-        }
-
-        public string getDetailsData(int i)
-        {
-
-            string toGet;
-            if (i < fieldData.Count())
-            {
-                toGet = detailsData.ElementAt<TextBox>(i).Text;
-                return toGet;
-            }
-            else
-            {
-                toGet = "";
-                return toGet;
-            }
-
-        }
 
         public void addtocontactlist(Contact c)
         { contactlist.Add(c); }

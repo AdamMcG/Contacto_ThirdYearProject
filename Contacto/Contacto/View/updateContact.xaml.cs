@@ -21,18 +21,13 @@ using System.Collections.ObjectModel;
 
 namespace Contacto.View
 {
-    public sealed partial class ContactDetail : Page
+    public sealed partial class updateContact : Page
     {
 
-       
-
-
-
-
-        Contact myContact; 
-        public ContactDetail()
+        Contact myContact;
+        public updateContact()
         {
-                this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -43,18 +38,18 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myContact = (Contact)e.Parameter;
-            myContact.deleteDuplicates();
-            this.DataContext = myContact;
-          
             
+            this.DataContext = myContact;
 
-           
+
+
+
 
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(updateContact), myContact);
+            Frame.Navigate(typeof(ContactDetail), myContact);
         }
     }
 }

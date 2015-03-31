@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Contacto.View.ContactDetail"
+    x:Class="Contacto.View.updateContact"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Contacto.View"
@@ -19,9 +19,9 @@
                 <TextBlock Text=":" FontSize="20" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding muValue}" FontSize="20" FontWeight="SemiBold" 
+                <TextBox Name="listrBox" Text="{Binding muValue, Mode=TwoWay}" FontSize="20" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+        			Width="200" TextWrapping="Wrap"/>
             </StackPanel>
 
         </DataTemplate>
@@ -52,9 +52,9 @@
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                    <TextBlock Text="{Binding mufirstName}" FontSize="20" FontWeight="SemiBold" 
+                    <TextBox  Name="firstnamebox" Text="{Binding mufirstName, Mode=TwoWay}" FontSize="20" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+        			Width="200" TextWrapping="Wrap"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
@@ -62,13 +62,13 @@
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                    <TextBlock Text="{Binding mulastName}" FontSize="20" FontWeight="SemiBold" 
+                    <TextBox Name=" lastnamebox" Text="{Binding mulastName, Mode=TwoWay}" FontSize="20" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+        			Width="200" TextWrapping="Wrap"/>
 
                 </StackPanel>
 
-                <ListView x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty}" 
+                <ListView x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty, Mode=TwoWay}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
                           ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>

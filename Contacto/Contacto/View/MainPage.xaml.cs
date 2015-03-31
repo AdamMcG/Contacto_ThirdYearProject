@@ -18,6 +18,8 @@ using Contacto.Data;
 using Contacto.Model;
 using Contacto.Common;
 using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
+using Windows.UI.Popups;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Contacto
@@ -29,7 +31,7 @@ namespace Contacto
     {
 
         MainPageViewModel myMain = new MainPageViewModel();
-        
+        bool singletap = true;
         public MainPage()
         {
 
@@ -153,7 +155,12 @@ namespace Contacto
 
         
         
-        private void ContactListView_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void ContactListView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            this.singletap = true;
+            await Task.Delay(200);
+            if (this.singletap)
         {
             try
             {
@@ -168,29 +175,61 @@ namespace Contacto
 
                 ex.ToString();
             }
+            }
 
         }
 
-        private void ContactListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
+
             int index = ContactListView.SelectedIndex;
+            string name =  myMain.listOfContacts.ElementAt<Contact>(index).mufirstName + " " + myMain.listOfContacts.ElementAt<Contact>(index).mulastName;
+            string dialog = "Are you sure you want to delete " + name + "?";
+
+            MessageDialog messageDialog = new MessageDialog(dialog, "Delete?");
+
+            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(CommandHandlers)));
+            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(CommandHandlers)));
+
+
+            await messageDialog.ShowAsync();
+
+
+
+
+        }
+
+        public void CommandHandlers(IUICommand commandLabel)
+        {
+
+            int index = ContactListView.SelectedIndex;
+
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Yes":
             myMain.deleteUser(index);
+                    break;
+                case "No":
+                    break;
+                
+            }
+        }
+
+        private void StackPanel_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+            this.singletap = false;
+            FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
+
 
         }
 
         
-        //private void OnClosePopup(object sender, RoutedEventArgs e)
-        //{
-        //    string a = ToDelete.Text;
-        //    myMain.deleteUser(a);
             
-        //    if (MyPopup.IsOpen) MyPopup.IsOpen = false;
-        //}
 
-        //private void OnShowPopup(object sender, RoutedEventArgs e)
-        //{
-        //    if (!MyPopup.IsOpen) MyPopup.IsOpen = true;
-        //}
 
        
 

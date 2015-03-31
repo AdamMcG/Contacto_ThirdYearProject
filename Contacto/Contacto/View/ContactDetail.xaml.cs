@@ -43,7 +43,7 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myContact = (Contact)e.Parameter;
-            myContact.deleteDuplicates();
+         //   myContact.deleteDuplicates();
             this.DataContext = myContact;
           
             

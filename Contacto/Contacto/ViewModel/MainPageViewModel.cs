@@ -22,6 +22,7 @@ namespace Contacto.ViewModel
     {
 
 
+
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> listOfContacts{
             get { return contactlist; }
@@ -87,6 +88,9 @@ namespace Contacto.ViewModel
             }
         }
 
+
+            public void serialiseList()
+            { SerialisingListWithJsonNetAsync(); }
         //This method deserialises a list and sets it as the contact list.
             private async void initalizeListJson()
             {
@@ -182,36 +186,10 @@ namespace Contacto.ViewModel
         }
 
 
-            
-        //Deserialises the contact and adds xer to the list.
-            private async void buildWithJsonNetAsync()
-            {
-                Contact c = new Contact();
-                try {
-                    string JSONFILENAME = "contacts.json";
-                    string content = " ";
-                    StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
-                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read)){
-                        using (DataReader dreader = new DataReader(testStream)){
-                            uint length = (uint)testStream.Size;
-                            await dreader.LoadAsync(length);
-                            content = dreader.ReadString(length);
-                            c = JsonConvert.DeserializeObject<Contact>(content);
-                         
-                        }
-                    }
-                listOfContacts.Add(c);       
-                }
-                catch (Exception e)
-                {
-
-                    e.ToString();
-                }
-            }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
+        public void NotifyPropertyChanged(String propertyName)
         {
 
             PropertyChangedEventHandler handle = PropertyChanged;

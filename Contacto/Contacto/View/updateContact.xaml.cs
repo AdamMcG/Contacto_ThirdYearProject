@@ -23,7 +23,7 @@ namespace Contacto.View
 {
     public sealed partial class updateContact : Page
     {
-
+        
         Contact myContact;
         public updateContact()
         {

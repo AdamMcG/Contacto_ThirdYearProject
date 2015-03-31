@@ -88,6 +88,7 @@
     <Compile Include="Data\ContactDataSource.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="ViewModel\AddContactViewModel.cs" />
+    <Compile Include="ViewModel\ContactDetailViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="View\AddContactPage.xaml.cs">

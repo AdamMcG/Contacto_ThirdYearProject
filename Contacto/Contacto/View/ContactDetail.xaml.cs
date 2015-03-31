@@ -23,13 +23,10 @@ namespace Contacto.View
 {
     public sealed partial class ContactDetail : Page
     {
-
-       
-
-
-
-
-        Contact myContact; 
+        MainPageViewModel myMain = new MainPageViewModel();
+        ContactDetailViewModel defaultViewModel = new ContactDetailViewModel();
+        
+        Contact myContact = new Contact(); 
         public ContactDetail()
         {
                 this.InitializeComponent();
@@ -42,14 +39,24 @@ namespace Contacto.View
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            defaultViewModel.pullFromJson();
             myContact = (Contact)e.Parameter;
             myContact.deleteDuplicates();
             this.DataContext = myContact;
-          
-            
-
            
 
+        }
+
+        public void exit(object sender, RoutedEventArgs e)
+        {
+
+            defaultViewModel.removeFromList(myContact);
+            defaultViewModel.addtocontactlist(myContact);
+            defaultViewModel.createNewContactList();
+
+            
+            
+            Frame.Navigate(typeof(MainPage)); 
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
@@ -58,3 +65,4 @@ namespace Contacto.View
         }
     }
 }
+

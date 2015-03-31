@@ -159,10 +159,8 @@ namespace Contacto
             {
 
                 int index = ContactListView.SelectedIndex;
-                Contact toPass = myMain.listOfContacts.ElementAt<Contact>(index);
 
-
-                Frame.Navigate(typeof(ContactDetail), toPass);
+                Frame.Navigate(typeof(ContactDetail), myMain.listOfContacts.ElementAt<Contact>(index));
 
             }
             catch (Exception ex)

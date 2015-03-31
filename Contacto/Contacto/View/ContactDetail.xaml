@@ -30,6 +30,7 @@
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
+            <AppBarButton Icon="BackToWindow" Label="appbarbutton" Click="exit"/>
 
         </CommandBar>
     </Page.BottomAppBar>

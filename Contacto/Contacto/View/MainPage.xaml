@@ -22,12 +22,19 @@
 
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
 
-            <StackPanel Orientation="Horizontal" Width="280" Margin="10,10,10,10">
-                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
+            <StackPanel Orientation="Horizontal" Width="400" Margin="10,10,10,10"  IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+
+
+                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="32" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
+                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}" FontSize="32" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
             </StackPanel>
@@ -36,7 +43,17 @@
 
         <DataTemplate x:Key="GridTemplate">
             <Grid Background="DarkGray" Width="250" Height="250">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10" IsHoldingEnabled="True">
+                    
+                    <StackPanel.Resources>
+                        <MenuFlyout x:Key="ListFlyout"/>
+                    </StackPanel.Resources>
+                    <FlyoutBase.AttachedFlyout>
+                        <StaticResource ResourceKey="ListFlyout"/>
+                    </FlyoutBase.AttachedFlyout>
+
+
+
                     <TextBlock Text="Ay Lorem ipsum dolor site amet yed diam nonumy" 
         				FontSize="24"  Margin="10,0,0,0" 
         				TextTrimming="WordEllipsis" TextWrapping="Wrap" 
@@ -132,33 +149,16 @@
 						Height="382" 
 						Width="360" 
 						FontSize="14" />
-                    <!--<Popup x:Name="MyPopup" VerticalOffset="10" HorizontalOffset="30">
-                        <StackPanel 
-            Background="CornflowerBlue" 
-            HorizontalAlignment="Center" Width="320" Height="309">
-
-                            <TextBlock 
-                Text="Which contact do you wish to delete?" 
-                Margin="20"
-                TextAlignment="Center" 
-                FontSize="16" 
-                Foreground="Brown"/>
-                            <TextBox x:Name="ToDelete" Margin="36,0,87,0"/>
-                            <Button 
-                            	Content="delete" 
-                            	Margin="36,20,0,20" 
-                            	Click="OnClosePopup" Width="197"/>
-                        </StackPanel>
-                    </Popup>-->
+                 
                 </Grid>
 
             </PivotItem>
 
-            <PivotItem x:Name="SecondPage" Margin="0,0,0,1"  >
+            <PivotItem x:Name="SecondPage" Margin="0,0,0,1" IsHoldingEnabled="True"  >
                 <StackPanel Orientation="Vertical" Width="400" >
-                    <TextBlock Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
-                    <ListView x:Name="ContactListView" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-						Height="447" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped" DoubleTapped="ContactListView_DoubleTapped"/>
+                    <TextBlock  Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
+                    <ListView x:Name="ContactListView"  IsHoldingEnabled="True" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+						Height="447" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
                 </StackPanel>
             </PivotItem>
 

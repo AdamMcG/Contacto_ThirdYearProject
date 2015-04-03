@@ -30,6 +30,10 @@ namespace Contacto
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
         ListView addList = new ListView();
+
+        public List<string> MenuOptions { get; private set; }
+
+
         AddContactViewModel AddViewModel = new AddContactViewModel();
 
 
@@ -39,6 +43,16 @@ namespace Contacto
 
             this.InitializeComponent();
 
+            MenuOptions = new List<string>
+            {
+                "Home Phone No.",
+                "Work Phone No.",
+                "Mobile Phone No.",
+                "Email Address",
+                "House Address",
+                "Work Address",
+                "Custom"
+            };
 
             addList.HorizontalAlignment = HorizontalAlignment.Stretch;
             addList.Height = 500;
@@ -120,19 +134,42 @@ namespace Contacto
             return "";
         }
 
-
-        private void AddFieldBtn_Click(object sender, RoutedEventArgs e)
+        private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
+            string selection = (string)sender.SelectedItem;
 
+            if (selection != "Custom")
+            {
+                fieldCounter++;
+                indexLocation++;
+                addList.Items.Add(AddViewModel.initalizePage(selection));
+            }
+            else
+            {
+                fieldCounter++;
+                indexLocation++;
+                StackPanel stackPan = AddViewModel.createList(); 
+                addList.Items.Add(stackPan);
 
-            fieldCounter++;
-            indexLocation++;
-
-            StackPanel stackPan = AddViewModel.createList(); 
-
-            addList.Items.Add(stackPan);
+            }
 
         }
+
+
+        //private void AddFieldBtn_Click(object sender, RoutedEventArgs e)
+        //{
+
+
+
+
+        //fieldCounter++;
+        //indexLocation++;
+
+        //StackPanel stackPan = AddViewModel.createList(); 
+
+        //addList.Items.Add(stackPan);
+
+        //}
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -180,6 +217,8 @@ namespace Contacto
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+ 
  
     }
 }

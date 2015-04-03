@@ -210,7 +210,7 @@ namespace Contacto
             switch (Actions)
             {
                 case "Yes":
-            myMain.deleteUser(index);
+                    myMain.deleteUser(index);
                     break;
                 case "No":
                     break;

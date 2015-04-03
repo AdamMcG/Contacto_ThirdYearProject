@@ -45,9 +45,9 @@ namespace Contacto
 
             MenuOptions = new List<string>
             {
-                "Home Phone No.",
-                "Work Phone No.",
-                "Mobile Phone No.",
+                "Home Phone",
+                "Work Phone",
+                "Mobile Phone",
                 "Email Address",
                 "House Address",
                 "Work Address",
@@ -64,13 +64,12 @@ namespace Contacto
 
             addList.Items.Add(AddViewModel.initalizePage("First Name"));
             addList.Items.Add(AddViewModel.initalizePage("Last Name"));
-            addList.Items.Add(AddViewModel.initalizePage("Phone Number"));
 
 
 
 
-            fieldCounter = fieldCounter + 3;
-            indexLocation = indexLocation + 3;
+            fieldCounter = fieldCounter + 2;
+            indexLocation = indexLocation + 2;
         }
 
 
@@ -78,8 +77,6 @@ namespace Contacto
         {
         //    var nav = (NavigationContext)e.Parameter;
 
-            fieldCounter = 3;
-            indexLocation = 2;
             AddViewModel.pullFromJson();
         }
 
@@ -173,7 +170,7 @@ namespace Contacto
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (fieldCounter > 3)
+            if (fieldCounter > 2)
             {
                 addList.Items.RemoveAt(indexLocation);
                 fieldCounter--;
@@ -191,11 +188,10 @@ namespace Contacto
             string ID = Guid.NewGuid().ToString();
             string Fname = getDetailsData(0);
             string Lname = getDetailsData(1);
-            string PNum = getDetailsData(2);
 
-            Contact newContact = new Contact(ID, Fname, Lname, PNum);
+            Contact newContact = new Contact(ID, Fname, Lname);
 
-            for (int i = 3; i <= indexLocation; i++)
+            for (int i = 2; i <= indexLocation; i++)
             {
 
                 string s = getFieldData(i);

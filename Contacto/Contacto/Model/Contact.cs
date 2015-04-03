@@ -4,31 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Contacto.Data;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 namespace Contacto.Model
 {
-    //This class is used to create a contact object to be added to the contact list. 
-    public class Contact
+    //This class is used to create a contact object to be added to the contact list.
+    public class Contact : INotifyPropertyChanged
     {
         private string _uniqueContactID;
-     public string uniqueContactID
+        public string uniqueContactID
         {
-        get { return _uniqueContactID; }
-        set { _uniqueContactID = value; }
-}
+            get { return _uniqueContactID; }
+            set { _uniqueContactID = value; }
+        }
         private string firstName;
         public string mufirstName
         {
             get { return firstName; }
-            set { firstName = value; }
+            set
+            {
+                if (value != firstName)
+                {
+                    firstName = value;
+                    NotifyPropertyChanged("firstName");
+                }
+            }
         }
 
-        private string phoneNumber;
-        public string muPhoneNumber
-        {
-            get { return phoneNumber; }
-            set { phoneNumber = value; }
-        }
+
         private string lastName;
         public string mulastName
         {
@@ -36,83 +39,115 @@ namespace Contacto.Model
             set { lastName = value; }
         }
 
-        public struct DynamicFields
+        public class DynamicFields : INotifyPropertyChanged
         {
+            public DynamicFields()
+            {
+                key = "";
+                dValue = "";
+            }
             private string key;
             public string muKey
-            { 
+            {
                 get { return key; }
-                set { key = value; }
+                set
+                {
+                    if (value != key)
+                    {
+                        key = value;
+                        NotifyPropertyChanged("key");
+                    }
+                }
             }
             private string dValue;
             public string muValue
             {
                 get { return dValue; }
-                set { dValue = value; }
+                set
+                {
+                    if (value != dValue)
+                    {
+                        dValue = value;
+                        NotifyPropertyChanged("dValue");
+                    }
+                }
             }
+            public event PropertyChangedEventHandler PropertyChanged;
+            private void NotifyPropertyChanged(String propertyName)
+            {
+                PropertyChangedEventHandler handler = PropertyChanged;
+                if (null != handler)
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+
         }
 
         public ObservableCollection<DynamicFields> Dynamic = new ObservableCollection<DynamicFields>();
-        public ObservableCollection<DynamicFields> dynamicProperty{ 
-            get { return Dynamic; }
+        public ObservableCollection<DynamicFields> dynamicProperty
+        {
+            get { return this.Dynamic; }
         }
 
-        public bool check(string checkKey)
+        public void deleteDuplicates()
         {
-            bool checking = false;
             for (int i = 0; i < Dynamic.Count; i++)
             {
-                if (checkKey.Equals( Dynamic.ElementAt(i).muKey))
-                    checking = true;
-
+                for (int j = 1; j <= Dynamic.Count - 1; j++)
+                {
+                    if (Dynamic.ElementAt(i).muKey == Dynamic.ElementAt(j).muKey && j != i)
+                        Dynamic.RemoveAt(j);
+                }
             }
-            return checking;
         }
 
         public void fillDynamicFields()
         {
-            for (int i = 0; i < customFields.Count-1; i++)
+            for (int i = 0; i < customFields.Count; i++)
             {
                 DynamicFields myfields = new DynamicFields();
-                myfields.muKey = customFields.ElementAt(i).Key;
-                myfields.muValue = customFields.ElementAt(i).Value;
-               
-                    dynamicProperty.Add(myfields);
+                myfields.muKey = muCustomFields.ElementAt(i).Key;
+                myfields.muValue = muCustomFields.ElementAt(i).Value;
+
+                Dynamic.Add(myfields);
+                NotifyPropertyChanged("Dynamic");
             }
-        
+
         }
 
-        
+
         private Dictionary<string, string> customFields = new Dictionary<string, string>();
 
-        public Dictionary<string, string> muCustomFields 
+        public Dictionary<string, string> muCustomFields
         {
 
             get { return customFields; }
-            set { customFields = value;  }
-        
-        }
+            set { customFields = value; }
 
-        public override string ToString()
-        {
-            return mufirstName;
         }
 
 
-        public Contact(string uniqueID,string first, string last, string phoneNumber)
+        public Contact(string uniqueID, string first, string last)
         {
             firstName = first;
             uniqueContactID = uniqueID;
             lastName = last;
-            this.phoneNumber = phoneNumber;
         }
 
-      public Contact() {
-          firstName = "test";
-          lastName = "testing";
-          uniqueContactID = "12";
-            phoneNumber = "0000112";
+        public Contact()
+        {
+            firstName = "test";
+            lastName = "testing";
+            uniqueContactID = "12";
 
-      }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

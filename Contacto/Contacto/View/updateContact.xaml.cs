@@ -23,7 +23,7 @@ namespace Contacto.View
 {
     public sealed partial class updateContact : Page
     {
-        
+
         Contact myContact;
         public updateContact()
         {
@@ -38,10 +38,8 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myContact = (Contact)e.Parameter;
-            
+
             this.DataContext = myContact;
-
-
 
 
 
@@ -50,11 +48,6 @@ namespace Contacto.View
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ContactDetail), myContact);
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

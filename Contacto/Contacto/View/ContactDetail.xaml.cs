@@ -25,11 +25,11 @@ namespace Contacto.View
     {
         MainPageViewModel myMain = new MainPageViewModel();
         ContactDetailViewModel defaultViewModel = new ContactDetailViewModel();
-        
-        Contact myContact = new Contact(); 
+
+        Contact myContact = new Contact();
         public ContactDetail()
         {
-                this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace Contacto.View
         {
             defaultViewModel.pullFromJson();
             myContact = (Contact)e.Parameter;
-         //   myContact.deleteDuplicates();
+            //   myContact.deleteDuplicates();
             this.DataContext = myContact;
-           
+
 
         }
 
@@ -54,9 +54,9 @@ namespace Contacto.View
             defaultViewModel.addtocontactlist(myContact);
             defaultViewModel.createNewContactList();
 
-            
-            
-            Frame.Navigate(typeof(MainPage)); 
+
+
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
@@ -65,4 +65,3 @@ namespace Contacto.View
         }
     }
 }
-

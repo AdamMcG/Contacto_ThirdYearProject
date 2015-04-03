@@ -18,57 +18,64 @@ using System.Collections.Specialized;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
-    class MainPageViewModel:INotifyPropertyChanged
+    class MainPageViewModel : INotifyPropertyChanged
     {
 
 
 
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
-        public ObservableCollection<Contact> listOfContacts{
+        public ObservableCollection<Contact> listOfContacts
+        {
             get { return contactlist; }
-            set { contactlist = value;
+            set
+            {
+                contactlist = value;
 
-            NotifyPropertyChanged("contactlist");
+                NotifyPropertyChanged("contactlist");
             }
         }
 
         private ObservableCollection<Group> groupList = new ObservableCollection<Group>();
-        public ObservableCollection<Group> listOfGroups{
+        public ObservableCollection<Group> listOfGroups
+        {
             get { return groupList; }
         }
 
-            public MainPageViewModel() {
-              
+        public MainPageViewModel()
+        {
+
         }
- 
-        
+
+
         String name = "contacts.json";
         //This creates a contact, then serialises it into JSON and writes to the JSON file.
-            private async void buildContactDataAsync()
+        private async void buildContactDataAsync()
+        {
+            try
             {
-                try
-                {
-                    Contact c = new Contact();
-                    string jsoncontent = JsonConvert.SerializeObject(c);
-                   
-                    StorageFile File = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+                Contact c = new Contact();
+                string jsoncontent = JsonConvert.SerializeObject(c);
 
-                    using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.ReadWrite)){
-                        using (DataWriter dwriter = new DataWriter(testStream)) {
-                            dwriter.WriteString(jsoncontent);
-                            await dwriter.StoreAsync();
-                            
-                        }
+                StorageFile File = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+
+                using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    using (DataWriter dwriter = new DataWriter(testStream))
+                    {
+                        dwriter.WriteString(jsoncontent);
+                        await dwriter.StoreAsync();
+
                     }
                 }
-                catch (IOException e)
-                { e.ToString(); }
             }
+            catch (IOException e)
+            { e.ToString(); }
+        }
 
         //This is serialising a list and adding to the json file. 
-            private async void SerialisingListWithJsonNetAsync()
-            {
-                ObservableCollection<Contact> list = listOfContacts;
+        private async void SerialisingListWithJsonNetAsync()
+        {
+            ObservableCollection<Contact> list = listOfContacts;
             // Changed to serialze the List
             string jsonContents = JsonConvert.SerializeObject(list);
 
@@ -89,99 +96,100 @@ namespace Contacto.ViewModel
         }
 
 
-            public void serialiseList()
-            { SerialisingListWithJsonNetAsync(); }
+        public void serialiseList()
+        { SerialisingListWithJsonNetAsync(); }
         //This method deserialises a list and sets it as the contact list.
-            private async void initalizeListJson()
+        private async void initalizeListJson()
+        {
+            List<Contact> list = new List<Contact>();
+            try
             {
-                List<Contact> list = new List<Contact>();
-                try
-                {
-                    string JSONFILENAME = "contacts.json";
-                    string content = " ";
-                    StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
-                    IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
+                string JSONFILENAME = "contacts.json";
+                string content = " ";
+                StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
+                IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
 
-                    using (testStream)
+                using (testStream)
+                {
+                    using (DataReader dreader = new DataReader(testStream))
                     {
-                        using (DataReader dreader = new DataReader(testStream))
-                        {
-                            uint length = (uint)testStream.Size;
-                            await dreader.LoadAsync(length);
-                            content = dreader.ReadString(length);
-                            list = JsonConvert.DeserializeObject<List<Contact>>(content);
-                            dreader.Dispose();
-                        }
-                        
+                        uint length = (uint)testStream.Size;
+                        await dreader.LoadAsync(length);
+                        content = dreader.ReadString(length);
+                        list = JsonConvert.DeserializeObject<List<Contact>>(content);
+                        dreader.Dispose();
                     }
-                    testStream.Dispose();
-                    if (contactlist != null)
-                    {
-                        contactlist.Clear();
-                    }
-                    
-                    foreach(Contact c in list)
-                        if(c != null)
-                         contactlist.Add(c);
-                    
-                    
-                    NotifyPropertyChanged("contactlist");
+
                 }
-                catch (Exception e)
+                testStream.Dispose();
+                if (contactlist != null)
                 {
-                    e.ToString();
-                }
-            }
-
-            public void deleteUser(int index_To_Delete)
-            {
-
-                contactlist.RemoveAt(index_To_Delete);
-                NotifyPropertyChanged("contactlist");
-                
-
-                List<Contact> temp = new List<Contact>();
-
-                for (int i = 0; i < contactlist.Count(); i++) {
-
-                    temp.Add(contactlist.ElementAt<Contact>(i));
+                    contactlist.Clear();
                 }
 
-                contactlist.Clear();
-
-                for (int i = 0; i < temp.Count(); i++)
-                {
-                    contactlist.Add(temp.ElementAt<Contact>(i));
-                }
+                foreach (Contact c in list)
+                    if (c != null)
+                        contactlist.Add(c);
 
 
                 NotifyPropertyChanged("contactlist");
-                SerialisingListWithJsonNetAsync();
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
+
+        public void deleteUser(int index_To_Delete)
+        {
+
+            contactlist.RemoveAt(index_To_Delete);
+            NotifyPropertyChanged("contactlist");
 
 
-                
+            List<Contact> temp = new List<Contact>();
+
+            for (int i = 0; i < contactlist.Count(); i++)
+            {
+
+                temp.Add(contactlist.ElementAt<Contact>(i));
+            }
+
+            contactlist.Clear();
+
+            for (int i = 0; i < temp.Count(); i++)
+            {
+                contactlist.Add(temp.ElementAt<Contact>(i));
             }
 
 
+            NotifyPropertyChanged("contactlist");
+            SerialisingListWithJsonNetAsync();
 
-            //public void deleteUser(String contactToRemove){
-            //    string check = null;
-            //    int a = 0;
-            //    foreach (Contact c in contactlist)
-            //    {
-            //        if (c.mufirstName == contactToRemove)
-            //        {
-            //            check = "to delete";
-            //            a = contactlist.IndexOf(c); }
-            //    }
-            //    if(check != null)
-            //    contactlist.RemoveAt(a);
-            //    NotifyPropertyChanged("contactlist");
-            //}
+
+
+        }
+
+
+
+        //public void deleteUser(String contactToRemove){
+        //    string check = null;
+        //    int a = 0;
+        //    foreach (Contact c in contactlist)
+        //    {
+        //        if (c.mufirstName == contactToRemove)
+        //        {
+        //            check = "to delete";
+        //            a = contactlist.IndexOf(c); }
+        //    }
+        //    if(check != null)
+        //    contactlist.RemoveAt(a);
+        //    NotifyPropertyChanged("contactlist");
+        //}
 
         public void initalizeList()
         {
-           initalizeListJson();
+            initalizeListJson();
 
         }
 
@@ -194,7 +202,8 @@ namespace Contacto.ViewModel
 
             PropertyChangedEventHandler handle = PropertyChanged;
             if (null != handle)
-            { handle(this, new PropertyChangedEventArgs(propertyName));
+            {
+                handle(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

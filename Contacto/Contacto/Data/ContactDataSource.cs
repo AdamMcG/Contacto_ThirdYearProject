@@ -65,8 +65,7 @@ namespace Contacto.Data
                     Contact c = new Contact(
                         contactObject["uniqueID"].GetString(),
                        contactObject["firstName"].GetString(),
-                       contactObject["lastName"].GetString(),
-                       contactObject["phoneNumber"].GetString());
+                       contactObject["lastName"].GetString());
                     contactList.Add(c);
                 }
             }

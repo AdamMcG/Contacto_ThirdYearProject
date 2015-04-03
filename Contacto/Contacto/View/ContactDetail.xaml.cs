@@ -41,7 +41,7 @@ namespace Contacto.View
         {
             defaultViewModel.pullFromJson();
             myContact = (Contact)e.Parameter;
-            //   myContact.deleteDuplicates();
+             myContact.deleteDuplicates();
             this.DataContext = myContact;
 
 

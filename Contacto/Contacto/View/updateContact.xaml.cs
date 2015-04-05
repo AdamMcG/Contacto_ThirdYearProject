@@ -24,30 +24,104 @@ namespace Contacto.View
     public sealed partial class updateContact : Page
     {
 
+        UpdateContactViewModel defaultViewModel = new UpdateContactViewModel();
+
+        Contact originalContact;
         Contact myContact;
+        int fieldCounter = 0;
+        int indexLocation = 0;
+        public List<string> MenuOptions2 { get; set; }
+
         public updateContact()
         {
             this.InitializeComponent();
+
+            MenuOptions2 = new List<string>
+            {
+                "Home Phone",
+                "Work Phone",
+                "Mobile Phone",
+                "Email Address",
+                "House Address",
+                "Work Address",
+                "Custom"
+            };
+
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            defaultViewModel.pullFromJson();
+            fieldCounter = defaultViewModel.listOfContacts.Count;
+            indexLocation = defaultViewModel.listOfContacts.Count - 1;
+
             myContact = (Contact)e.Parameter;
-
-            this.DataContext = myContact;
-
+            originalContact = (Contact)e.Parameter;
+                
+            toAddGrid.DataContext = myContact;
+            addGrid.DataContext = myContact;
 
 
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
+
+            defaultViewModel.removeFromList(myContact);
+            defaultViewModel.addtocontactlist(myContact);
+            defaultViewModel.createNewContactList();
+
             Frame.Navigate(typeof(ContactDetail), myContact);
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ContactDetail), originalContact);
+        }
+
+        
+        private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+            string selection = (string)sender.SelectedItem;
+
+            if (selection != "Custom")
+            {
+                fieldCounter++;
+                indexLocation++;
+            }
+            else
+            {
+                fieldCounter++;
+                indexLocation++;
+
+                InputBox.Visibility = Visibility.Visible;
+
+            }
+
+        }
+
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // YesButton Clicked! Let's hide our InputBox and handle the input text.
+            InputBox.Visibility = Visibility.Collapsed;
+
+            // Do something with the Input
+            String input = InputTextBox.Text;
+
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            // NoButton Clicked! Let's hide our InputBox.
+            InputBox.Visibility = Visibility.Collapsed;
+
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
+
     }
 }

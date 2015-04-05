@@ -50,9 +50,9 @@ namespace Contacto.View
         public void exit(object sender, RoutedEventArgs e)
         {
 
-            defaultViewModel.removeFromList(myContact);
-            defaultViewModel.addtocontactlist(myContact);
-            defaultViewModel.createNewContactList();
+            //defaultViewModel.removeFromList(myContact);
+            //defaultViewModel.addtocontactlist(myContact);
+            //defaultViewModel.createNewContactList();
 
 
 

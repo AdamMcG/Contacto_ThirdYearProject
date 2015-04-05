@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -30,8 +31,7 @@ namespace Contacto
         private static int fieldCounter = 0;
         private static int indexLocation = -1;
         ListView addList = new ListView();
-
-        public List<string> MenuOptions { get; private set; }
+        public List<string> MenuOptions { get; set; }
 
 
         AddContactViewModel AddViewModel = new AddContactViewModel();
@@ -145,28 +145,38 @@ namespace Contacto
             {
                 fieldCounter++;
                 indexLocation++;
-                StackPanel stackPan = AddViewModel.createList(); 
-                addList.Items.Add(stackPan);
+                InputBox.Visibility = Visibility.Visible;
 
             }
 
+        
         }
 
 
-        //private void AddFieldBtn_Click(object sender, RoutedEventArgs e)
-        //{
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // YesButton Clicked! Let's hide our InputBox and handle the input text.
+            InputBox.Visibility = Visibility.Collapsed;
 
+            // Do something with the Input
+            String input = InputTextBox.Text;
 
+            
+             addList.Items.Add(AddViewModel.initalizePage(input));
 
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
 
-        //fieldCounter++;
-        //indexLocation++;
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            // NoButton Clicked! Let's hide our InputBox.
+            InputBox.Visibility = Visibility.Collapsed;
 
-        //StackPanel stackPan = AddViewModel.createList(); 
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
 
-        //addList.Items.Add(stackPan);
-
-        //}
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -181,33 +191,91 @@ namespace Contacto
                 return;
             }
         }
- 
-        private void FinishBtn_Click(object sender, RoutedEventArgs e)
+
+        private async void FinishBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            
             string ID = Guid.NewGuid().ToString();
             string Fname = getDetailsData(0);
             string Lname = getDetailsData(1);
 
-            Contact newContact = new Contact(ID, Fname, Lname);
-
-            for (int i = 2; i <= indexLocation; i++)
+            try
             {
 
-                string s = getFieldData(i);
-                string t = getDetailsData(i);
+                Contact newContact = new Contact(ID, Fname, Lname);
 
-                newContact.muCustomFields.Add(s, t);
-            }
+
+                for (int i = 2; i <= indexLocation; i++)
+                {
+
+
+
+                    string s = getFieldData(i);
+                    string t = getDetailsData(i);
+
+                    if (s == "" || t == "")
+                    {
+                        string dialog = "All fields must have entries";
+
+                        MessageDialog messageDialog = new MessageDialog(dialog, "Empty Field");
+                        messageDialog.Commands.Add(new UICommand("Ok", new UICommandInvokedHandler(CommandHandlers)));
+                        await messageDialog.ShowAsync();
+                        return;
+                    }
+                    else if (AddViewModel.muFieldData.Count != AddViewModel.muFieldData.Distinct().Count())
+                    {
+
+                        string dialog = "Fields cannot be duplicates";
+
+                        MessageDialog messageDialog = new MessageDialog(dialog, "Duplicate");
+                        messageDialog.Commands.Add(new UICommand("Ok", new UICommandInvokedHandler(CommandHandlers)));
+                        await messageDialog.ShowAsync();
+                        return;
+
+                    }
+                    else
+                        newContact.muCustomFields.Add(s, t);
+                }
 
                 newContact.fillDynamicFields();
 
-            AddViewModel.addtocontactlist(newContact);
-            AddViewModel.createNewContactList();
+                AddViewModel.addtocontactlist(newContact);
+                AddViewModel.createNewContactList();
+
+
+                Frame.Navigate(typeof(MainPage));
+            }
+            catch (Exception ex)
+            {
+
+                showException(ex.Message);
+
+            }
+    }
+
+
+        public async void showException(string message){
 
             
-            Frame.Navigate(typeof(MainPage));
+                MessageDialog messageDialog = new MessageDialog(message, "Error");
+                messageDialog.Commands.Add(new UICommand("Ok", new UICommandInvokedHandler(CommandHandlers)));
+                await messageDialog.ShowAsync();
         }
+
+        public void CommandHandlers(IUICommand commandLabel)
+        {
+
+
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Ok":
+                    break;
+
+            }
+        }
+
  
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

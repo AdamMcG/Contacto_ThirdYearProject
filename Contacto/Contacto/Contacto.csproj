@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\ContactDetailViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\UpdateContactViewModel.cs" />
     <Compile Include="View\AddContactPage.xaml.cs">
       <DependentUpon>AddContactPage.xaml</DependentUpon>
     </Compile>

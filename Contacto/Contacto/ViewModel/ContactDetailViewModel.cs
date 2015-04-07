@@ -96,5 +96,8 @@ namespace Contacto.ViewModel
         { SerialiseNewList(); }
 
 
+        public void openAppointmentCalendar()
+        { }
+
     }
 }

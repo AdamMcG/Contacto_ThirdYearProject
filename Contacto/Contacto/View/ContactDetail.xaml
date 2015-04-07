@@ -25,12 +25,13 @@
 
         </DataTemplate>
     </Page.Resources>
-
-    <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Compact">
-            <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
+        <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+           <!-- <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>-->
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
-
+            <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
+            <AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
+            <AppBarButton Icon="Mail" Label=" Send Email" Click="EmailClick"/>
         </CommandBar>
     </Page.BottomAppBar>
 

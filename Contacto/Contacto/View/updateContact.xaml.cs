@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -89,15 +90,12 @@ namespace Contacto.View
             {
 
 
-                //defaultViewModel.removeFromList(myContact);
                 myContact.muCustomFields.Add(selection, "");
                 myContact.fillDynamicFields();
                 myContact.deleteDuplicates();
 
-                //defaultViewModel.addtocontactlist(myContact);
-                //defaultViewModel.createNewContactList();
 
- //               Frame.Navigate(typeof(updateContact), myContact);
+                //Frame.Navigate(typeof(ContactDetail), myContact);
 
             }
             else
@@ -127,42 +125,87 @@ namespace Contacto.View
 
 
 
+
+            int index = listofcustomfields.SelectedIndex;
+            string keyToRemove = myContact.muCustomFields.Keys.ElementAt<string>(index);
+
+            string dialog = "Are you sure you want to delete " + keyToRemove + "?";
+
+ 
+            MessageDialog messageDialog = new MessageDialog(dialog, "Delete?");
+
+            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(CommandHandlers)));
+            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(CommandHandlers)));
+
+
+            await messageDialog.ShowAsync();
+
+
+
+
+        }
+
+
+
+        public void CommandHandlers(IUICommand commandLabel)
+        {
+
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Yes":
+                    int index = listofcustomfields.SelectedIndex;
+                    string keyToRemove =  myContact.muCustomFields.Keys.ElementAt<string>(index);
+
+                    for (int i = 0; i < myContact.muCustomFields.Count; i++)
+                    {
+                        if (keyToRemove == myContact.muCustomFields.Keys.ElementAt<string>(i))
+                        {
+
+                            myContact.muCustomFields.Remove(keyToRemove);
+                            myContact.dynamicProperty.RemoveAt(index);
+                            myContact.deleteDuplicates();
+
+
+
+                        }
+
+                    }
+     
+
+                    
+                    break;
+
+
+                case "No":
+                    break;
+
+            }
         }
 
 
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
-            // YesButton Clicked! Let's hide our InputBox and handle the input text.
             InputBox.Visibility = Visibility.Collapsed;
 
-            // Do something with the Input
             String input = InputTextBox.Text;
 
 
 
-          //  defaultViewModel.removeFromList(myContact);
             myContact.muCustomFields.Add(input, "");
             myContact.fillDynamicFields();
             myContact.deleteDuplicates();
 
-//            defaultViewModel.addtocontactlist(myContact);
-//            defaultViewModel.createNewContactList();
-
-//            Frame.Navigate(typeof(updateContact), myContact);
 
 
-
-            // Clear InputBox.
             InputTextBox.Text = String.Empty;
         }
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
-            // NoButton Clicked! Let's hide our InputBox.
             InputBox.Visibility = Visibility.Collapsed;
 
-            // Clear InputBox.
             InputTextBox.Text = String.Empty;
         }
 

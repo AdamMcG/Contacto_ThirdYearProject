@@ -94,7 +94,7 @@
 
                 </StackPanel>
 
-                <ListView  x:Name ="listofcustomfields"  Width="390" Height="349" ItemsSource="{Binding dynamicProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                <ListView  x:Name ="listofcustomfields" Width="390" Height="344" ItemsSource="{Binding dynamicProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                           HorizontalAlignment="Left" VerticalAlignment="Center" 
                           ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>

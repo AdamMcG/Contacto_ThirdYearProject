@@ -21,8 +21,8 @@
         </Style>
 
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
-
-            <StackPanel Orientation="Horizontal" Width="400" Margin="10,10,10,10"  IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
+            <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0"   IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
@@ -30,15 +30,17 @@
                 </FlyoutBase.AttachedFlyout>
 
 
-                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="32" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
+                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
+        			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}" FontSize="32" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
+                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="24" FontWeight="SemiBold" 
+        			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
             </StackPanel>
-
+            </Border>
+            
         </DataTemplate>
 
         <DataTemplate x:Key="GridTemplate">
@@ -70,11 +72,11 @@
 
 
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton x:Name ="addContact"  Icon="AddFriend" Label="Add Contact" Click="AppBarButton_Click"/>
             <AppBarButton x:Name ="addGroup" Icon="People" Label="Create Group" Click="addGroup_Click"/>
-            <AppBarButton Icon="Find" Label="Find Contact"   />
-            <!--<AppBarButton Icon="Delete"  Label="Delete contact" Click="OnShowPopup"/>-->
+            <AppBarButton x:Name="findContact" Icon="Find" Label="Find Contact" Click="findContact_Click"   />
+            <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort Contact"   />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -158,7 +160,7 @@
                 <StackPanel Orientation="Vertical" Width="400" >
                     <TextBlock  Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
                     <ListView x:Name="ContactListView"  IsHoldingEnabled="True" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-						Height="447" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
+						Height="408" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
                 </StackPanel>
             </PivotItem>
 
@@ -174,24 +176,37 @@
 
             </PivotItem>
 
-            <!--<PivotItem x:Name="FourthPage">
-                <Grid HorizontalAlignment="Left" Height="527" VerticalAlignment="Top" Width="400" Margin="0,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="4*"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Uploads" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" 
-                               Text = "This page will be used to facilitate upload/download functionality."
-                               VerticalAlignment="Top"
-                               Height="373" 
-                               Width="365" 
-                               FontSize="14"/>
-                </Grid>
-
-            </PivotItem>-->
-
         </Pivot>
+
+        <Grid x:Name="SearchBox" Visibility="Collapsed" Grid.Row="1">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="#363951" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="5" Text="Search:" FontSize="15" FontWeight="Bold" />
+                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
+                    <ComboBox HorizontalAlignment="Center" MinWidth="150" PlaceholderText="Search by..">
+                        <TextBlock Text="Test"/>
+                        <TextBlock Text="Test1"/>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton" Margin="5" Content="Search" Click="YesButton_Click">
+
+                            <Button.Flyout>
+                                <ListPickerFlyout x:Name="resultPicker"/>
+                            </Button.Flyout>
+
+                        </Button>
+                        <Button x:Name="NoButton" Margin="5" Content="Cancel" Click="NoButton_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
     </Grid>
 </Page>

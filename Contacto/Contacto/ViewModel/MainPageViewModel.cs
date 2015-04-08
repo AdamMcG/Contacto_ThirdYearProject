@@ -171,22 +171,6 @@ namespace Contacto.ViewModel
         }
 
 
-
-        //public void deleteUser(String contactToRemove){
-        //    string check = null;
-        //    int a = 0;
-        //    foreach (Contact c in contactlist)
-        //    {
-        //        if (c.mufirstName == contactToRemove)
-        //        {
-        //            check = "to delete";
-        //            a = contactlist.IndexOf(c); }
-        //    }
-        //    if(check != null)
-        //    contactlist.RemoveAt(a);
-        //    NotifyPropertyChanged("contactlist");
-        //}
-
         public void initalizeList()
         {
             initalizeListJson();

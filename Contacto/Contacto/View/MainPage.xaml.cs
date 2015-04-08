@@ -31,6 +31,8 @@ namespace Contacto
     {
 
         MainPageViewModel myMain = new MainPageViewModel();
+        Dictionary<string, string> searchResults = new Dictionary<string, string>();
+
         bool singletap = true;
         public MainPage()
         {
@@ -201,6 +203,65 @@ namespace Contacto
 
         }
 
+
+        private void findContact_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Visibility = Visibility.Visible;
+
+        }
+
+
+
+        private void searchForContact(string value, string searchfield)
+        {
+
+            List<Contact> resultList = new List<Contact>();
+
+
+            if (searchfield == "firstName"){
+                for (int i = 0; i < myMain.listOfContacts.Count; i++)
+                {
+                    if (value == myMain.listOfContacts.ElementAt<Contact>(i).mufirstName)
+                    {
+                        resultList.Add(myMain.listOfContacts.ElementAt<Contact>(i));
+
+                    }
+
+                }
+            }
+            else if (searchfield == "lastName")
+            {
+                for (int i = 0; i < myMain.listOfContacts.Count; i++)
+                {
+                    if (value == myMain.listOfContacts.ElementAt<Contact>(i).mulastName)
+                    {
+                        resultList.Add(myMain.listOfContacts.ElementAt<Contact>(i));
+
+                    }
+
+                }
+
+            }
+
+            for (int i = 0; i < resultList.Count; i++)
+            {
+                string id = resultList.ElementAt<Contact>(i).uniqueContactID;
+                string FirstName = resultList.ElementAt<Contact>(i).mufirstName;
+                string LastName = resultList.ElementAt<Contact>(i).mulastName;
+                string Name = FirstName + " " + LastName;
+
+                searchResults.Add(id, Name);
+
+            }
+
+
+            resultPicker.ItemsSource = searchResults.Values;
+
+
+        }
+
+       
+
         public void CommandHandlers(IUICommand commandLabel)
         {
 
@@ -226,12 +287,36 @@ namespace Contacto
 
 
         }
-
         
-            
 
 
-       
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            searchResults.Clear();
+            // YesButton Clicked! Let's hide our InputBox and handle the input text.
+            SearchBox.Visibility = Visibility.Collapsed;
+
+            // Do something with the Input
+            String input = InputTextBox.Text;
+            searchForContact(InputTextBox.Text, "firstName");
+
+
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            // NoButton Clicked! Let's hide our InputBox.
+            SearchBox.Visibility = Visibility.Collapsed;
+
+            // Clear InputBox.
+            InputTextBox.Text = String.Empty;
+        }
+
+
+
 
  
     }

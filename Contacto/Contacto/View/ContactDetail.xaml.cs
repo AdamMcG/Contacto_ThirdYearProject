@@ -173,8 +173,10 @@ namespace Contacto.View
             ContentArea.SelectedIndex = 1;
         }
 
-        private void HeaderImg3_Tapped(object sender, TappedEventHandler e)
+
+        private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
+
             ContentArea.SelectedIndex = 2;
 
         }
@@ -211,6 +213,7 @@ namespace Contacto.View
             }
 
         }
+
     }
     
 }

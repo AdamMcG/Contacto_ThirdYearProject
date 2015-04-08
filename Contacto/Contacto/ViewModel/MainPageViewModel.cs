@@ -55,28 +55,72 @@ namespace Contacto.ViewModel
 
 
         String name = "contacts.json";
-        //This creates a contact, then serialises it into JSON and writes to the JSON file.
-        private async void buildContactDataAsync()
+        String name2 = "groups.json";
+
+
+        //This is serialising a list and adding to the json file. 
+        private async void SerialisingGroupsWithJsonNetAsync()
         {
-            try
+            ObservableCollection<Group> list = listOfGroups;
+            // Changed to serialze the List
+            string jsonContents = JsonConvert.SerializeObject(list);
+
+            // Get the app data folder and create or replace the file we are storing the JSON in.
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile textFile = await localFolder.CreateFileAsync(name2, CreationCollisionOption.ReplaceExisting);
+
+            // Open the file...
+            using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
             {
-                Contact c = new Contact();
-                string jsoncontent = JsonConvert.SerializeObject(c);
-
-                StorageFile File = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
-
-                using (IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.ReadWrite))
+                // write the JSON string!
+                using (DataWriter textWriter = new DataWriter(textStream))
                 {
-                    using (DataWriter dwriter = new DataWriter(testStream))
-                    {
-                        dwriter.WriteString(jsoncontent);
-                        await dwriter.StoreAsync();
-
-                    }
+                    textWriter.WriteString(jsonContents);
+                    await textWriter.StoreAsync();
                 }
             }
-            catch (IOException e)
-            { e.ToString(); }
+        }
+
+        public void SerialiseGroups()
+        { SerialisingGroupsWithJsonNetAsync(); }
+
+        public void InitalizeGroups()
+        { initalizeGroupsJson(); }
+        private async void initalizeGroupsJson()
+        {
+            List<Group> list = new List<Group>();
+            try
+            {
+                string JSONFILENAME = "groups.json";
+                string content = " ";
+                StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
+                IRandomAccessStream testStream = await File.OpenAsync(FileAccessMode.Read);
+
+                using (testStream)
+                {
+                    using (DataReader dreader = new DataReader(testStream)) {
+                        uint length = (uint)testStream.Size;
+                        await dreader.LoadAsync(length);
+                        content = dreader.ReadString(length);
+                        list = JsonConvert.DeserializeObject<List<Group>>(content);
+                        dreader.Dispose();
+                    }
+
+                }
+                testStream.Dispose();
+                if (listOfGroups != null)
+                {
+                    listOfGroups.Clear();
+                }
+
+                foreach (Group g in list)
+                    if (g != null)
+                        listOfGroups.Add(g);
+                NotifyPropertyChanged("Grouplist");
+            }
+            catch (Exception e){
+                e.ToString();
+            }
         }
 
         //This is serialising a list and adding to the json file. 

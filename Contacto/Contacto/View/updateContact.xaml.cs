@@ -92,6 +92,7 @@ namespace Contacto.View
                 //defaultViewModel.removeFromList(myContact);
                 myContact.muCustomFields.Add(selection, "");
                 myContact.fillDynamicFields();
+                myContact.deleteDuplicates();
 
                 //defaultViewModel.addtocontactlist(myContact);
                 //defaultViewModel.createNewContactList();
@@ -143,6 +144,7 @@ namespace Contacto.View
           //  defaultViewModel.removeFromList(myContact);
             myContact.muCustomFields.Add(input, "");
             myContact.fillDynamicFields();
+            myContact.deleteDuplicates();
 
 //            defaultViewModel.addtocontactlist(myContact);
 //            defaultViewModel.createNewContactList();

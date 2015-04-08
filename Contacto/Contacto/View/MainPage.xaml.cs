@@ -336,7 +336,112 @@ namespace Contacto
 
         }
 
+        private void sort(string order)
+        {
 
+
+
+            //List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
+            //var newList = toSort.OrderByDescending(x => x.mufirstName).ToList();
+            //myMain.listOfContacts.Clear();
+
+
+            //for (int i = 0; i < newList.Count(); i++)
+            //{
+
+            //    myMain.listOfContacts.Add(newList.ElementAt<Contact>(i));
+            //}
+
+
+            List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
+
+            switch (order)
+            {
+                case "f.asc":
+
+                    var newList_f_ASC = toSort.OrderBy(x => x.mufirstName).ToList();
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_f_ASC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_f_ASC.ElementAt<Contact>(i));
+                    }
+
+                    break;
+
+                case "f.desc":
+
+                    var newList_f_DESC = toSort.OrderByDescending(x => x.mufirstName).ToList();
+
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_f_DESC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_f_DESC.ElementAt<Contact>(i));
+                    }
+                    
+                    break;
+
+                case "l.asc":
+
+                    var newList_L_ASC = toSort.OrderBy(x => x.mulastName).ToList();
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_L_ASC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_L_ASC.ElementAt<Contact>(i));
+                    }
+                    break;
+
+                case "l.desc":
+
+                    var newList_L_DESC = toSort.OrderByDescending(x => x.mulastName).ToList();
+
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_L_DESC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_L_DESC.ElementAt<Contact>(i));
+                    }
+                    
+                    break;
+            }
+                
+        
+        }
+
+
+        private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            sort("f.asc");
+        }
+
+        private void MenuFlyoutItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            sort("f.desc");
+        }
+
+        private void MenuFlyoutItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            sort("l.asc");
+        }
+
+        private void MenuFlyoutItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            sort("l.desc");
+
+        }
 
 
  

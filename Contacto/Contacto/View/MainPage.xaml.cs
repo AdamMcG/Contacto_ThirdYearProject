@@ -66,6 +66,7 @@ namespace Contacto
             this.InitializeComponent();
             ContentArea.SelectedIndex = 0;
             myMain.initalizeList();
+            myMain.InitalizeGroups();
             this.DataContext = myMain;
 
             ContactListView.ItemsSource = myMain.listOfContacts;

@@ -89,7 +89,7 @@ namespace Contacto.View
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-           
+            Frame.Navigate(typeof(updateContact), myContact);
         }
 
         private async void createAppointment()

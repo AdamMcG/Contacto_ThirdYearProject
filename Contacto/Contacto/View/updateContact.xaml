@@ -12,11 +12,18 @@
     <Page.Resources>
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
 
-            <StackPanel Orientation="Horizontal" Width="400" Margin="10,10,10,10">
-                <TextBlock Text="{Binding muKey}" FontSize="24" 
+            <StackPanel Orientation="Horizontal" Width="400" Margin="10,10,10,10" DoubleTapped="StackPanel_DoubleTapped">
+
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Delete Field" Click="MenuFlyoutItem_Click"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+
+                <TextBlock Text="{Binding muKey, Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="24" 
         			Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap" Width="160"/>
-                <TextBox Name="listrBox" Text="{Binding muValue, Mode=TwoWay}" 
+                <TextBox Name="listrBox" Text="{Binding muValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                          FontSize="24" FontWeight="SemiBold" 
         			Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Left"
         			Width="180" TextWrapping="Wrap" />
@@ -87,7 +94,7 @@
 
                 </StackPanel>
 
-                <ListView  x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty, Mode=TwoWay}" 
+                <ListView  x:Name ="listofcustomfields"  Width="390" Height="349" ItemsSource="{Binding dynamicProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                           HorizontalAlignment="Left" VerticalAlignment="Center" 
                           ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                 </ListView>
@@ -110,8 +117,8 @@
                     <TextBlock Margin="5" Text="Add Field:" FontWeight="Bold" />
                     <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="YesButton" Margin="5" Content="Yes" Click="YesButton_Click"/>
-                        <Button x:Name="NoButton" Margin="5" Content="No" Click="NoButton_Click" />
+                        <Button x:Name="YesButton" Margin="5" Content="Enter" Click="YesButton_Click"/>
+                        <Button x:Name="NoButton" Margin="5" Content="Cancel" Click="NoButton_Click" />
                     </StackPanel>
                 </StackPanel>
             </Border>

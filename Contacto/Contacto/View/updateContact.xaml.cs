@@ -87,8 +87,17 @@ namespace Contacto.View
 
             if (selection != "Custom")
             {
-                fieldCounter++;
-                indexLocation++;
+
+
+                //defaultViewModel.removeFromList(myContact);
+                myContact.muCustomFields.Add(selection, "");
+                myContact.fillDynamicFields();
+
+                //defaultViewModel.addtocontactlist(myContact);
+                //defaultViewModel.createNewContactList();
+
+ //               Frame.Navigate(typeof(updateContact), myContact);
+
             }
             else
             {
@@ -102,6 +111,25 @@ namespace Contacto.View
         }
 
 
+        private void StackPanel_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+            FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
+
+
+        }
+
+
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
+
+
+
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
             // YesButton Clicked! Let's hide our InputBox and handle the input text.
@@ -109,6 +137,19 @@ namespace Contacto.View
 
             // Do something with the Input
             String input = InputTextBox.Text;
+
+
+
+          //  defaultViewModel.removeFromList(myContact);
+            myContact.muCustomFields.Add(input, "");
+            myContact.fillDynamicFields();
+
+//            defaultViewModel.addtocontactlist(myContact);
+//            defaultViewModel.createNewContactList();
+
+//            Frame.Navigate(typeof(updateContact), myContact);
+
+
 
             // Clear InputBox.
             InputTextBox.Text = String.Empty;

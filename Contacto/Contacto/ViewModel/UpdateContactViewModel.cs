@@ -38,6 +38,7 @@ namespace Contacto.ViewModel
 
 
 
+
         public void pullFromJson()
         { pullFromList(); }
 

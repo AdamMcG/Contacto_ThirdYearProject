@@ -6,32 +6,42 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+
+
+        <Style TargetType="Path" x:Key="HeaderStyleUnselected" x:Name="HeaderStyleUnselected">
+            <Setter Property="Fill" Value="#FF838192" />
+        </Style>
+
+        <Style TargetType="Path" x:Key="HeaderStyleSelected" x:Name="HeaderStyleSelected">
+            <Setter Property="Fill" Value="Silver"/>
+        </Style>
+
+
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
 
-            <StackPanel Orientation="Horizontal" Width="280" Margin="10,10,10,10">
-                <TextBlock Text="{Binding muKey}" FontSize="20" FontWeight="SemiBold" 
+            <StackPanel Orientation="Vertical"  Margin="10,10,10,10">
+                <TextBlock Text="{Binding muKey}" FontSize="24" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-                <TextBlock Text=":" FontSize="20" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding muValue}" FontSize="20" FontWeight="SemiBold" 
+                
+                <TextBlock Text="{Binding muValue}" FontSize="20"  
         			Margin="10,10,0,0" HorizontalAlignment="Left"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
             </StackPanel>
 
         </DataTemplate>
     </Page.Resources>
-        <Page.BottomAppBar>
+    <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-           <!-- <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>-->
+            <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
-            <AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
-            <AppBarButton Icon="Mail" Label=" Send Email" Click="EmailClick"/>
+            <!--<AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
+            <AppBarButton Icon="Mail" Label=" Send Email" Click="EmailClick"/>-->
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -39,57 +49,151 @@
 
     <Grid x:Name="addGrid" Background="#0C0B15">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="0.5*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition />
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Grid  Background="#363951" Margin="0,0,0,2">
+        <Grid  Background="#363951" Margin="0,0,0,0">
+              <StackPanel x:Name="Header"
+			Grid.Row="0"
+			HorizontalAlignment="Left" 
+			Height="77"
+			VerticalAlignment="Top"
+			Width="400">
+
+
             <StackPanel Orientation="Horizontal">
-                <Canvas  x:Name="HeaderImg2" Width="80" Height="40" Background="#363951">
-                    <Path x:Name="HeaderIcon2" Width="35" 
-						Height="40"
-						Canvas.Left="20"
-						Canvas.Top="0"
-						Stretch="Fill" 
-						Data="F1 M 53.8333,58.5834L 45.9166,58.5834C 45.0422,58.5834 44.3333,57.8745 44.3333,57L 44.3333,49.0834C 44.3333,48.2089 45.0422,47.5 45.9166,47.5L 53.8333,47.5C 54.7077,47.5 55.4166,48.2089 55.4166,49.0834L 55.4166,57C 55.4166,57.8745 54.7077,58.5834 53.8333,58.5834 Z M 38,17.4167C 42.3722,17.4167 45.9167,20.9611 45.9167,25.3333C 45.9167,29.7056 42.3722,33.25 38,33.25C 33.6277,33.25 30.0833,29.7056 30.0833,25.3333C 30.0833,20.9611 33.6278,17.4167 38,17.4167 Z M 30.0833,44.3334C 29.0278,44.8611 26.9167,49.0833 26.9167,49.0833C 26.9167,49.0833 25.8611,50.6666 25.3333,56.9999L 20.5833,55.4166L 22.1667,47.5C 22.1667,47.5 25.3333,36.4167 31.6666,36.4168L 44.3332,36.4168C 48.4316,36.4167 51.2039,41.0578 52.6502,44.3334L 45.9166,44.3333L 44.3332,44.3334C 42.5843,44.3334 41.1666,45.7512 41.1666,47.5001L 41.1666,60.0362L 38.7916,60.1667C 35.4528,60.1667 32.2927,59.4011 29.4774,58.036L 30.0833,44.3334 Z  "
-						Fill="Silver"
+                <StackPanel.Background>
+                    <ImageBrush Stretch="Fill"/>
+                </StackPanel.Background>
+
+                <Canvas  x:Name="HeaderImg1" Width="135" Height="80" Background="#363951"  Tapped="HeaderImg1_Tapped" Opacity="30">
+                    <Path x:Name="HeaderIcon1" 
+						Width="50" 
+						Height="50" 
+						Canvas.Left="45"
+						Canvas.Top="15"
+						Stretch="Fill"
+                        Data="F1 M 29.9796,22.2C 33.4365,22.2 36.2389,25.0024 36.2389,28.4593C 36.2389,31.9162 33.4365,34.7185 29.9796,34.7185C 26.5228,34.7185 23.7204,31.9162 23.7204,28.4593C 23.7204,25.0024 26.5228,22.2 29.9796,22.2 Z M 23.7204,43.2315C 22.8858,43.6488 21.2167,46.987 21.2167,46.987C 21.2167,46.987 20.3821,48.2388 19.9648,53.2462L 16.2093,51.9944L 17.4611,45.7352C 17.4611,45.7352 19.9648,36.9722 24.9722,36.9723L 34.9869,36.9723C 39.9944,36.9722 42.4981,45.7352 42.4981,45.7352L 43.75,51.9945L 39.9944,53.2463C 39.5772,48.2389 38.7427,46.987 38.7427,46.987C 38.7427,46.987 37.0735,43.6488 36.2389,43.2315L 36.7447,54.6004C 34.8417,55.3427 32.7712,55.75 30.6056,55.75C 27.9657,55.75 25.4672,55.1447 23.2413,54.0654L 23.7204,43.2315 Z M 39,24L 57,24L 57,27L 39,27L 39,24 Z M 39,30L 57,30L 57,33L 39,33L 39,30 Z M 41,36L 57,36L 57,39L 41,39L 41,36 Z M 44,42L 57,42L 57,45L 44,45L 44,42 Z M 46,48L 57,48L 57,51L 46,51L 46,48 Z "
+                        UseLayoutRounding="False" 
                           />
                 </Canvas>
-                <TextBlock Text ="{Binding mufirstName}" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="15,0,0,2"/>
-            </StackPanel>
+                    <Canvas  x:Name="HeaderImg2" Width="135" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
+                        <Path x:Name="HeaderIcon2" Width="50" 
+						Height="50"
+						Canvas.Left="45"
+						Canvas.Top="15"
+						Stretch="Fill" 
+                        Data="F1 M 33,51L 36.4167,61.75L 24,51L 19,51L 19,22L 57,22L 57,51L 33,51 Z M 44.7244,45.3609C 45.2458,44.776 45.7533,44.0978 46.2471,43.3263L 47.5506,40.9739L 48.4534,38.6341C 48.6802,37.8711 48.7936,37.1972 48.7936,36.6122C 48.7936,36.0273 48.6802,35.3533 48.4534,34.5904L 47.5506,32.2379L 46.2471,29.8854L 44.7244,27.8635L 42.6898,27.8635C 43.7622,29.097 44.5729,30.4248 45.1218,31.8469C 45.6707,33.2689 45.9451,34.8574 45.9451,36.6122C 45.9451,38.3543 45.6707,39.9354 45.1218,41.3554C 44.5729,42.7753 43.7622,44.1105 42.6898,45.3609L 44.7244,45.3609 Z M 36.0208,34.8334C 35.1464,34.8334 34.4375,35.5422 34.4375,36.4167C 34.4375,37.2911 35.1464,38 36.0208,38L 39.1875,38C 40.0619,38 41.5625,37.2911 41.5625,36.4167C 41.5625,35.5422 40.0619,34.8334 39.1875,34.8334L 36.0208,34.8334 Z M 29.2917,30.0834C 28.4172,30.0834 27.7083,30.7922 27.7083,31.6667C 27.7083,32.5411 28.4172,32.8542 29.2917,32.8542L 30.875,32.8542C 31.7494,32.8542 32.4583,32.5411 32.4583,31.6667C 32.4583,30.7922 31.7494,30.0834 30.875,30.0834L 29.2917,30.0834 Z M 29.2917,39.9792C 28.4172,39.9792 27.7083,40.2922 27.7083,41.1667C 27.7083,42.0411 28.4172,42.75 29.2917,42.75L 30.875,42.75C 31.7494,42.75 32.4583,42.0411 32.4583,41.1667C 32.4583,40.2922 31.7494,39.9792 30.875,39.9792L 29.2917,39.9792 Z "
+                        Opacity="100"
+                          />
+
+                    </Canvas>
+
+                    <Canvas  x:Name="HeaderImg3" Width="135" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
+                        <Path x:Name="HeaderIcon3" Width="50" 
+						Height="50"
+						Canvas.Left="45"
+						Canvas.Top="15"
+						Stretch="Fill" 
+                        Data="F1 M 18,23L 58,23L 58,53L 18,53L 18,23 Z M 22,49L 54,49L 54,31L 38,43L 22,31L 22,49 Z M 23,27L 38,38L 53,27L 23,27 Z "
+                        Opacity="100"
+                              />
+
+                    </Canvas>
+
+
+                </StackPanel>
+
+        </StackPanel>
+      
         </Grid>
 
-        <Grid x:Name="toAddGrid"  Margin="0,0,0,0" Grid.Row="1">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  >
-                <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                    <TextBlock Text="First Name:" FontSize="20" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                    <TextBlock Text="{Binding mufirstName}" FontSize="20" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                    <TextBlock Text="Last Name:" FontSize="20" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-
-                    <TextBlock Text="{Binding mulastName}" FontSize="20" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-
-                </StackPanel>
-
-                <ListView x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty}" 
+        <Pivot x:Name="ContentArea" Grid.Row="1" SelectionChanged="ContentArea_SelectionChanged">
+            <PivotItem x:Name="contactDetails">
+                <Grid x:Name="toAddGrid"  Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding mulastName}" FontSize="24" FontWeight="Bold"/>
+                            <TextBlock Text="'s Details:" FontSize="24" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ListView x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
                           ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
-                </ListView>
-            </StackPanel>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="SMS">
+                <StackPanel Orientation="Vertical">
+                    
+                    <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Send a text to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
+                        <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" />
+                    </StackPanel>
+                    
+                    
+                    <StackPanel Orientation="Horizontal">
+                        
+                        <TextBlock Text="Contact Number: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
+                        <Button x:Name="fieldSelector" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+                                
+                            <Button.Flyout>
+                                <ListPickerFlyout x:Name="FieldList"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
+                            </Button.Flyout>
 
-        </Grid>
+                        </Button>
+
+                    </StackPanel>
+
+                    <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
+
+                    <Button Content="Send SMS" Click="SMSClick"  HorizontalAlignment="Center"/>
+
+                </StackPanel>
+                
+            </PivotItem>
+
+            <PivotItem x:Name="Email">
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Send an Email to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
+                        <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="Email Address: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
+                        <Button x:Name="fieldSelector2" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+                            <Button.Flyout>
+                                <ListPickerFlyout x:Name="FieldList2"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
+                            </Button.Flyout>
+
+                        </Button>
+
+                    </StackPanel>
 
 
+                    <TextBox x:Name="emailSubject" PlaceholderText="Enter subject.." TextWrapping="Wrap"/>
+                    <TextBox x:Name="emailBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
 
+                    <!--<Button Content="Calendar" Click="Calendar_Click" HorizontalAlignment="Center" />-->
+                    <!--<Button Content="Email" Click="EmailClick" HorizontalAlignment="Center" />-->
+
+
+                    <Button Content="Send Email" Click="EmailClick"  HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </PivotItem>
+
+
+        </Pivot>
+        
     </Grid>
 </Page>

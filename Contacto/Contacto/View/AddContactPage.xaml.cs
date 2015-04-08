@@ -28,8 +28,8 @@ namespace Contacto
     public sealed partial class AddContactPage : Page
     {
         
-        private static int fieldCounter = 0;
-        private static int indexLocation = -1;
+        private int fieldCounter = 0;
+        private int indexLocation = -1;
         ListView addList = new ListView();
         public List<string> MenuOptions { get; set; }
 
@@ -180,15 +180,23 @@ namespace Contacto
 
         private void RemoveFieldBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (fieldCounter > 2)
+            try
             {
-                addList.Items.RemoveAt(indexLocation);
-                fieldCounter--;
-                indexLocation--;
+                if (fieldCounter > 2)
+                {
+                    addList.Items.RemoveAt(indexLocation);
+                    fieldCounter--;
+                    indexLocation--;
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                return;
+
+                string message = ex.Message;
             }
         }
 

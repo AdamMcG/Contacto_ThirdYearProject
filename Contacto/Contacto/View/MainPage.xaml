@@ -186,7 +186,7 @@
                         <Button x:Name="YesButton" Margin="5" Content="Search" Click="YesButton_Click">
 
                             <Button.Flyout>
-                                <ListPickerFlyout x:Name="resultPicker"/>
+                                <ListPickerFlyout x:Name="resultPicker" ItemsPicked="resultPicker_ItemsPicked"/>
                             </Button.Flyout>
 
                         </Button>

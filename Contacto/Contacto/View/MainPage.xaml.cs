@@ -217,7 +217,6 @@ namespace Contacto
 
             List<Contact> resultList = new List<Contact>();
 
-
             if (searchfield == "firstName"){
                 for (int i = 0; i < myMain.listOfContacts.Count; i++)
                 {
@@ -254,9 +253,8 @@ namespace Contacto
 
             }
 
-
-            resultPicker.ItemsSource = searchResults.Values;
-
+            List<String> listOfResults = searchResults.Values.ToList<String>();
+            resultPicker.ItemsSource = listOfResults;
 
         }
 
@@ -293,7 +291,6 @@ namespace Contacto
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
 
-            searchResults.Clear();
             // YesButton Clicked! Let's hide our InputBox and handle the input text.
             SearchBox.Visibility = Visibility.Collapsed;
 
@@ -313,6 +310,29 @@ namespace Contacto
 
             // Clear InputBox.
             InputTextBox.Text = String.Empty;
+            searchResults.Clear();
+        }
+
+        private void resultPicker_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+            int index = resultPicker.SelectedIndex;
+            string id = searchResults.Keys.ElementAt<string>(index);
+            Contact toUse = new Contact();
+
+            for (int i = 0; i < myMain.listOfContacts.Count; i++)
+            {
+                if (id == myMain.listOfContacts.ElementAt<Contact>(i).uniqueContactID)
+                {
+                    toUse = myMain.listOfContacts.ElementAt<Contact>(i);
+
+                }
+
+            }
+
+            searchResults.Clear();
+            Frame.Navigate(typeof(ContactDetail), toUse);
+
         }
 
 

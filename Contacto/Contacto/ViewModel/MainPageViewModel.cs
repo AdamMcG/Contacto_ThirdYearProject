@@ -43,7 +43,14 @@ namespace Contacto.ViewModel
 
         public MainPageViewModel()
         {
-
+            Group a = new Group();
+            a.myGroupName = "IT WORKS";
+            Group b = new Group();
+            Group c = new Group();
+            c.myGroupName = "12332Gret";
+            groupList.Add(a);
+            groupList.Add(b);
+            groupList.Add(c);
         }
 
 
@@ -171,29 +178,11 @@ namespace Contacto.ViewModel
         }
 
 
-
-        //public void deleteUser(String contactToRemove){
-        //    string check = null;
-        //    int a = 0;
-        //    foreach (Contact c in contactlist)
-        //    {
-        //        if (c.mufirstName == contactToRemove)
-        //        {
-        //            check = "to delete";
-        //            a = contactlist.IndexOf(c); }
-        //    }
-        //    if(check != null)
-        //    contactlist.RemoveAt(a);
-        //    NotifyPropertyChanged("contactlist");
-        //}
-
         public void initalizeList()
         {
             initalizeListJson();
 
         }
-
-
 
 
         public event PropertyChangedEventHandler PropertyChanged;

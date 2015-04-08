@@ -1,10 +1,12 @@
 ﻿using Contacto.Model;
-using Contacto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Appointments;
+using Windows.ApplicationModel.Chat;
+using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,74 +16,34 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Collections.ObjectModel;
-using Windows.ApplicationModel.Appointments;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Chat;
-using Windows.ApplicationModel.Email;
-
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Contacto.View
 {
-    public sealed partial class ContactDetail : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class GroupDetail : Page
     {
-        MainPageViewModel myMain = new MainPageViewModel();
-        ContactDetailViewModel defaultViewModel = new ContactDetailViewModel();
-        public List<string> fields { get; set; }
-
-
-        Contact myContact = new Contact();
-        public ContactDetail()
+        Group myGroup;
+        public GroupDetail()
         {
-
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Invoked when this page is about to be displayed in a Frame.
+        /// </summary>
+        /// <param name="e">Event data that describes how this page was reached.
+        /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            defaultViewModel.pullFromJson();
-            myContact = (Contact)e.Parameter;
-            myContact.deleteDuplicates();
-
-            fields = new List<string>();
-
-            foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
-            {
-
-                fields.Add(d.muKey.ToString());
-
-                {
-                    if (d.muKey == "Mobile Phone" || d.muKey == "Work Phone")
-                    { fieldSelector.Content = d.muKey; }
-
-                    if (d.muKey == "Email Address")
-                    {
-
-                        fieldSelector2.Content = d.muKey;
-                    }
-
-                }
-            }
-
-
-            
-            FieldList.ItemsSource = fields;
-            FieldList2.ItemsSource = fields;
-
-            ContentArea.DataContext = myContact;
-
-
-            HeaderIcon1.Style = HeaderStyleSelected;
-            HeaderIcon2.Style = HeaderStyleUnselected;
-            HeaderIcon3.Style = HeaderStyleUnselected;
-
-
-
+            myGroup = (Group)e.Parameter;
+            this.DataContext = myGroup;
         }
 
-        public void exit(object sender, RoutedEventArgs e)
+                public void exit(object sender, RoutedEventArgs e)
         {
 
             Frame.Navigate(typeof(MainPage));
@@ -95,8 +57,6 @@ namespace Contacto.View
         private async void createAppointment()
         {
             var appointment = new Appointment();
-            string subjectName = myContact.mufirstName + " " + myContact.mulastName;
-            appointment.Subject = subjectName;
 
             string appointmentId = await AppointmentManager.ShowAddAppointmentAsync(appointment, new Rect(), Windows.UI.Popups.Placement.Default);
         }
@@ -106,13 +66,6 @@ namespace Contacto.View
             var chatmesg = new ChatMessage();
 
             chatmesg.Body = smsBody.Text;
-            
-
-            foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
-            {
-                if (d.muKey == fieldSelector.Content.ToString() )
-                { chatmesg.Recipients.Add(d.muValue); }
-            }
 
             await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(chatmesg);
 
@@ -130,18 +83,7 @@ namespace Contacto.View
         private async void createEmail()
         {
             var email = new EmailMessage();
-            string name = myContact.mufirstName + " " + myContact.mulastName;
-            email.Subject = emailSubject.Text.ToString();
-            email.Body = emailBody.Text.ToString();
             
-
-            foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
-            {
-                if (d.muKey == fieldSelector2.Content.ToString())
-                {
-                    email.To.Add(new EmailRecipient(d.muValue, name));
-                }
-            }
             await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(email);
         }
 
@@ -211,6 +153,5 @@ namespace Contacto.View
             }
 
         }
-    }
-    
+    }   
 }

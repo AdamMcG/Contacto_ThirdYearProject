@@ -16,21 +16,11 @@ namespace Contacto.Model
     //contacts should be able to be a member of many groups. 
     public class Group
     {
-        public Group(){ }
-      public Group(int ID, string name, ObservableCollection<Contact> myContacts)
-        {
-            uniqueGroupID = ID;
-            groupName = name;
-            myGroup = myContacts;
-        }
-
-        public Group(Contact myContact)
-        {
-            uniqueGroupID = 1;
-            groupName = "Testing";
-
-            this.myContact = myContact;
-            myContactList.Add(myContact);
+        public Group(){
+            muGroup = 1;
+            myGroupName = "Sheniqua";
+            Contact test = new Contact();
+            contlist.Add(test);
         }
 
         private int uniqueGroupID;
@@ -44,10 +34,8 @@ namespace Contacto.Model
         set { groupName = value; }
         }
 
-        private ObservableCollection<Contact> myGroup = new ObservableCollection<Contact>();
         private ObservableCollection<Contact> myContactList = new ObservableCollection<Contact>();
-        private Contact myContact;
-
-    
+        public ObservableCollection<Contact> contlist
+        { get { return myContactList; }}
     }
 }

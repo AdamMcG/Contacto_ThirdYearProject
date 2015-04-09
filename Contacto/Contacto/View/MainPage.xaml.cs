@@ -93,12 +93,6 @@ namespace Contacto
             ContentArea.SelectedIndex = 2;
         }
 
-        //private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    ContentArea.SelectedIndex = 3;
-
-
-        //}
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {

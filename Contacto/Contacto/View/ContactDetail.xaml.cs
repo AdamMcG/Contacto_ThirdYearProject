@@ -70,6 +70,10 @@ namespace Contacto.View
             FieldList.ItemsSource = fields;
             FieldList2.ItemsSource = fields;
 
+            DefaultFields.ItemsSource = fields;
+            DefaultFields2.ItemsSource = fields;
+
+
             ContentArea.DataContext = myContact;
 
 
@@ -127,6 +131,30 @@ namespace Contacto.View
 
         }
 
+        private void ListPickerFlyout_ItemsPicked2(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+            string selection = (string)sender.SelectedItem;
+            fieldSelector2.Content = selection;
+
+        }
+
+        private void ListPickerFlyout_ItemsPicked3(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+            string selection = (string)sender.SelectedItem;
+            PhoneButton.Content = selection;
+
+        }
+        private void ListPickerFlyout_ItemsPicked4(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+            string selection = (string)sender.SelectedItem;
+            EmailButton.Content = selection;
+
+        }
+
+
         private async void createEmail()
         {
             var email = new EmailMessage();
@@ -144,6 +172,45 @@ namespace Contacto.View
             }
             await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(email);
         }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsBox.Visibility = Visibility.Visible;
+        }
+
+
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            for (int i = 0; i < myContact.muCustomFields.Count; i++)
+            {
+                if (EmailButton.Content.ToString() == myContact.muCustomFields.Keys.ElementAt<string>(i))
+                {
+                    myContact.muprimary_email_address = myContact.muCustomFields.Values.ElementAt<string>(i);
+
+                }
+                
+                if (PhoneButton.ToString() == myContact.muCustomFields.Keys.ElementAt<string>(i))
+                {
+                    myContact.muprimary_contact_num = myContact.muCustomFields.Values.ElementAt<string>(i);
+
+                }
+            }
+
+                SettingsBox.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            SettingsBox.Visibility = Visibility.Collapsed;
+
+        }
+
 
         private void SMSClick(object sender, RoutedEventArgs e)
         {

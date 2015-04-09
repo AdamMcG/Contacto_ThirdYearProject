@@ -43,14 +43,6 @@ namespace Contacto.ViewModel
 
         public MainPageViewModel()
         {
-            Group a = new Group();
-            a.myGroupName = "IT WORKS";
-            Group b = new Group();
-            Group c = new Group();
-            c.myGroupName = "12332Gret";
-            groupList.Add(a);
-            groupList.Add(b);
-            groupList.Add(c);
         }
 
 

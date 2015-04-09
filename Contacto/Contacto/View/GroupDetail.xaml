@@ -114,15 +114,14 @@
                 <Grid x:Name="toAddGrid"  Grid.Row="1">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding mygroupname}" FontSize="24" FontWeight="Bold" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding myGroupName}" FontSize="24" FontWeight="Bold" Margin="0,0,5,0"/>
                             <TextBlock Text="'s Group:" FontSize="24" FontWeight="Bold"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <ListView x:Name ="listofContacts" ItemsSource="{Binding contlist}" 
+                        <ListView x:Name ="listofContacts" ItemsSource="{Binding contactList}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
-                          ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
-                            </ListView>
-                        </StackPanel>
+                          ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Height="439" Margin="0,0,1.667,0" 
+                                  RenderTransformOrigin="0.5,0.5" Width="360">
+                        </ListView>
                     </StackPanel>
                 </Grid>
             </PivotItem>
@@ -131,7 +130,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Send a text to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
-                        <TextBlock Text="{Binding mygroupname}" FontSize="24" FontWeight="Bold" />
+                        <TextBlock Text="{Binding myGroupName}" FontSize="24" FontWeight="Bold" />
                     </StackPanel>
 
 

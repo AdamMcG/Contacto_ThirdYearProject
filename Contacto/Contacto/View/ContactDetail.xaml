@@ -119,7 +119,8 @@
                             <TextBlock Text="'s Details:" FontSize="24" FontWeight="Bold"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ListView Height="470" Width="360" x:Name ="listofcustomfields" ItemsSource="{Binding dynamicProperty}" 
+                            <ListView Height="470" Width="360" x:Name ="listofcustomfields" 
+                                      ItemsSource="{Binding dynamicProperty}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
                           ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}">
                             </ListView>

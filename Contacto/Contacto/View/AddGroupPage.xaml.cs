@@ -69,6 +69,7 @@ namespace Contacto.View
                 defaultview.localContacts.Add((Contact)temp);
             }
             defaultview.addGroup();
+            defaultview.serailizeGroups();
 
                 // defaultview.groupName = myTextBox.Text;
                 // List<int> testing = new List<int>();
@@ -79,7 +80,7 @@ namespace Contacto.View
                 //     defaultview.localContacts.Add(defaultview.globalContacts.ElementAt(testing.ElementAt(i)));
                 // }
                 //defaultview.addGroup();
-                Frame.Navigate(typeof(MainPage));
+           Frame.Navigate(typeof(MainPage));
         }
     }
 }

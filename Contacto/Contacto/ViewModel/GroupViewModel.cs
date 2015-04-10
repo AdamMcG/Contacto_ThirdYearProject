@@ -37,12 +37,27 @@ namespace Contacto.ViewModel
 
        public void addGroup()
        {
-       Group group = new Group();
-       group.myGroupName = groupName;
-       group.contactList= localListOfContactsForGroups;
-       myGroup.Add(group);
-       SerialisingGroupsWithJsonNetAsync();
+           Group group = new Group();
+           group.myGroupName = groupName;
+           group.contactList= localListOfContactsForGroups;
+           myGroup.Add(group);
        }
+
+       public void addGroup(Group toAdd)
+       {
+           myGroup.Add(toAdd);
+       }
+
+
+       public void removeGroup(Group toRemove)
+       {
+
+           myGroup.Remove(toRemove);
+
+       }
+
+
+
 
        public void initaliseGroup()
        { initalizeGroupsJson(); }
@@ -85,15 +100,18 @@ namespace Contacto.ViewModel
            }
        }
 
+   
        private async void SerialisingGroupsWithJsonNetAsync()
        {
+
+           string name = "groups.json";
            ObservableCollection<Group> list = myGroup;
            // Changed to serialze the List
            string jsonContents = JsonConvert.SerializeObject(list);
 
            // Get the app data folder and create or replace the file we are storing the JSON in.
            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-           StorageFile textFile = await localFolder.CreateFileAsync("groups.json", CreationCollisionOption.ReplaceExisting);
+           StorageFile textFile = await localFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
 
            // Open the file...
            using (IRandomAccessStream textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -103,8 +121,16 @@ namespace Contacto.ViewModel
                {
                    textWriter.WriteString(jsonContents);
                    await textWriter.StoreAsync();
+                   textWriter.Dispose();
                }
+               textStream.Dispose();
            }
+       }
+
+       public void serailizeGroups()
+       {
+           SerialisingGroupsWithJsonNetAsync();
+
        }
 
        public void fillcontactList()

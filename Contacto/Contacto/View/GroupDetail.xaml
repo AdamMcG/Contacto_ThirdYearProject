@@ -24,7 +24,7 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
+            <AppBarButton Icon="Up" Label="Update Group" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
             <!--<AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
@@ -113,10 +113,15 @@
                                     <DataTemplate  >
                                     <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
-                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"   >
-                                    
+                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"  DoubleTapped="StackPanel_DoubleTapped" >
+                                         
+                                            <FlyoutBase.AttachedFlyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
+                                                </MenuFlyout>
+                                            </FlyoutBase.AttachedFlyout>
 
-                                        <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
+                                            <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
         			                    Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 

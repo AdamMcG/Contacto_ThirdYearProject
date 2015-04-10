@@ -61,8 +61,6 @@ namespace Contacto
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-    
-
             this.InitializeComponent();
             ContentArea.SelectedIndex = 0;
             myMain.initalizeList();
@@ -104,8 +102,7 @@ namespace Contacto
 
         private void addGroup_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(View.AddGroupPage));
-
+            Frame.Navigate(typeof(AddGroupPage));
         }
 
         private void ContentArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,6 +137,7 @@ namespace Contacto
                 HeaderIcon1.Style = HeaderStyleUnselected;
                 HeaderIcon2.Style = HeaderStyleUnselected;
                 HeaderIcon3.Style = HeaderStyleSelected;
+                myMain.InitalizeGroups();
             }
             else {
 
@@ -324,11 +322,13 @@ namespace Contacto
                 }
 
             }
-
-            searchResults.Clear();
-            Frame.Navigate(typeof(ContactDetail), toUse);
-
         }
+
+        private void Group_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(GroupDetail),myMain.listOfGroups.ElementAt(GridForGroups.SelectedIndex));
+        }
+
 
         private void sort(string order)
         {

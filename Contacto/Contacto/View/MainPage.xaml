@@ -22,42 +22,44 @@
 
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
             <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0"   IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
-                    <FlyoutBase.AttachedFlyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
-                        </MenuFlyout>
-                    </FlyoutBase.AttachedFlyout>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                        VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" 
+                        IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
 
 
-                    <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
+                <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                    <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
+                <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="24" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-                </StackPanel>
+            </StackPanel>
             </Border>
-
+            
         </DataTemplate>
 
         <DataTemplate x:Key="GridTemplate">
-            <Grid Width="auto" Margin="5,5,5,5">
+            <Grid Width="173" Margin="5,5,5,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Background="MediumSeaGreen" Height="173" Width="173" 
-                        Grid.Row="0" HorizontalAlignment="Left">
+                <Border Background="#363951" Height="173" Width="173" 
+                        Grid.Row="0" HorizontalAlignment="Left" Opacity="0.3">
 
                 </Border>
-                <TextBlock FontSize="32" Text="{Binding myGroupName}" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                <TextBlock FontSize="32" Text="{Binding myGroupName}" HorizontalAlignment="Left" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
             </Grid>
 
         </DataTemplate>
-
+        
     </Page.Resources>
 
 
@@ -140,7 +142,7 @@
 						Height="382" 
 						Width="360" 
 						FontSize="14" />
-
+                 
                 </Grid>
 
             </PivotItem>
@@ -167,19 +169,20 @@
                             </AppBarButton.Flyout>
                             
                         </AppBarButton>
-                        <TextBlock  Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
+                    <TextBlock  Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
                     </StackPanel>
                     <ListView x:Name="ContactListView"  IsHoldingEnabled="True" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-					Height="408" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
+						Height="408" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
                 </StackPanel>
             </PivotItem>
 
             <PivotItem x:Name="ThirdPage" Margin="10,0">
                 <StackPanel Orientation="Vertical" Width="390" Height="auto">
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold">Groups</TextBlock>
+                    <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold">Groups</TextBlock>
                     <GridView x:Name="GridForGroups" 
                           Height="450" Width="380" ItemsSource="{Binding listOfGroups}" 
-                          ItemTemplate="{ThemeResource GridTemplate}">
+                          ItemTemplate="{ThemeResource GridTemplate}" Tapped="Group_Tapped">
 
                     </GridView>
                 </StackPanel>

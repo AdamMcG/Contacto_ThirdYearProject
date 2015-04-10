@@ -57,7 +57,7 @@ namespace Contacto.View
         private async void createAppointment()
         {
             var appointment = new Appointment();
-
+            appointment.Subject = myGroup.myGroupName;
             string appointmentId = await AppointmentManager.ShowAddAppointmentAsync(appointment, new Rect(), Windows.UI.Popups.Placement.Default);
         }
 

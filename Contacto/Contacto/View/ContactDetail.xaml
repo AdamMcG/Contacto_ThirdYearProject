@@ -37,12 +37,14 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
+            <CommandBar.PrimaryCommands>
             <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
-            <!--<AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
-            <AppBarButton Icon="Mail" Label=" Send Email" Click="EmailClick"/>-->
+            <AppBarButton Icon="Setting" Label="Change Defaults" Click="Settings_Click"/>
+            </CommandBar.PrimaryCommands>       
         </CommandBar>
+        
     </Page.BottomAppBar>
 
 
@@ -172,7 +174,7 @@
                         <Button x:Name="fieldSelector2" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
                             <Button.Flyout>
-                                <ListPickerFlyout x:Name="FieldList2"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
+                                <ListPickerFlyout x:Name="FieldList2"  ItemsPicked="ListPickerFlyout_ItemsPicked2" />
                             </Button.Flyout>
 
                         </Button>
@@ -195,6 +197,50 @@
 
 
         </Pivot>
-        
+
+
+
+        <!--http://stackoverflow.com/questions/8103743/wpf-c-sharp-inputbox-->
+        <Grid x:Name="SettingsBox" Visibility="Collapsed" Grid.Row="1">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="#363951" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="10" Text="Default Contact Details:" FontSize="24" FontWeight="Bold" />
+                    
+                    <TextBlock Text="Default Contact No." FontSize="24" HorizontalAlignment="Center" />
+                    <Button x:Name="PhoneButton" Content="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+                        <Button.Flyout>
+                            <ListPickerFlyout x:Name="DefaultFields"  ItemsPicked="ListPickerFlyout_ItemsPicked3" />
+                        </Button.Flyout>
+                        
+                    </Button>
+                    
+                    <TextBlock Text="Default Email Address." FontSize="24" HorizontalAlignment="Center" />
+                    <Button x:Name="EmailButton" Content="Email" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+
+                        <Button.Flyout>
+                            <ListPickerFlyout x:Name="DefaultFields2"  ItemsPicked="ListPickerFlyout_ItemsPicked4" />
+                        </Button.Flyout>
+
+
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton" Margin="5" Content="Okay" Click="YesButton_Click" />
+                        <Button x:Name="NoButton" Margin="5" Content="Cancel" Click="NoButton_Click"  />                  
+                    </StackPanel>
+                    
+                </StackPanel>
+            </Border>
+        </Grid>
+
     </Grid>
 </Page>

@@ -91,12 +91,6 @@ namespace Contacto
             ContentArea.SelectedIndex = 2;
         }
 
-        //private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    ContentArea.SelectedIndex = 3;
-
-
-        //}
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -216,7 +210,6 @@ namespace Contacto
 
             List<Contact> resultList = new List<Contact>();
 
-
             if (searchfield == "firstName"){
                 for (int i = 0; i < myMain.listOfContacts.Count; i++)
                 {
@@ -253,9 +246,8 @@ namespace Contacto
 
             }
 
-
-            resultPicker.ItemsSource = searchResults.Values;
-
+            List<String> listOfResults = searchResults.Values.ToList<String>();
+            resultPicker.ItemsSource = listOfResults;
 
         }
 
@@ -292,7 +284,6 @@ namespace Contacto
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
 
-            searchResults.Clear();
             // YesButton Clicked! Let's hide our InputBox and handle the input text.
             SearchBox.Visibility = Visibility.Collapsed;
 
@@ -312,6 +303,25 @@ namespace Contacto
 
             // Clear InputBox.
             InputTextBox.Text = String.Empty;
+            searchResults.Clear();
+        }
+
+        private void resultPicker_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+            int index = resultPicker.SelectedIndex;
+            string id = searchResults.Keys.ElementAt<string>(index);
+            Contact toUse = new Contact();
+
+            for (int i = 0; i < myMain.listOfContacts.Count; i++)
+            {
+                if (id == myMain.listOfContacts.ElementAt<Contact>(i).uniqueContactID)
+                {
+                    toUse = myMain.listOfContacts.ElementAt<Contact>(i);
+
+                }
+
+            }
         }
 
         private void Group_Tapped(object sender, TappedRoutedEventArgs e)
@@ -320,6 +330,112 @@ namespace Contacto
         }
 
 
+        private void sort(string order)
+        {
+
+
+
+            //List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
+            //var newList = toSort.OrderByDescending(x => x.mufirstName).ToList();
+            //myMain.listOfContacts.Clear();
+
+
+            //for (int i = 0; i < newList.Count(); i++)
+            //{
+
+            //    myMain.listOfContacts.Add(newList.ElementAt<Contact>(i));
+            //}
+
+
+            List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
+
+            switch (order)
+            {
+                case "f.asc":
+
+                    var newList_f_ASC = toSort.OrderBy(x => x.mufirstName).ToList();
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_f_ASC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_f_ASC.ElementAt<Contact>(i));
+                    }
+
+                    break;
+
+                case "f.desc":
+
+                    var newList_f_DESC = toSort.OrderByDescending(x => x.mufirstName).ToList();
+
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_f_DESC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_f_DESC.ElementAt<Contact>(i));
+                    }
+                    
+                    break;
+
+                case "l.asc":
+
+                    var newList_L_ASC = toSort.OrderBy(x => x.mulastName).ToList();
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_L_ASC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_L_ASC.ElementAt<Contact>(i));
+                    }
+                    break;
+
+                case "l.desc":
+
+                    var newList_L_DESC = toSort.OrderByDescending(x => x.mulastName).ToList();
+
+                    
+                    myMain.listOfContacts.Clear();
+
+
+                    for (int i = 0; i < newList_L_DESC.Count(); i++)
+                    {
+
+                        myMain.listOfContacts.Add(newList_L_DESC.ElementAt<Contact>(i));
+                    }
+                    
+                    break;
+            }
+                
+        
+        }
+
+
+        private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            sort("f.asc");
+        }
+
+        private void MenuFlyoutItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            sort("f.desc");
+        }
+
+        private void MenuFlyoutItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            sort("l.asc");
+        }
+
+        private void MenuFlyoutItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            sort("l.desc");
+
+        }
 
 
  

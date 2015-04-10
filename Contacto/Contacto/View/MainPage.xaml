@@ -67,8 +67,7 @@
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton x:Name ="addContact"  Icon="AddFriend" Label="Add Contact" Click="AppBarButton_Click"/>
             <AppBarButton x:Name ="addGroup" Icon="People" Label="Create Group" Click="addGroup_Click"/>
-            <AppBarButton x:Name="findContact" Icon="Find" Label="Find Contact" Click="findContact_Click"   />
-            <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort Contact"   />
+            <AppBarButton x:Name="findContact" Icon="Find" Label="Find Contact" Click="findContact_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -86,7 +85,7 @@
 			Width="400">
 
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="74">
                 <StackPanel.Background>
                     <ImageBrush Stretch="Fill"/>
                 </StackPanel.Background>
@@ -127,7 +126,7 @@
             </StackPanel>
 
         </StackPanel>
-        <Pivot x:Name="ContentArea" Margin="0,104,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2" SelectionChanged="ContentArea_SelectionChanged">
+        <Pivot x:Name="ContentArea" Margin="0,99,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2" SelectionChanged="ContentArea_SelectionChanged">
 
             <PivotItem x:Name="firstPage">
                 <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
@@ -148,9 +147,30 @@
 
             </PivotItem>
 
-            <PivotItem x:Name="SecondPage" Margin="0,0,0,1" IsHoldingEnabled="True"  >
-                <StackPanel Orientation="Vertical" Width="400" >
+            <PivotItem x:Name="SecondPage" IsHoldingEnabled="True" Margin="0,-24,0,0"  >
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <AppBarButton x:Name="sortButton" Icon="Sort" Height="55" Width="70" HorizontalAlignment="Center">
+                           
+                            <AppBarButton.Flyout>
+                                <MenuFlyout >
+                                    <MenuFlyoutItem Text="Sort First Name" FontWeight="Bold" FontSize="28"/>
+                                    <MenuFlyoutSeparator Height="15"/>
+                                    <MenuFlyoutItem  Text="Ascending" Click="MenuFlyoutItem_Click_1" />
+                                    <MenuFlyoutItem Text="Descending" Click="MenuFlyoutItem_Click_2" />
+                                    <MenuFlyoutSeparator Height="15"/>
+                                    <MenuFlyoutItem Text="Sort Last Name" FontWeight="Bold" FontSize="28"/>
+                                    <MenuFlyoutSeparator Height="15"/>
+                                    <MenuFlyoutItem Text="Ascending" Click="MenuFlyoutItem_Click_3" />
+                                    <MenuFlyoutItem Text="Descending" Click="MenuFlyoutItem_Click_4" />
+
+
+                                </MenuFlyout>
+                            </AppBarButton.Flyout>
+                            
+                        </AppBarButton>
                     <TextBlock  Text="Contacts" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="44"  />
+                    </StackPanel>
                     <ListView x:Name="ContactListView"  IsHoldingEnabled="True" FontSize="43"  HorizontalAlignment="Center" ItemsSource="{Binding listOfContacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
 						Height="408" VerticalAlignment="Top" Width="400" ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Tapped="ContactListView_Tapped"/>
                 </StackPanel>
@@ -189,7 +209,7 @@
                         <Button x:Name="YesButton" Margin="5" Content="Search" Click="YesButton_Click">
 
                             <Button.Flyout>
-                                <ListPickerFlyout x:Name="resultPicker"/>
+                                <ListPickerFlyout x:Name="resultPicker" ItemsPicked="resultPicker_ItemsPicked"/>
                             </Button.Flyout>
 
                         </Button>

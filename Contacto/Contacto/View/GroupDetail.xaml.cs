@@ -1,4 +1,5 @@
 ﻿using Contacto.Model;
+using Contacto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,10 +27,14 @@ namespace Contacto.View
     /// </summary>
     public sealed partial class GroupDetail : Page
     {
-        Group myGroup;
+        public Group myGroup { get; set; }
+        public List<Contact> groupContacts  { get; set; }
+
         public GroupDetail()
         {
+
             this.InitializeComponent();
+
         }
 
         /// <summary>
@@ -40,7 +45,14 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myGroup = (Group)e.Parameter;
+
+            groupContacts = myGroup.contactList.ToList<Contact>();
+
             this.DataContext = myGroup;
+            listofContacts.ItemsSource = myGroup.contactList;
+
+            
+
         }
 
                 public void exit(object sender, RoutedEventArgs e)

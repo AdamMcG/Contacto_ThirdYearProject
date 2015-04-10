@@ -57,16 +57,29 @@ namespace Contacto.View
         
         private void AddGroup(object sender, RoutedEventArgs e)
         {
+
             defaultview.groupName = myTextBox.Text;
-            List<int> testing = new List<int>();
-           int a = ToAddToGroups.SelectedIndex;
-           testing.Add(a);
-            for (int i = 0; i < testing.Count; i++)
+            var selected = ToAddToGroups.SelectedItems;
+
+
+            for (int i = 0; i < selected.Count; i++)
             {
-                defaultview.localContacts.Add(defaultview.globalContacts.ElementAt(testing.ElementAt(i)));
+
+                var temp = selected.ElementAt(i);
+                defaultview.localContacts.Add((Contact)temp);
             }
-           defaultview.addGroup();
-           Frame.Navigate(typeof(MainPage));
+            defaultview.addGroup();
+
+                // defaultview.groupName = myTextBox.Text;
+                // List<int> testing = new List<int>();
+                //int a = ToAddToGroups.SelectedIndex;
+                //testing.Add(a);
+                // for (int i = 0; i < testing.Count; i++)
+                // {
+                //     defaultview.localContacts.Add(defaultview.globalContacts.ElementAt(testing.ElementAt(i)));
+                // }
+                //defaultview.addGroup();
+                Frame.Navigate(typeof(MainPage));
         }
     }
 }

@@ -184,9 +184,6 @@
                     <TextBox x:Name="emailSubject" PlaceholderText="Enter subject.." TextWrapping="Wrap"/>
                     <TextBox x:Name="emailBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
 
-                    <!--<Button Content="Calendar" Click="Calendar_Click" HorizontalAlignment="Center" />-->
-                    <!--<Button Content="Email" Click="EmailClick" HorizontalAlignment="Center" />-->
-
 
                     <Button Content="Send Email" Click="EmailClick"  HorizontalAlignment="Center"/>
 
@@ -203,7 +200,7 @@
         <Grid x:Name="SettingsBox" Visibility="Collapsed" Grid.Row="1">
             <Grid Background="Black" Opacity="0.5"/>
             <Border
-            MinWidth="250"
+            MinWidth="400"
             Background="#363951" 
             BorderBrush="Black" 
             BorderThickness="1" 

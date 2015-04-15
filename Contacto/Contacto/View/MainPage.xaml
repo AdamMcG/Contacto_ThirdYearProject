@@ -53,6 +53,11 @@
                 </Grid.RowDefinitions>
                 <Border Background="#363951" Height="173" Width="173" 
                         Grid.Row="0" HorizontalAlignment="Left" Opacity="0.3">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Delete Group" Click="MenuFlyoutItem_Click"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
 
                 </Border>
                 <TextBlock FontSize="32" Text="{Binding myGroupName}" HorizontalAlignment="Left" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
@@ -178,11 +183,11 @@
 
             <PivotItem x:Name="ThirdPage" Margin="10,0">
                 <StackPanel Orientation="Vertical" Width="390" Height="auto">
-                    <TextBlock VerticalAlignment="Center"
-                               HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold">Groups</TextBlock>
+                    <TextBlock Text ="Groups"  VerticalAlignment="Center"
+                               HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold"></TextBlock>
                     <GridView x:Name="GridForGroups" 
                           Height="450" Width="380" ItemsSource="{Binding listOfGroups}" 
-                          ItemTemplate="{ThemeResource GridTemplate}" Tapped="Group_Tapped">
+                          ItemTemplate="{ThemeResource GridTemplate}" Tapped="Group_Tapped" DoubleTapped="GridForGroups_DoubleTapped">
 
                     </GridView>
                 </StackPanel>

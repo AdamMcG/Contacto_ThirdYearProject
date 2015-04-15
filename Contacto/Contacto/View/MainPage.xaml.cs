@@ -34,6 +34,7 @@ namespace Contacto
         Dictionary<string, string> searchResults = new Dictionary<string, string>();
 
         bool singletap = true;
+        bool singletapGroups = true;
         public MainPage()
         {
 
@@ -324,9 +325,26 @@ namespace Contacto
             }
         }
 
-        private void Group_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void Group_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GroupDetail),myMain.listOfGroups.ElementAt(GridForGroups.SelectedIndex));
+
+            this.singletap = true;
+            await Task.Delay(200);
+            if (this.singletap)
+            {
+                try
+                {
+
+                    Frame.Navigate(typeof(GroupDetail), myMain.listOfGroups.ElementAt(GridForGroups.SelectedIndex));
+
+                }
+                catch (Exception ex)
+                {
+
+                    ex.ToString();
+                }
+            }
+
         }
 
 
@@ -334,17 +352,6 @@ namespace Contacto
         {
 
 
-
-            //List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
-            //var newList = toSort.OrderByDescending(x => x.mufirstName).ToList();
-            //myMain.listOfContacts.Clear();
-
-
-            //for (int i = 0; i < newList.Count(); i++)
-            //{
-
-            //    myMain.listOfContacts.Add(newList.ElementAt<Contact>(i));
-            //}
 
 
             List<Contact> toSort = myMain.listOfContacts.ToList<Contact>(); ;
@@ -436,6 +443,53 @@ namespace Contacto
             sort("l.desc");
 
         }
+
+        private void GridForGroups_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
+        }
+
+
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            int index = GridForGroups.SelectedIndex;
+            string name = myMain.listOfGroups.ElementAt<Group>(index).myGroupName;
+            string dialog = "Are you sure you want to delete " + name + "?";
+
+            MessageDialog messageDialog = new MessageDialog(dialog, "Delete?");
+
+            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(GroupCommandHandler)));
+            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(GroupCommandHandler)));
+
+
+            await messageDialog.ShowAsync();
+
+
+
+
+        }
+
+
+
+        public void GroupCommandHandler(IUICommand commandLabel)
+        {
+
+            int index = GridForGroups.SelectedIndex;
+
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Yes":
+                    myMain.(index);
+                    break;
+                case "No":
+                    break;
+
+            }
+        }
+
 
 
  

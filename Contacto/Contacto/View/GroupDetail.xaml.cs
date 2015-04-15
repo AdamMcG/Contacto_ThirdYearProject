@@ -1,4 +1,5 @@
 ﻿using Contacto.Model;
+using Contacto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using Windows.ApplicationModel.Chat;
 using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,10 +28,16 @@ namespace Contacto.View
     /// </summary>
     public sealed partial class GroupDetail : Page
     {
-        Group myGroup;
+        public Group myGroup { get; set; }
+
+        GroupViewModel groupVM = new GroupViewModel();
+
+
         public GroupDetail()
         {
+
             this.InitializeComponent();
+
         }
 
         /// <summary>
@@ -40,7 +48,15 @@ namespace Contacto.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myGroup = (Group)e.Parameter;
+
+
+            groupVM.fillcontactList();
+
             this.DataContext = myGroup;
+            listofContacts.ItemsSource = myGroup.contactList;
+
+            
+
         }
 
                 public void exit(object sender, RoutedEventArgs e)
@@ -51,7 +67,7 @@ namespace Contacto.View
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-           
+            Frame.Navigate(typeof(UpdateGroup), myGroup);
         }
 
         private async void createAppointment()
@@ -153,5 +169,56 @@ namespace Contacto.View
             }
 
         }
+
+        private void StackPanel_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+            FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
+        
+        }
+
+
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
+           Contact temp = (Contact)listofContacts.SelectedItem;
+
+            string dialog = "Are you sure you want to delete " + temp.mufirstName + " " + temp.mulastName + " From this list?";
+
+            MessageDialog messageDialog = new MessageDialog(dialog, "Delete?");
+
+            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(CommandHandlers)));
+            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(CommandHandlers)));
+
+
+            await messageDialog.ShowAsync();
+
+
+
+
+        }
+
+
+        public async void CommandHandlers(IUICommand commandLabel)
+        {
+
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Yes":
+
+                    groupVM.removeGroup(myGroup);
+                    Contact temp = (Contact)listofContacts.SelectedItem;
+                    myGroup.contactList.Remove(temp);
+                    groupVM.addGroup(myGroup);
+                    groupVM.serailizeGroups();
+                    break;
+                case "No":
+                    break;
+
+            }
+        }
+
     }   
 }

@@ -40,7 +40,6 @@ namespace Contacto.ViewModel
         public void pullFromJson()
         { pullFromList(); }
 
-
         private async void pullFromList()
         {
             ObservableCollection<Contact> list = new ObservableCollection<Contact>();

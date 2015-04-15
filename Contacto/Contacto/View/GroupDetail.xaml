@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page x:Name="page"
     x:Class="Contacto.View.GroupDetail"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,23 +21,10 @@
         </Style>
 
 
-        <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
-
-            <StackPanel Orientation="Vertical"  Margin="10,10,10,10">
-                <TextBlock Text="{Binding mufirstname}" FontSize="24" FontWeight="SemiBold" 
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-
-                <TextBlock Text="{Binding mulastname}" FontSize="20"  
-        			Margin="10,10,0,0" HorizontalAlignment="Left"
-        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
-            </StackPanel>
-
-        </DataTemplate>
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
+            <AppBarButton Icon="Up" Label="Update Group" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
             <!--<AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
@@ -109,18 +96,44 @@
         </Grid>
 
 
-        <Pivot x:Name="ContentArea" Grid.Row="1" SelectionChanged="ContentArea_SelectionChanged">
+        <Pivot x:Name="ContentArea" Grid.Row="1" SelectionChanged="ContentArea_SelectionChanged" >
             <PivotItem x:Name="GroupDetails">
                 <Grid x:Name="toAddGrid"  Grid.Row="1">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding myGroupName}" FontSize="24" FontWeight="Bold" Margin="0,0,5,0"/>
-                            <TextBlock Text="'s Group:" FontSize="24" FontWeight="Bold"/>
+                            <TextBlock Text="Group:" FontSize="30" FontWeight="Bold" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding myGroupName}" FontSize="30" FontWeight="Bold" Margin="0,0,5,0"/>
                         </StackPanel>
-                        <ListView x:Name ="listofContacts" ItemsSource="{Binding contactList}" 
+                        <ListView x:Name ="listofContacts" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
-                          ItemTemplate="{StaticResource ImageTextListMailFolderTemplate}" Height="439" Margin="0,0,1.667,0" 
-                                  RenderTransformOrigin="0.5,0.5" Width="360">
+                             Height="439" 
+                             RenderTransformOrigin="0.5,0.5" Width="360" DataContext="{Binding myGroup.contactList, ElementName=page}" >
+
+                            <ListView.ItemTemplate >
+                                    <DataTemplate  >
+                                    <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
+                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"  DoubleTapped="StackPanel_DoubleTapped" >
+                                         
+                                            <FlyoutBase.AttachedFlyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
+                                                </MenuFlyout>
+                                            </FlyoutBase.AttachedFlyout>
+
+                                            <TextBlock Text="{Binding mufirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="24" FontWeight="SemiBold" 
+        			                    Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
+        			                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+
+                                        <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="24" FontWeight="SemiBold" 
+        			                    Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
+        			                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </StackPanel>
                 </Grid>

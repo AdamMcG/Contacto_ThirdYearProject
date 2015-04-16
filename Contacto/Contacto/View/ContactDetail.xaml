@@ -39,8 +39,8 @@
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
             <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
-            <AppBarButton Icon="Back" Label="Back" Click="exit"/>
-            <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
+                <AppBarButton Icon="Phone" Label="Make A Call" Click="makeACall"/>
+                <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
             <AppBarButton Icon="Setting" Label="Change Defaults" Click="Settings_Click"/>
             </CommandBar.PrimaryCommands>       
         </CommandBar>

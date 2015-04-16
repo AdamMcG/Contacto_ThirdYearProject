@@ -129,7 +129,12 @@ namespace Contacto.View
 
         }
 
-        
+
+        public void makeACall(object sender, RoutedEventArgs e)
+        {
+            Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(myContact.muprimary_contact_num, myContact.mufirstName);
+        }
+
         private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
             string selection = (string)sender.SelectedItem;

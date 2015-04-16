@@ -35,6 +35,8 @@ namespace Contacto.ViewModel
             }
         }
 
+
+
         private ObservableCollection<Group> groupList = new ObservableCollection<Group>();
         public ObservableCollection<Group> listOfGroups
         {
@@ -44,6 +46,7 @@ namespace Contacto.ViewModel
         public MainPageViewModel()
         {
         }
+
 
 
         String name = "contacts.json";
@@ -230,6 +233,19 @@ namespace Contacto.ViewModel
             {
                 handle(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void addGroup(Group toAdd)
+        {
+            groupList.Add(toAdd);
+        }
+
+
+        public void removeGroup(Group toRemove)
+        {
+
+            groupList.Remove(toRemove);
+
         }
 
 

@@ -328,9 +328,9 @@ namespace Contacto
         private async void Group_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            this.singletap = true;
+            this.singletapGroups = true;
             await Task.Delay(200);
-            if (this.singletap)
+            if (this.singletapGroups)
             {
                 try
                 {
@@ -446,12 +446,13 @@ namespace Contacto
 
         private void GridForGroups_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            this.singletapGroups = false; 
             FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
         }
 
 
 
-        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_Click_Group(object sender, RoutedEventArgs e)
         {
 
             int index = GridForGroups.SelectedIndex;
@@ -476,13 +477,14 @@ namespace Contacto
         public void GroupCommandHandler(IUICommand commandLabel)
         {
 
-            int index = GridForGroups.SelectedIndex;
+            var item = GridForGroups.SelectedItem;
 
             var Actions = commandLabel.Label;
             switch (Actions)
             {
                 case "Yes":
-                    myMain.(index);
+                    myMain.removeGroup((Group)item);
+                    myMain.SerialiseGroups();
                     break;
                 case "No":
                     break;

@@ -142,10 +142,7 @@ namespace Contacto
                 addList.Items.Add(AddViewModel.initalizePage(selection));
             }
             else
-            {
-                fieldCounter++;
-                indexLocation++;
-                InputBox.Visibility = Visibility.Visible;
+            {   InputBox.Visibility = Visibility.Visible;
 
             }
 
@@ -161,8 +158,10 @@ namespace Contacto
             // Do something with the Input
             String input = InputTextBox.Text;
 
-            
-             addList.Items.Add(AddViewModel.initalizePage(input));
+
+            fieldCounter++;
+            indexLocation++;
+            addList.Items.Add(AddViewModel.initalizePage(input));
 
             // Clear InputBox.
             InputTextBox.Text = String.Empty;
@@ -248,6 +247,69 @@ namespace Contacto
 
                 newContact.fillDynamicFields();
 
+                if (newContact.muCustomFields.Keys.Contains<string>("Email Address"))
+                {
+
+                    for (int i = 0; i < newContact.muCustomFields.Keys.Count; i++)
+                    {
+                        if (newContact.muCustomFields.Keys.ElementAt<String>(i) == "Email Address")
+                        {
+                            newContact.muprimary_email_address = newContact.muCustomFields.Values.ElementAt<String>(i);
+                        }
+
+                    }
+                }
+                else
+                {
+                    newContact.muprimary_email_address = " ";
+                }
+
+                
+                
+                
+                if (newContact.muCustomFields.Keys.Contains<String>("Home Phone"))
+                {
+
+                    for (int i = 0; i < newContact.muCustomFields.Keys.Count; i++)
+                    {
+                        if (newContact.muCustomFields.Keys.ElementAt<String>(i) == "Home Phone")
+                        {
+                            newContact.muprimary_contact_num = newContact.muCustomFields.Values.ElementAt<String>(i);
+
+                        }
+
+                    }
+                }else if (newContact.muCustomFields.Keys.Contains<String>("Work Phone")){
+
+                     for (int i = 0; i < newContact.muCustomFields.Keys.Count; i++)
+                    {
+                        if (newContact.muCustomFields.Keys.ElementAt<String>(i) == "Work Phone")
+                        {
+                            newContact.muprimary_contact_num = newContact.muCustomFields.Values.ElementAt<String>(i);
+
+                        }
+                     }
+                }
+                else if (newContact.muCustomFields.Keys.Contains<String>("Mobile Phone"))
+                {
+
+                    for (int i = 0; i < newContact.muCustomFields.Keys.Count; i++)
+                    {
+                        if (newContact.muCustomFields.Keys.ElementAt<String>(i) == "Mobile Phone")
+                        {
+                            newContact.muprimary_contact_num = newContact.muCustomFields.Values.ElementAt<String>(i);
+
+                        }
+                    }
+                }
+                else
+                {
+
+                    newContact.muprimary_contact_num = " ";
+                }
+
+
+
                 AddViewModel.addtocontactlist(newContact);
                 AddViewModel.createNewContactList();
 
@@ -256,9 +318,7 @@ namespace Contacto
             }
             catch (Exception ex)
             {
-
                 showException(ex.Message);
-
             }
     }
 

@@ -45,21 +45,26 @@
             
         </DataTemplate>
 
-        <DataTemplate x:Key="GridTemplate">
-            <Grid Width="173" Margin="5,5,5,5">
+        <DataTemplate x:Key="GridTemplate"> 
+            <Grid Width="173" Margin="5,5,5,5" Tapped="Group_Tapped" DoubleTapped="GridForGroups_DoubleTapped">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Background="#363951" Height="173" Width="173" 
-                        Grid.Row="0" HorizontalAlignment="Left" Opacity="0.3">
-                        <FlyoutBase.AttachedFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Text="Delete Group" Click="MenuFlyoutItem_Click"/>
-                            </MenuFlyout>
-                        </FlyoutBase.AttachedFlyout>
 
-                </Border>
+
+                    <FlyoutBase.AttachedFlyout>
+                        <MenuFlyout x:Name="GroupFlyout">
+                            <MenuFlyoutItem Text="Delete Group" Click="MenuFlyoutItem_Click_Group"/>
+                        </MenuFlyout>
+                    </FlyoutBase.AttachedFlyout>
+
+
+
+                <Border Background="#363951" Height="173" Width="173" 
+                        Grid.Row="0" HorizontalAlignment="Left" Opacity="0.3" >
+                    </Border>
+
                 <TextBlock FontSize="32" Text="{Binding myGroupName}" HorizontalAlignment="Left" FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
             </Grid>
 
@@ -187,7 +192,7 @@
                                HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold"></TextBlock>
                     <GridView x:Name="GridForGroups" 
                           Height="450" Width="380" ItemsSource="{Binding listOfGroups}" 
-                          ItemTemplate="{ThemeResource GridTemplate}" Tapped="Group_Tapped" DoubleTapped="GridForGroups_DoubleTapped">
+                          ItemTemplate="{ThemeResource GridTemplate}">
 
                     </GridView>
                 </StackPanel>

@@ -46,7 +46,7 @@ namespace Contacto.Model
         {
 
             get { return primary_email_address; }
-            set { value = primary_email_address;  }
+            set { primary_email_address = value;  }
         }
 
 
@@ -151,8 +151,8 @@ namespace Contacto.Model
             firstName = first;
             uniqueContactID = uniqueID;
             lastName = last;
-            primary_contact_num = "";
-            primary_email_address = "";
+            primary_contact_num = " ";
+            primary_email_address = " ";
         }
 
         public Contact()
@@ -160,8 +160,8 @@ namespace Contacto.Model
             firstName = "test";
             lastName = "testing";
             uniqueContactID = "12";
-            primary_contact_num = "";
-            primary_email_address = "";
+            primary_contact_num = " ";
+            primary_email_address = " ";
 
         }
 

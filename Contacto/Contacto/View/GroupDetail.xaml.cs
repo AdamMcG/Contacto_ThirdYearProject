@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Appointments;
 using Windows.ApplicationModel.Chat;
 using Windows.ApplicationModel.Email;
@@ -29,7 +30,7 @@ namespace Contacto.View
     public sealed partial class GroupDetail : Page
     {
         public Group myGroup { get; set; }
-
+        bool singletap = true;
         GroupViewModel groupVM = new GroupViewModel();
 
 
@@ -67,13 +68,22 @@ namespace Contacto.View
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(UpdateGroup), myGroup);
+            //Frame.Navigate(typeof(UpdateGroup), myGroup);
         }
 
         private async void createAppointment()
         {
             var appointment = new Appointment();
             appointment.Subject = myGroup.myGroupName;
+            foreach(Contact c in myGroup.contactList)
+            { 
+            var Invitee = new AppointmentInvitee();
+            Invitee.DisplayName = c.mufirstName + " " + c.mulastName;
+            Invitee.Address = "1sthwt";
+            Invitee.Role = AppointmentParticipantRole.OptionalAttendee;
+            Invitee.Response = AppointmentParticipantResponse.Accepted;
+            appointment.Invitees.Add(Invitee);
+            }
             string appointmentId = await AppointmentManager.ShowAddAppointmentAsync(appointment, new Rect(), Windows.UI.Popups.Placement.Default);
         }
 
@@ -170,9 +180,23 @@ namespace Contacto.View
 
         }
 
+        private async void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            
+            this.singletap = true;
+            await Task.Delay(200);
+            if (this.singletap)
+            {
+
+                Frame.Navigate(typeof(ContactDetail), (Contact)listofContacts.SelectedItem);
+            }
+
+        }
+
+
         private void StackPanel_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-
+            this.singletap = false;
             FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
         
         }
@@ -219,6 +243,8 @@ namespace Contacto.View
 
             }
         }
+
+        
 
     }   
 }

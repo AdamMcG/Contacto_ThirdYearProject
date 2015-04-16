@@ -116,9 +116,6 @@
     <Compile Include="View\updateContact.xaml.cs">
       <DependentUpon>updateContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UpdateGroup.xaml.cs">
-      <DependentUpon>UpdateGroup.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -163,10 +160,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\updateContact.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UpdateGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -101,6 +101,13 @@ namespace Contacto.View
             var appointment = new Appointment();
             string subjectName = myContact.mufirstName + " " + myContact.mulastName;
             appointment.Subject = subjectName;
+            var Invitee = new AppointmentInvitee();
+            Invitee.DisplayName = subjectName;
+            Invitee.Address = myContact.muprimary_email_address;
+            Invitee.Role = AppointmentParticipantRole.OptionalAttendee;
+            Invitee.Response = AppointmentParticipantResponse.Accepted;
+            appointment.Invitees.Add(Invitee);
+
 
             string appointmentId = await AppointmentManager.ShowAddAppointmentAsync(appointment, new Rect(), Windows.UI.Popups.Placement.Default);
         }

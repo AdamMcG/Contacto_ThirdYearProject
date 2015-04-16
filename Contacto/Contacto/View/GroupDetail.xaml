@@ -110,10 +110,10 @@
                              RenderTransformOrigin="0.5,0.5" Width="360" DataContext="{Binding myGroup.contactList, ElementName=page}" >
 
                             <ListView.ItemTemplate >
-                                    <DataTemplate  >
+                                    <DataTemplate>
                                     <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
-                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"  DoubleTapped="StackPanel_DoubleTapped" >
+                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"  DoubleTapped="StackPanel_DoubleTapped" Tapped="StackPanel_Tapped" >
                                          
                                             <FlyoutBase.AttachedFlyout>
                                                 <MenuFlyout>

@@ -149,6 +149,8 @@ namespace Contacto.ViewModel
             ObservableCollection<Contact> list = new ObservableCollection<Contact>();
             try
             {
+                foreach (Contact c in list)
+                { c.deleteDuplicates(); }
                 string JSONFILENAME = "contacts.json";
                 string content = " ";
                 StorageFile File = await ApplicationData.Current.LocalFolder.GetFileAsync(JSONFILENAME);
@@ -165,7 +167,8 @@ namespace Contacto.ViewModel
                     testS.Dispose();
                 }
                 foreach (Contact c in list)
-                { contactlist.Add(c); }
+                {
+                    contactlist.Add(c); }
             }
             catch (Exception e)
             { e.ToString(); }

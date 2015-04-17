@@ -15,6 +15,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Windows.Storage.Streams;
 using System.Collections.Specialized;
+using Microsoft.WindowsAzure.MobileServices;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
@@ -47,11 +48,33 @@ namespace Contacto.ViewModel
         {
         }
 
-
-
+       string contactFile;
+        string groupFile;
         String name = "contacts.json";
         String name2 = "groups.json";
 
+
+        public async void insertItem()
+        {
+            await insertBackupItem(); 
+        }
+
+        private async System.Threading.Tasks.Task insertBackupItem()
+        {
+            try{
+            Backup back = new Backup();
+            back.title = "Adam";
+            back.myContactFile = contactFile;
+            back.myGroupFile = groupFile;
+            
+                await App.Contacto4Client.GetTable<Backup>().InsertAsync(back);
+                string a = "check";
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
 
         //This is serialising a list and adding to the json file. 
         private async void SerialisingGroupsWithJsonNetAsync()
@@ -59,7 +82,6 @@ namespace Contacto.ViewModel
             ObservableCollection<Group> list = listOfGroups;
             // Changed to serialze the List
             string jsonContents = JsonConvert.SerializeObject(list);
-
             // Get the app data folder and create or replace the file we are storing the JSON in.
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             StorageFile textFile = await localFolder.CreateFileAsync(name2, CreationCollisionOption.ReplaceExisting);
@@ -97,6 +119,7 @@ namespace Contacto.ViewModel
                         uint length = (uint)testStream.Size;
                         await dreader.LoadAsync(length);
                         content = dreader.ReadString(length);
+                        groupFile = groupFile + content;
                         list = JsonConvert.DeserializeObject<List<Group>>(content);
                         dreader.Dispose();
                     }
@@ -177,8 +200,8 @@ namespace Contacto.ViewModel
                     if (c != null)
                         contactlist.Add(c);
 
-
                 NotifyPropertyChanged("contactlist");
+                contactFile = content;
             }
             catch (Exception e)
             {

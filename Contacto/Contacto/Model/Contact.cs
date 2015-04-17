@@ -112,7 +112,7 @@ namespace Contacto.Model
         {
             for (int i = 0; i < Dynamic.Count; i++)
             {
-                for (int j = 1; j <= Dynamic.Count - 1; j++)
+                for (int j = 1; j < Dynamic.Count; j++)
                 {
                     if (Dynamic.ElementAt(i).muKey == Dynamic.ElementAt(j).muKey && j != i)
                         Dynamic.RemoveAt(j);

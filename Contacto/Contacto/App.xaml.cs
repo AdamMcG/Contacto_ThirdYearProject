@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
+using Contacto.Data;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,6 +27,11 @@ namespace Contacto
     /// </summary>
     public sealed partial class App : Application
     {
+        // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
+        public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient Contacto4Client = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
+        "https://contacto4.azure-mobile.net/",
+        "ZwSnTFFnrvcugOLmmNBFPVhOAloIwD23");
+
         private TransitionCollection transitions;
 
         /// <summary>

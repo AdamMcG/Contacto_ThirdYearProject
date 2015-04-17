@@ -40,6 +40,8 @@ namespace Contacto.ViewModel
            Group group = new Group();
            group.myGroupName = groupName;
            group.contactList= localListOfContactsForGroups;
+           foreach (Contact c in group.contactList)
+           { c.deleteDuplicates(); }
            myGroup.Add(group);
        }
 

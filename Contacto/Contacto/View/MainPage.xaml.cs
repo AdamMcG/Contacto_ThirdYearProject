@@ -101,6 +101,28 @@ namespace Contacto
 
         }
 
+        private void backup_click(object sender, RoutedEventArgs e)
+        {
+            
+            testTheCloud();
+        }
+
+        private void testTheCloud()
+        { 
+            getBackUpitems();
+        }
+        List<Backup> myBackup;
+
+        private async void getBackUpitems()
+        {
+            try
+            {
+                myBackup = await App.Contacto4Client.GetTable<Backup>().ToListAsync();
+                testingbox.Text = myBackup.ElementAt(0).myGroupFile;
+            }
+            catch (Exception e)
+            { e.ToString(); }
+        }
         private void addGroup_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddGroupPage));

@@ -69,7 +69,21 @@
             </Grid>
 
         </DataTemplate>
+        <DataTemplate x:Key="backupTemplate">
+            <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" 
+                        VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" >
+                    <TextBlock Text="{Binding title, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
+        			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
+        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding date, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,0" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="20" FontWeight="SemiBold" 
+        			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
 
+        </DataTemplate>
     </Page.Resources>
 
 
@@ -78,7 +92,7 @@
             <AppBarButton x:Name ="addContact"  Icon="AddFriend" Label="Add Contact" Click="AppBarButton_Click"/>
             <AppBarButton x:Name ="addGroup" Icon="People" Label="Create Group" Click="addGroup_Click"/>
             <AppBarButton x:Name="findContact" Icon="Find" Label="Find Contact" Click="findContact_Click"/>
-            <AppBarButton x:Name="AddBackup" Icon="Folder" Label="Backup Contacts" Click="backup_click"/>
+            <AppBarButton x:Name="AddBackup" Icon="Folder" Label="Backup Contacts" Click="backup_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -140,6 +154,7 @@
         <Pivot x:Name="ContentArea" Margin="0,99,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2" SelectionChanged="ContentArea_SelectionChanged">
 
             <PivotItem x:Name="firstPage">
+                
                 <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -147,15 +162,10 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Home Page" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,-0.333" TextWrapping="Wrap" 
-						Text="This is the home page, it will be used to display relevant notifications and will serve as a landing page when the user starts up this application." 
-						VerticalAlignment="Top"
-						Height="382" 
-						Width="360" 
-						FontSize="14" />
-                    <TextBlock x:Name="testingbox" HorizontalAlignment="Left" Margin="10,59,0,0" 
-                             Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"
-                             Width="360" Height="282"/>
+                    <ListView Grid.Row="1"  FontSize="22" Header="This is your list of backups" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  ItemTemplate="{ThemeResource backupTemplate}">
+
+                    </ListView>
+
 
                 </Grid>
 
@@ -202,7 +212,7 @@
                 </StackPanel>
             </PivotItem>
         </Pivot>
-
+    
         <Grid x:Name="SearchBox" Visibility="Collapsed" Grid.Row="1">
             <Grid Background="Black" Opacity="0.5"/>
             <Border
@@ -232,6 +242,25 @@
                 </StackPanel>
             </Border>
         </Grid>
+        <Grid x:Name="Backupbox" Visibility="Collapsed" Grid.Row="1">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="#363951" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Download" Margin="5" Content="download" Click="Download_Click">
+                        </Button>
+                        <Button x:Name="upload" Margin="5" Content="upload" Click="upload_Click" />
+                    </StackPanel>
+                    <Button HorizontalAlignment="Center" x:Name="Closebackup" Margin="5" Click="Closebackup_Click" >close</Button>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

@@ -67,7 +67,7 @@ namespace Contacto
             myMain.initalizeList();
             myMain.InitalizeGroups();
             this.DataContext = myMain;
-
+            BackupListView.ItemsSource = myMain.myBackup;
             ContactListView.ItemsSource = myMain.listOfContacts;
 
 
@@ -101,28 +101,9 @@ namespace Contacto
 
         }
 
-        private void backup_click(object sender, RoutedEventArgs e)
-        {
-            
-            testTheCloud();
-        }
+  
 
-        private void testTheCloud()
-        { 
-            getBackUpitems();
-        }
-        List<Backup> myBackup;
-
-        private async void getBackUpitems()
-        {
-            try
-            {
-                myBackup = await App.Contacto4Client.GetTable<Backup>().ToListAsync();
-                testingbox.Text = myBackup.ElementAt(0).myGroupFile;
-            }
-            catch (Exception e)
-            { e.ToString(); }
-        }
+       
         private void addGroup_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddGroupPage));
@@ -514,7 +495,47 @@ namespace Contacto
             }
         }
 
+        private void backup_Click(object sender, RoutedEventArgs e)
+        {
+            Backupbox.Visibility = Visibility.Visible;
+            
+        }
 
+        private void Closebackup_Click(object sender, RoutedEventArgs e)
+        {
+            Backupbox.Visibility = Visibility.Collapsed;
+        }
+
+        private void upload_Click(object sender, RoutedEventArgs e)
+        {
+            testTheCloud();
+            Backupbox.Visibility = Visibility.Collapsed;
+        }
+
+        private void testTheCloud()
+        {
+            try
+            {
+                myMain.insertItem();
+
+            }
+            catch (Exception e)
+            { e.ToString(); }
+        }
+
+        private void Download_Click(object sender, RoutedEventArgs e)
+        {
+            myMain.Fillbackup();
+            Frame.Navigate(typeof(backupSuccess));
+            Backupbox.Visibility = Visibility.Collapsed;
+        }
+
+        private void backup_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            int index = BackupListView.SelectedIndex;
+            myMain.getBackUpitems(index);
+            
+        }
 
  
     }

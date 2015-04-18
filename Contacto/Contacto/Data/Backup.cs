@@ -19,5 +19,7 @@ namespace Contacto.Data
         { get; set; }
         public string myGroupFile
         { get; set; }
+        public string date
+        { get; set; }
     }
 }

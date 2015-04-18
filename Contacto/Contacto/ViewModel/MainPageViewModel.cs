@@ -21,9 +21,20 @@ namespace Contacto.ViewModel
     //This handles the main page business logic.
     class MainPageViewModel : INotifyPropertyChanged
     {
+        
+        string contactFile;
+        string groupFile;
+        string name = "contacts.json";
+        string name2 = "groups.json";
 
-
-
+        private ObservableCollection<Backup> backup = new ObservableCollection<Backup>();
+        public ObservableCollection<Backup> myBackup
+        {
+            get { return backup; }
+            set { backup = value;
+            NotifyPropertyChanged("backup");
+            }
+        }
         private ObservableCollection<Contact> contactlist = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> listOfContacts
         {
@@ -48,12 +59,6 @@ namespace Contacto.ViewModel
         {
         }
 
-       string contactFile;
-        string groupFile;
-        String name = "contacts.json";
-        String name2 = "groups.json";
-
-
         public async void insertItem()
         {
             await insertBackupItem(); 
@@ -63,10 +68,10 @@ namespace Contacto.ViewModel
         {
             try{
             Backup back = new Backup();
-            back.title = "Adam";
+            back.title = "Adam's backup";
             back.myContactFile = contactFile;
             back.myGroupFile = groupFile;
-            
+            back.date = DateTime.UtcNow.ToString();
                 await App.Contacto4Client.GetTable<Backup>().InsertAsync(back);
                 string a = "check";
             }
@@ -75,6 +80,34 @@ namespace Contacto.ViewModel
                 e.ToString();
             }
         }
+
+
+        public async void Fillbackup()
+        {
+            myBackup = new ObservableCollection<Backup>(await App.Contacto4Client.GetTable<Backup>().ToListAsync());
+            
+        }
+        public void getBackUpitems(int index)
+        {
+            
+            BackUpitems(index);
+        }
+        private async void BackUpitems(int index)
+        {
+            try
+            {
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                StorageFile File = await folder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+                StorageFile File2 = await folder.CreateFileAsync(name2, CreationCollisionOption.ReplaceExisting);
+                await Windows.Storage.FileIO.WriteTextAsync(File, myBackup.ElementAt(index).myContactFile);
+                await Windows.Storage.FileIO.WriteTextAsync(File2, myBackup.ElementAt(index).myGroupFile);
+            }
+            catch (Exception e)
+            { e.ToString(); }
+        }
+
+   
+
 
         //This is serialising a list and adding to the json file. 
         private async void SerialisingGroupsWithJsonNetAsync()
@@ -119,7 +152,7 @@ namespace Contacto.ViewModel
                         uint length = (uint)testStream.Size;
                         await dreader.LoadAsync(length);
                         content = dreader.ReadString(length);
-                        groupFile = groupFile + content;
+                        
                         list = JsonConvert.DeserializeObject<List<Group>>(content);
                         dreader.Dispose();
                     }
@@ -135,6 +168,7 @@ namespace Contacto.ViewModel
                     if (g != null)
                         listOfGroups.Add(g);
                 NotifyPropertyChanged("Grouplist");
+                groupFile = content;
             }
             catch (Exception e){
                 e.ToString();

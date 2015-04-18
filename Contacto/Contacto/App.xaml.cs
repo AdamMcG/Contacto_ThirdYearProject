@@ -29,7 +29,7 @@ namespace Contacto
     {
         // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
         public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient Contacto4Client = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
-        "https://contacto4.azure-mobile.net/",
+        "http://contacto4.azure-mobile.net/",
         "ZwSnTFFnrvcugOLmmNBFPVhOAloIwD23");
 
         private TransitionCollection transitions;

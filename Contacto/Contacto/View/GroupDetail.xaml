@@ -113,11 +113,11 @@
                                     <DataTemplate>
                                     <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
-                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0"  DoubleTapped="StackPanel_DoubleTapped" Tapped="StackPanel_Tapped" >
+                                        VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0" Background="#0C0B15"  DoubleTapped="StackPanel_DoubleTapped" Tapped="StackPanel_Tapped" >
                                          
                                             <FlyoutBase.AttachedFlyout>
                                                 <MenuFlyout>
-                                                    <MenuFlyoutItem Text="Delete Contact" Click="MenuFlyoutItem_Click"/>
+                                                    <MenuFlyoutItem Text="Delete Contact From Group" Click="MenuFlyoutItem_Click"/>
                                                 </MenuFlyout>
                                             </FlyoutBase.AttachedFlyout>
 

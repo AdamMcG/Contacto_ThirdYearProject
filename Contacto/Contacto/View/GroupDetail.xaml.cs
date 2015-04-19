@@ -224,7 +224,7 @@ namespace Contacto.View
         }
 
 
-        public async void CommandHandlers(IUICommand commandLabel)
+        public void CommandHandlers(IUICommand commandLabel)
         {
 
             var Actions = commandLabel.Label;

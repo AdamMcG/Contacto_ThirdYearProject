@@ -53,6 +53,12 @@ namespace Contacto.ViewModel
         public ObservableCollection<Group> listOfGroups
         {
             get { return groupList; }
+            set { groupList = value;
+
+            NotifyPropertyChanged("groupList");
+
+            
+            }
         }
 
         public MainPageViewModel()
@@ -243,11 +249,45 @@ namespace Contacto.ViewModel
             }
         }
 
-        public void deleteUser(int index_To_Delete)
-        {
 
+        public void removeFromGroups(Contact toRemove)
+        {
+            //initalizeGroupsJson();
+
+            for (int i = 0; i < groupList.Count; i++)
+            {
+
+                for (int j = 0; j < groupList.ElementAt(i).contactList.Count; j++ )
+                {
+                    if (toRemove.uniqueContactID == groupList.ElementAt(i).contactList.ElementAt(j).uniqueContactID)
+                    {
+                        var temp = groupList.ElementAt(i);
+                        groupList.RemoveAt(i);
+                        temp.contactList.RemoveAt(j);
+                        groupList.Add(temp);
+                    }
+                }
+
+                
+            }
+
+            SerialiseGroups();
+
+        }
+
+        public async void deleteUser(int index_To_Delete)
+        {
+            
+
+
+            Contact toRemove = contactlist.ElementAt<Contact>(index_To_Delete);
             contactlist.RemoveAt(index_To_Delete);
+            removeFromGroups(toRemove);
+            await Task.Delay(200);
+
+
             NotifyPropertyChanged("contactlist");
+            NotifyPropertyChanged("groupList");
 
 
             List<Contact> temp = new List<Contact>();
@@ -257,7 +297,6 @@ namespace Contacto.ViewModel
 
                 temp.Add(contactlist.ElementAt<Contact>(i));
             }
-
             contactlist.Clear();
 
             for (int i = 0; i < temp.Count(); i++)
@@ -266,9 +305,11 @@ namespace Contacto.ViewModel
             }
 
 
-            NotifyPropertyChanged("contactlist");
-            SerialisingListWithJsonNetAsync();
 
+
+            NotifyPropertyChanged("contactlist");
+
+            SerialisingListWithJsonNetAsync();
 
 
         }

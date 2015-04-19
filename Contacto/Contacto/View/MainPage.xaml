@@ -23,7 +23,7 @@
         <DataTemplate x:Key="ImageTextListMailFolderTemplate" >
             <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
-                        VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" 
+                        VerticalAlignment="Bottom" Background="#0C0B15"  Width="400" Margin="0,0,0,0" 
                         IsHoldingEnabled="True" DoubleTapped="StackPanel_DoubleTapped"   >
                     <FlyoutBase.AttachedFlyout>
                         <MenuFlyout>

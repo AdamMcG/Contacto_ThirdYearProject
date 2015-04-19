@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -310,11 +311,11 @@ namespace Contacto
 
 
 
-                AddViewModel.addtocontactlist(newContact);
-                AddViewModel.createNewContactList();
+               AddViewModel.addtocontactlist(newContact);
+               AddViewModel.createNewContactList();
 
-
-                Frame.Navigate(typeof(MainPage));
+               await Task.Delay(200);
+               Frame.Navigate(typeof(MainPage));
             }
             catch (Exception ex)
             {

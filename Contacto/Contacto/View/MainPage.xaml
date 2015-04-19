@@ -122,7 +122,7 @@
 						Canvas.Left="45"
 						Canvas.Top="15"
 						Stretch="Fill"
-						Data="F1 M 24.0033,56.0078L 24.0033,38.0053L 22.0031,40.0056L 19.0027,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.0029L 49.0068,28.6882L 57.008,35.0049L 54.0075,40.0056L 52.0073,38.0053L 52.0073,56.0078L 24.0033,56.0078 Z M 38.0053,26.9204L 27.0038,36.005L 27.0038,53.0074L 33.0046,53.0074L 33.0046,42.006L 43.006,42.006L 43.006,53.0074L 49.0068,53.0074L 49.0068,36.005L 38.0053,26.9204 Z " UseLayoutRounding="False" 
+						Data="F1 M 27.0986,51.6256L 27.0961,51.6352L 27.2903,51.6352C 27.3908,51.6391 27.49,51.6505 27.5914,51.6505C 27.6935,51.6505 27.7923,51.6391 27.8928,51.6352L 46.9359,51.6352L 46.9359,51.6298C 47.0756,51.6352 47.2116,51.6505 47.3518,51.6505C 52.6937,51.6505 57.0245,47.2851 57.0245,41.8997C 57.0245,36.5142 52.6937,32.1489 47.3518,32.1489C 47.155,32.1489 46.9621,32.1666 46.7678,32.1784C 45.9377,27.6442 42.0022,24.206 37.2636,24.206C 31.9221,24.206 27.5914,28.5718 27.5914,33.9572C 27.5914,34.0986 27.6066,34.2372 27.6125,34.3778L 27.5914,34.3765C 22.8604,34.3765 19.0245,38.2432 19.0245,43.013C 19.0245,47.6157 22.5982,51.3667 27.0986,51.6256 Z " UseLayoutRounding="False" 
                           />
                 </Canvas>
                 <Canvas  x:Name="HeaderImg2" Width="135" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
@@ -149,27 +149,22 @@
 
                 </Canvas>
             </StackPanel>
-
         </StackPanel>
+        
+        
         <Pivot x:Name="ContentArea" Margin="0,99,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2" SelectionChanged="ContentArea_SelectionChanged">
 
-            <PivotItem x:Name="firstPage">
-                
-                <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="380" Margin="0,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="4*"/>
-                    </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Home Page" VerticalAlignment="Top" Height="85" Width="380" FontSize="60"/>
-                    <ListView Grid.Row="1"  FontSize="22" Header="This is your list of backups" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  ItemTemplate="{ThemeResource backupTemplate}">
-
-                    </ListView>
-
-
-                </Grid>
-
+            <PivotItem x:Name="firstPage" IsHoldingEnabled="True" Margin="0,-24,0,0"  >
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cloud Backups" VerticalAlignment="Top" Margin="10, 10, 10, 10" FontSize="44"/>
+                    </StackPanel>
+                    <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="22" Width="367.661"  ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  ItemTemplate="{ThemeResource backupTemplate}" Margin="10,10,10,10" Height="360" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+                </StackPanel>
             </PivotItem>
+
+
 
             <PivotItem x:Name="SecondPage" IsHoldingEnabled="True" Margin="0,-24,0,0"  >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" >
@@ -203,7 +198,7 @@
             <PivotItem x:Name="ThirdPage" Margin="10,0">
                 <StackPanel Orientation="Vertical" Width="390" Height="auto">
                     <TextBlock Text ="Groups"  VerticalAlignment="Center"
-                               HorizontalAlignment="Center" FontSize="43" FontWeight="SemiBold"></TextBlock>
+                               HorizontalAlignment="Center" FontSize="44"/>
                     <GridView x:Name="GridForGroups" 
                           Height="450" Width="380" ItemsSource="{Binding listOfGroups}" 
                           ItemTemplate="{ThemeResource GridTemplate}">
@@ -212,7 +207,7 @@
                 </StackPanel>
             </PivotItem>
         </Pivot>
-    
+
         <Grid x:Name="SearchBox" Visibility="Collapsed" Grid.Row="1">
             <Grid Background="Black" Opacity="0.5"/>
             <Border

@@ -63,7 +63,7 @@ namespace Contacto
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.InitializeComponent();
-            ContentArea.SelectedIndex = 0;
+            ContentArea.SelectedIndex = 1;
             myMain.initalizeList();
             myMain.InitalizeGroups();
             this.DataContext = myMain;

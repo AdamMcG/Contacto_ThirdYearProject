@@ -220,9 +220,9 @@
                 <StackPanel>
                     <TextBlock Margin="5" Text="Search:" FontSize="15" FontWeight="Bold" />
                     <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
-                    <ComboBox HorizontalAlignment="Center" MinWidth="150" PlaceholderText="Search by..">
-                        <TextBlock Text="Test"/>
-                        <TextBlock Text="Test1"/>
+                    <ComboBox x:Name="searchOptions" HorizontalAlignment="Center" MinWidth="150" PlaceholderText="Search by..">
+                        <TextBlock  Text="First Name"/>
+                        <TextBlock Text="Last Name"/>
                     </ComboBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="YesButton" Margin="5" Content="Search" Click="YesButton_Click">

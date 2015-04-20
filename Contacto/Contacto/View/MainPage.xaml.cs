@@ -204,6 +204,7 @@ namespace Contacto
         private void findContact_Click(object sender, RoutedEventArgs e)
         {
             SearchBox.Visibility = Visibility.Visible;
+            
 
         }
 
@@ -293,10 +294,19 @@ namespace Contacto
 
             // Do something with the Input
             String input = InputTextBox.Text;
-            searchForContact(InputTextBox.Text, "firstName");
+            if (searchOptions.SelectedIndex == 0)
+            {
+                searchForContact(InputTextBox.Text, "firstName");
 
+            }
+            else
+            {
+                searchForContact(InputTextBox.Text, "lastName");
+
+            }
 
             // Clear InputBox.
+            searchOptions.SelectedIndex = -1;
             InputTextBox.Text = String.Empty;
         }
 
@@ -315,6 +325,7 @@ namespace Contacto
 
             int index = resultPicker.SelectedIndex;
             string id = searchResults.Keys.ElementAt<string>(index);
+            searchResults.Clear();
             Contact toUse = new Contact();
 
             for (int i = 0; i < myMain.listOfContacts.Count; i++)
@@ -326,6 +337,9 @@ namespace Contacto
                 }
 
             }
+
+
+            Frame.Navigate(typeof(ContactDetail), toUse);
         }
 
         private async void Group_Tapped(object sender, TappedRoutedEventArgs e)

@@ -211,7 +211,6 @@
                             
                         </StackPanel>
                     </StackPanel>
-                    <Button HorizontalAlignment="Center" x:Name="Closebackup" Margin="5" Click="Closebackup_Click" >close</Button>
                 </StackPanel>
             </Border>
         </Grid>

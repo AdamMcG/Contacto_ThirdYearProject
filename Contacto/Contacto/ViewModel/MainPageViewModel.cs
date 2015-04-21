@@ -16,6 +16,9 @@ using Newtonsoft.Json;
 using Windows.Storage.Streams;
 using System.Collections.Specialized;
 using Microsoft.WindowsAzure.MobileServices;
+using Windows.System.Profile;
+using Windows.Security.Cryptography.Core;
+using Windows.Security.Cryptography;
 namespace Contacto.ViewModel
 {
     //This handles the main page business logic.
@@ -70,16 +73,34 @@ namespace Contacto.ViewModel
             await insertBackupItem(); 
         }
 
+
+        //http://stackoverflow.com/questions/23321484/device-unique-id-in-windows-phone-8-1
+        private string GetDeviceID()
+        {
+            HardwareToken token = HardwareIdentification.GetPackageSpecificToken(null);
+            IBuffer hardwareId = token.Id;
+
+            HashAlgorithmProvider hasher = HashAlgorithmProvider.OpenAlgorithm("MD5");
+            IBuffer hashed = hasher.HashData(hardwareId);
+
+            string hashedString = CryptographicBuffer.EncodeToHexString(hashed);
+            return hashedString;
+        }
+
+
         private async System.Threading.Tasks.Task insertBackupItem()
         {
             try{
-            Backup back = new Backup();
-            back.title = "Adam's backup";
-            back.myContactFile = contactFile;
-            back.myGroupFile = groupFile;
-            back.date = DateTime.UtcNow.ToString();
+
+                Backup back = new Backup();
+                back.itemID = GetDeviceID();
+                string name = Windows.Networking.Proximity.PeerFinder.DisplayName;
+                back.title = name + " backup";
+                back.myContactFile = contactFile;
+                back.myGroupFile = groupFile;
+                back.date = DateTime.UtcNow.ToString();
                 await App.Contacto4Client.GetTable<Backup>().InsertAsync(back);
-                string a = "check";
+                
             }
             catch (Exception e)
             {
@@ -90,14 +111,24 @@ namespace Contacto.ViewModel
 
         public async void Fillbackup()
         {
-            myBackup = new ObservableCollection<Backup>(await App.Contacto4Client.GetTable<Backup>().ToListAsync());
+            IMobileServiceTable<Backup> todoTable = App.Contacto4Client.GetTable<Backup>();
+            //myBackup = new ObservableCollection<Backup>(await App.Contacto4Client.GetTable<Backup>().ToListAsync());
+            List<Backup> items = await todoTable.Where(Backup => Backup.itemID == GetDeviceID()).ToListAsync(); 
+            //await todoTable.DeleteAsync(items.ElementAt(0));
+            myBackup = new ObservableCollection<Backup>(items); 
+
+   //         List<TodoItem> items = await todoTable
+   //.Where(todoItem => todoItem.Complete == false)
+   //.ToListAsync();
+
             
         }
         public void getBackUpitems(int index)
         {
-            
             BackUpitems(index);
         }
+
+
         private async void BackUpitems(int index)
         {
             try

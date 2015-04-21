@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using Windows.System.Profile;
+using Windows.Storage.Streams;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -208,6 +212,12 @@ namespace Contacto
             string Fname = getDetailsData(0);
             string Lname = getDetailsData(1);
 
+            if (Fname == "" || Lname == "")
+            {
+                showException("All Fields must have entries");
+                return;
+            }
+
             try
             {
 
@@ -319,10 +329,13 @@ namespace Contacto
             }
             catch (Exception ex)
             {
-                showException(ex.Message);
+
+                string toShow = "All fields must be unique";
+                
+                showException(toShow);
+                return;
             }
     }
-
 
         public async void showException(string message){
 
@@ -351,7 +364,7 @@ namespace Contacto
             Frame.Navigate(typeof(MainPage));
         }
 
- 
- 
+
+
     }
 }

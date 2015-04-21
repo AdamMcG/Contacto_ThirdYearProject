@@ -12,6 +12,8 @@ namespace Contacto.Data
         public string id
         { get; set; }
 
+        public string itemID
+        { get; set; }
         public string title
         { get; set; }
 

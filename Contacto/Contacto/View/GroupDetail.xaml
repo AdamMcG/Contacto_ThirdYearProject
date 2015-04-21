@@ -23,7 +23,7 @@
 
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Icon="Up" Label="Update Group" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
@@ -107,7 +107,7 @@
                         <ListView x:Name ="listofContacts" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
                              Height="439" 
-                             RenderTransformOrigin="0.5,0.5" Width="360" DataContext="{Binding myGroup.contactList, ElementName=page}" >
+                             RenderTransformOrigin="0.5,0.5" Width="360" DataContext="{Binding myGroup.contactList, ElementName=page}" Margin="1,0,0.667,0" >
 
                             <ListView.ItemTemplate >
                                     <DataTemplate>

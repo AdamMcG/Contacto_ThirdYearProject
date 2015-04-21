@@ -27,8 +27,6 @@
             <AppBarButton Icon="Up" Label="Update Group" Click="updateButton_Click"/>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
-            <!--<AppBarButton Icon="Message" Label=" Send SMS" Click="SMSClick"/>
-            <AppBarButton Icon="Mail" Label=" Send Email" Click="EmailClick"/>-->
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -142,16 +140,14 @@
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Send a group text to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
-                        <TextBlock Text="{Binding myGroupName}" FontSize="24" FontWeight="Bold" />
+                        <TextBlock Text="Send a group text to " Margin="0,0,5,10" FontWeight="Bold" FontSize="20" />
+                        <TextBlock Text="{Binding myGroupName}" FontSize="20" FontWeight="Bold" />
                     </StackPanel>
 
 
                     <StackPanel Orientation="Horizontal"/>
 
-                    <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="315" Margin="0.212,0,-0.545,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                        
-                    </TextBox>
+                    <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="315" Margin="0,0,-0.333,0" RenderTransformOrigin="0.5,0.5"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="NumbersButton" Content="Numbers" Margin="10,10,10,10" Click="NumbersButton_Click">
                             <Button.Flyout>
@@ -168,8 +164,8 @@
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Send a group Email to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
-                        <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" />
+                        <TextBlock Text="Send a group Email to " Margin="0,0,5,10" FontWeight="Bold" FontSize="20" />
+                        <TextBlock Text="{Binding myGroupName}" FontSize="20" FontWeight="Bold" />
                     </StackPanel>
 
 
@@ -208,7 +204,7 @@
                         <StackPanel Orientation="Horizontal">
 
                             <TextBlock x:Name="EmailSelection" Text="Primary Email" ></TextBlock>
-                            
+
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

@@ -178,7 +178,6 @@ namespace Contacto.ViewModel
 
         public void RefreshGroups(Contact toRefresh)
         {
-
             for (int i = 0; i < groupList.Count; i++)
             {
 

@@ -39,9 +39,9 @@
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
             <AppBarButton Icon="Up" Label="Update Contact" Click="updateButton_Click"/>
-                <AppBarButton Icon="Phone" Label="Make A Call" Click="makeACall"/>
-                <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
-            <AppBarButton Icon="Setting" Label="Change Defaults" Click="Settings_Click"/>
+            <AppBarButton Icon="Phone" Label="Make A Call" Click="makeACall"/>
+            <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
+                <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             </CommandBar.PrimaryCommands>       
         </CommandBar>
         
@@ -68,21 +68,21 @@
                     <ImageBrush Stretch="Fill"/>
                 </StackPanel.Background>
 
-                <Canvas  x:Name="HeaderImg1" Width="135" Height="80" Background="#363951"  Tapped="HeaderImg1_Tapped" Opacity="30">
+                <Canvas  x:Name="HeaderImg1" Width="100" Height="80" Background="#363951"  Tapped="HeaderImg1_Tapped" Opacity="30">
                     <Path x:Name="HeaderIcon1" 
 						Width="50" 
 						Height="50" 
-						Canvas.Left="45"
+						Canvas.Left="25"
 						Canvas.Top="15"
 						Stretch="Fill"
                         Data="F1 M 29.9796,22.2C 33.4365,22.2 36.2389,25.0024 36.2389,28.4593C 36.2389,31.9162 33.4365,34.7185 29.9796,34.7185C 26.5228,34.7185 23.7204,31.9162 23.7204,28.4593C 23.7204,25.0024 26.5228,22.2 29.9796,22.2 Z M 23.7204,43.2315C 22.8858,43.6488 21.2167,46.987 21.2167,46.987C 21.2167,46.987 20.3821,48.2388 19.9648,53.2462L 16.2093,51.9944L 17.4611,45.7352C 17.4611,45.7352 19.9648,36.9722 24.9722,36.9723L 34.9869,36.9723C 39.9944,36.9722 42.4981,45.7352 42.4981,45.7352L 43.75,51.9945L 39.9944,53.2463C 39.5772,48.2389 38.7427,46.987 38.7427,46.987C 38.7427,46.987 37.0735,43.6488 36.2389,43.2315L 36.7447,54.6004C 34.8417,55.3427 32.7712,55.75 30.6056,55.75C 27.9657,55.75 25.4672,55.1447 23.2413,54.0654L 23.7204,43.2315 Z M 39,24L 57,24L 57,27L 39,27L 39,24 Z M 39,30L 57,30L 57,33L 39,33L 39,30 Z M 41,36L 57,36L 57,39L 41,39L 41,36 Z M 44,42L 57,42L 57,45L 44,45L 44,42 Z M 46,48L 57,48L 57,51L 46,51L 46,48 Z "
                         UseLayoutRounding="False" 
                           />
                 </Canvas>
-                    <Canvas  x:Name="HeaderImg2" Width="135" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
+                    <Canvas  x:Name="HeaderImg2" Width="100" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
                         <Path x:Name="HeaderIcon2" Width="50" 
 						Height="50"
-						Canvas.Left="45"
+						Canvas.Left="25"
 						Canvas.Top="15"
 						Stretch="Fill" 
                         Data="F1 M 33,51L 36.4167,61.75L 24,51L 19,51L 19,22L 57,22L 57,51L 33,51 Z M 44.7244,45.3609C 45.2458,44.776 45.7533,44.0978 46.2471,43.3263L 47.5506,40.9739L 48.4534,38.6341C 48.6802,37.8711 48.7936,37.1972 48.7936,36.6122C 48.7936,36.0273 48.6802,35.3533 48.4534,34.5904L 47.5506,32.2379L 46.2471,29.8854L 44.7244,27.8635L 42.6898,27.8635C 43.7622,29.097 44.5729,30.4248 45.1218,31.8469C 45.6707,33.2689 45.9451,34.8574 45.9451,36.6122C 45.9451,38.3543 45.6707,39.9354 45.1218,41.3554C 44.5729,42.7753 43.7622,44.1105 42.6898,45.3609L 44.7244,45.3609 Z M 36.0208,34.8334C 35.1464,34.8334 34.4375,35.5422 34.4375,36.4167C 34.4375,37.2911 35.1464,38 36.0208,38L 39.1875,38C 40.0619,38 41.5625,37.2911 41.5625,36.4167C 41.5625,35.5422 40.0619,34.8334 39.1875,34.8334L 36.0208,34.8334 Z M 29.2917,30.0834C 28.4172,30.0834 27.7083,30.7922 27.7083,31.6667C 27.7083,32.5411 28.4172,32.8542 29.2917,32.8542L 30.875,32.8542C 31.7494,32.8542 32.4583,32.5411 32.4583,31.6667C 32.4583,30.7922 31.7494,30.0834 30.875,30.0834L 29.2917,30.0834 Z M 29.2917,39.9792C 28.4172,39.9792 27.7083,40.2922 27.7083,41.1667C 27.7083,42.0411 28.4172,42.75 29.2917,42.75L 30.875,42.75C 31.7494,42.75 32.4583,42.0411 32.4583,41.1667C 32.4583,40.2922 31.7494,39.9792 30.875,39.9792L 29.2917,39.9792 Z "
@@ -91,10 +91,10 @@
 
                     </Canvas>
 
-                    <Canvas  x:Name="HeaderImg3" Width="135" Height="80" Background="#363951" Tapped="HeaderImg3_Tapped" >
+                    <Canvas  x:Name="HeaderImg3" Width="100" Height="80" Background="#363951" Tapped="HeaderImg3_Tapped" >
                         <Path x:Name="HeaderIcon3" Width="50" 
 						Height="50"
-						Canvas.Left="45"
+						Canvas.Left="25"
 						Canvas.Top="15"
 						Stretch="Fill" 
                         Data="F1 M 18,23L 58,23L 58,53L 18,53L 18,23 Z M 22,49L 54,49L 54,31L 38,43L 22,31L 22,49 Z M 23,27L 38,38L 53,27L 23,27 Z "
@@ -103,6 +103,18 @@
 
                     </Canvas>
 
+
+                    <Canvas  x:Name="HeaderImg4" Width="100" Height="80" Background="#363951" Tapped="HeaderImg4_Tapped" >
+                        <Path x:Name="HeaderIcon4" Width="50" 
+						Height="50"
+						Canvas.Left="25"
+						Canvas.Top="15"
+						Stretch="Fill" 
+                        Data="F1 M 57,19L 8.60117,19C 7.57586,20.5832 6.67496,22.2545 5.91232,24L 52,24L 52,70.0877C 53.7455,69.3251 55.4168,68.4242 57,67.3988L 57,19 Z M 46,30L 3.91849,30C 3.5383,31.626 3.27147,33.2956 3.12678,35L 46,35L 46,30 Z M 46,40L 3.05619,40C 3.15208,41.702 3.36958,43.3715 3.70014,45L 46,45L 46,40 Z M 46,50L 5.11131,50C 5.74451,51.735 6.51108,53.4058 7.39861,55L 46,55L 46,50 Z M 46,60L 10.7772,60C 12.256,61.8276 13.9151,63.5033 15.7274,65L 46,65L 46,60 Z "
+                        Opacity="100"
+                              />
+
+                    </Canvas>
 
                 </StackPanel>
 
@@ -139,17 +151,10 @@
                     </StackPanel>
                     
                     
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
                         
-                        <TextBlock Text="Contact Number: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
-                        <Button x:Name="fieldSelector" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-                                
-                            <Button.Flyout>
-                                <ListPickerFlyout x:Name="FieldList"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
-                            </Button.Flyout>
-
-                        </Button>
-
+                        <TextBlock Text="Contact Number: "  FontSize="20"  Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding muprimary_contact_num}" FontSize="20"  />
                     </StackPanel>
 
                     <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
@@ -168,16 +173,10 @@
                         <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
 
-                        <TextBlock Text="Email Address: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
-                        <Button x:Name="fieldSelector2" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-
-                            <Button.Flyout>
-                                <ListPickerFlyout x:Name="FieldList2"  ItemsPicked="ListPickerFlyout_ItemsPicked2" />
-                            </Button.Flyout>
-
-                        </Button>
+                        <TextBlock Text="Email Address: "  FontSize="20"  Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding muprimary_email_address}" FontSize="20"  />
 
                     </StackPanel>
 
@@ -192,36 +191,25 @@
 
             </PivotItem>
 
+            <PivotItem x:Name="settings">
 
-        </Pivot>
-
-
-
-        <!--http://stackoverflow.com/questions/8103743/wpf-c-sharp-inputbox-->
-        <Grid x:Name="SettingsBox" Visibility="Collapsed" Grid.Row="1">
-            <Grid Background="Black" Opacity="0.5"/>
-            <Border
-            MinWidth="400"
-            Background="#363951" 
-            BorderBrush="Black" 
-            BorderThickness="1" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center">
                 <StackPanel>
                     <TextBlock Margin="10" Text="Default Contact Details:" FontSize="24" FontWeight="Bold" />
+
+                    <TextBlock Text="Default Contact No:" FontSize="24"/>
+                    <TextBlock Text="{Binding muprimary_contact_num}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
                     
-                    <TextBlock Text="Default Contact No." FontSize="24" HorizontalAlignment="Center" />
-                    <Button x:Name="PhoneButton" Content="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+                    <Button x:Name="PhoneButton" Content="Change Phone" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
                         <Button.Flyout>
-                            <ListPickerFlyout x:Name="DefaultFields"  ItemsPicked="ListPickerFlyout_ItemsPicked3" />
+                            <ListPickerFlyout x:Name="DefaultFields" ItemsPicked="ListPickerFlyout_ItemsPicked3" />
                         </Button.Flyout>
-                        
-                    </Button>
-                    
-                    <TextBlock Text="Default Email Address." FontSize="24" HorizontalAlignment="Center" />
-                    <Button x:Name="EmailButton" Content="Email" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
+                    </Button>
+
+                    <TextBlock Text="Default Email Address:" FontSize="24"  />
+                    <TextBlock Text="{Binding muprimary_email_address}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
+                    <Button x:Name="EmailButton" Content="Email" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
                         <Button.Flyout>
                             <ListPickerFlyout x:Name="DefaultFields2"  ItemsPicked="ListPickerFlyout_ItemsPicked4" />
@@ -231,13 +219,18 @@
                     </Button>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="YesButton" Margin="5" Content="Okay" Click="YesButton_Click" />
-                        <Button x:Name="NoButton" Margin="5" Content="Cancel" Click="NoButton_Click"  />                  
+                        <Button x:Name="YesButton" Margin="5" Content="Confirm Changes" Click="YesButton_Click" />
                     </StackPanel>
-                    
+
                 </StackPanel>
-            </Border>
-        </Grid>
+
+
+
+            </PivotItem>
+            
+            
+        </Pivot>
+
 
     </Grid>
 </Page>

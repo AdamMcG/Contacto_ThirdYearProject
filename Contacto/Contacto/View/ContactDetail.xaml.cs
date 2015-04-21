@@ -30,9 +30,9 @@ namespace Contacto.View
         MainPageViewModel myMain = new MainPageViewModel();
         ContactDetailViewModel defaultViewModel = new ContactDetailViewModel();
         public List<string> fields { get; set; }
+        public Contact myContact { get; set; }
 
 
-        Contact myContact = new Contact();
         public ContactDetail()
         {
 
@@ -46,40 +46,26 @@ namespace Contacto.View
             myContact.deleteDuplicates();
 
             fields = new List<string>();
-
+            
             foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
             {
 
-                fields.Add(d.muKey.ToString());
+                fields.Add(d.muKey.ToString() + "\n " + d.muValue.ToString());
 
-                {
-                    if (d.muKey == "Mobile Phone" || d.muKey == "Work Phone")
-                    { fieldSelector.Content = d.muKey; }
-
-                    if (d.muKey == "Email Address")
-                    {
-
-                        fieldSelector2.Content = d.muKey;
-                    }
-
-                }
             }
 
 
             
-            FieldList.ItemsSource = fields;
-            FieldList2.ItemsSource = fields;
-
-            DefaultFields.ItemsSource = fields;
-            DefaultFields2.ItemsSource = fields;
 
 
             ContentArea.DataContext = myContact;
-
+            DefaultFields.ItemsSource = fields;
+            DefaultFields2.ItemsSource = fields;
 
             HeaderIcon1.Style = HeaderStyleSelected;
             HeaderIcon2.Style = HeaderStyleUnselected;
             HeaderIcon3.Style = HeaderStyleUnselected;
+            HeaderIcon4.Style = HeaderStyleUnselected;
 
 
 
@@ -117,13 +103,8 @@ namespace Contacto.View
             var chatmesg = new ChatMessage();
 
             chatmesg.Body = smsBody.Text;
-            
 
-            foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
-            {
-                if (d.muKey == fieldSelector.Content.ToString() )
-                { chatmesg.Recipients.Add(d.muValue); }
-            }
+            chatmesg.Recipients.Add(myContact.muprimary_contact_num);
 
             await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(chatmesg);
 
@@ -135,21 +116,7 @@ namespace Contacto.View
             Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(myContact.muprimary_contact_num, myContact.mufirstName);
         }
 
-        private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
-        {
-            string selection = (string)sender.SelectedItem;
-
-            fieldSelector.Content = selection;
-
-        }
-
-        private void ListPickerFlyout_ItemsPicked2(ListPickerFlyout sender, ItemsPickedEventArgs args)
-        {
-
-            string selection = (string)sender.SelectedItem;
-            fieldSelector2.Content = selection;
-
-        }
+        
 
         private void ListPickerFlyout_ItemsPicked3(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
@@ -173,56 +140,43 @@ namespace Contacto.View
             string name = myContact.mufirstName + " " + myContact.mulastName;
             email.Subject = emailSubject.Text.ToString();
             email.Body = emailBody.Text.ToString();
-            
 
-            foreach (Contacto.Model.Contact.DynamicFields d in myContact.Dynamic)
-            {
-                if (d.muKey == fieldSelector2.Content.ToString())
-                {
-                    email.To.Add(new EmailRecipient(d.muValue, name));
-                }
-            }
+
+            email.To.Add(new EmailRecipient(myContact.muprimary_email_address, name));
+
             await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(email);
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsBox.Visibility = Visibility.Visible;
-        }
+        //private void Settings_Click(object sender, RoutedEventArgs e)
+        //{
+        //    SettingsBox.Visibility = Visibility.Visible;
+        //}
 
 
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
 
-
-            for (int i = 0; i < myContact.muCustomFields.Count; i++)
+            if (DefaultFields.SelectedIndex != -1)
             {
-                if (EmailButton.Content.ToString() == myContact.muCustomFields.Keys.ElementAt<string>(i))
-                {
-                    myContact.muprimary_email_address = myContact.muCustomFields.Values.ElementAt<string>(i);
+                myContact.muprimary_contact_num = myContact.muCustomFields.Values.ElementAt(DefaultFields.SelectedIndex);
 
-                }
-                
-                if (PhoneButton.ToString() == myContact.muCustomFields.Keys.ElementAt<string>(i))
-                {
-                    myContact.muprimary_contact_num = myContact.muCustomFields.Values.ElementAt<string>(i);
+            }
+            if (DefaultFields2.SelectedIndex != -1)
+            {
 
-                }
+                myContact.muprimary_email_address = myContact.muCustomFields.Values.ElementAt(DefaultFields2.SelectedIndex);
             }
 
-                SettingsBox.Visibility = Visibility.Collapsed;
+
+            defaultViewModel.removeFromList(myContact);
+            defaultViewModel.addtocontactlist(myContact);
+            defaultViewModel.createNewContactList();
+
+            Frame.Navigate(typeof(ContactDetail), myContact);
+
 
         }
-
-        private void NoButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-            SettingsBox.Visibility = Visibility.Collapsed;
-
-        }
-
 
         private void SMSClick(object sender, RoutedEventArgs e)
         {
@@ -260,6 +214,13 @@ namespace Contacto.View
 
         }
 
+        private void HeaderImg4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            ContentArea.SelectedIndex = 3;
+
+        }
+
         private void ContentArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ContentArea.SelectedIndex == 0)
@@ -268,6 +229,7 @@ namespace Contacto.View
                 HeaderIcon1.Style = HeaderStyleSelected;
                 HeaderIcon2.Style = HeaderStyleUnselected;
                 HeaderIcon3.Style = HeaderStyleUnselected;
+                HeaderIcon4.Style = HeaderStyleUnselected;
 
             }
             else if (ContentArea.SelectedIndex == 1)
@@ -276,18 +238,30 @@ namespace Contacto.View
                 HeaderIcon1.Style = HeaderStyleUnselected;
                 HeaderIcon2.Style = HeaderStyleSelected;
                 HeaderIcon3.Style = HeaderStyleUnselected;
+                HeaderIcon4.Style = HeaderStyleUnselected;
             }
             else if (ContentArea.SelectedIndex == 2)
             {
                 HeaderIcon1.Style = HeaderStyleUnselected;
                 HeaderIcon2.Style = HeaderStyleUnselected;
                 HeaderIcon3.Style = HeaderStyleSelected;
+                HeaderIcon4.Style = HeaderStyleUnselected;
+            }
+            else if (ContentArea.SelectedIndex == 3)
+            {
+                HeaderIcon1.Style = HeaderStyleUnselected;
+                HeaderIcon2.Style = HeaderStyleUnselected;
+                HeaderIcon3.Style = HeaderStyleUnselected;
+                HeaderIcon4.Style = HeaderStyleSelected;
+
             }
             else
             {
+
                 HeaderIcon1.Style = HeaderStyleSelected;
                 HeaderIcon2.Style = HeaderStyleUnselected;
                 HeaderIcon3.Style = HeaderStyleUnselected;
+                HeaderIcon4.Style = HeaderStyleUnselected;
 
             }
 

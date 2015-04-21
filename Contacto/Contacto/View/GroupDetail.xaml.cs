@@ -68,7 +68,9 @@ namespace Contacto.View
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            //Frame.Navigate(typeof(UpdateGroup), myGroup);
+
+            
+            
         }
 
         private async void createAppointment()
@@ -100,10 +102,7 @@ namespace Contacto.View
 
             }
 
-      
-
             await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(chatmesg);
-
         }
 
         
@@ -112,10 +111,12 @@ namespace Contacto.View
         {
             var email = new EmailMessage();
 
-            EmailRecipient toadd = new EmailRecipient();
-
+            email.Subject = emailSubject.Text;
+            email.Body = emailBody.Text;
+ 
             foreach (Contact c in myGroup.contactList)
             {
+                EmailRecipient toadd = new EmailRecipient();
 
                 toadd.Address = c.muprimary_email_address;
                 toadd.Name = c.mufirstName + " " + c.mulastName;

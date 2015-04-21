@@ -76,7 +76,7 @@
 
                     </Canvas>
 
-                    <Canvas  x:Name="HeaderImg3" Width="135" Height="80" Background="#363951" Tapped="HeaderImg2_Tapped">
+                    <Canvas  x:Name="HeaderImg3" Width="135" Height="80" Background="#363951" Tapped="HeaderImg3_Tapped">
                         <Path x:Name="HeaderIcon3" Width="50" 
 						Height="50"
 						Canvas.Left="45"
@@ -110,11 +110,11 @@
                              RenderTransformOrigin="0.5,0.5" Width="360" DataContext="{Binding myGroup.contactList, ElementName=page}" Margin="1,0,0.667,0" >
 
                             <ListView.ItemTemplate >
-                                    <DataTemplate>
+                                <DataTemplate>
                                     <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
-                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
                                         VerticalAlignment="Bottom"  Width="360" Margin="0,0,0,0" Background="#0C0B15"  DoubleTapped="StackPanel_DoubleTapped" Tapped="StackPanel_Tapped" >
-                                         
+
                                             <FlyoutBase.AttachedFlyout>
                                                 <MenuFlyout>
                                                     <MenuFlyoutItem Text="Delete Contact From Group" Click="MenuFlyoutItem_Click"/>
@@ -125,7 +125,7 @@
         			                    Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                                        <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
+                                            <TextBlock Text="{Binding mulastName, UpdateSourceTrigger=PropertyChanged}"
                                           FontSize="24" FontWeight="SemiBold" 
         			                    Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			                    TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
@@ -142,28 +142,24 @@
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Send a text to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
+                        <TextBlock Text="Send a group text to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
                         <TextBlock Text="{Binding myGroupName}" FontSize="24" FontWeight="Bold" />
                     </StackPanel>
 
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal"/>
 
-                        <TextBlock Text="Contact Number: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
-                        <Button x:Name="fieldSelector" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-
+                    <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="315" Margin="0.212,0,-0.545,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="NumbersButton" Content="Numbers" Margin="10,10,10,10" Click="NumbersButton_Click">
                             <Button.Flyout>
-                                <ListPickerFlyout x:Name="FieldList"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
+                                <ListPickerFlyout x:Name="NumbersPicker" ItemsPicked="NumbersPicker_ItemsPicked"/>
                             </Button.Flyout>
-
                         </Button>
-
+                        <Button Content="Send SMS" Click="SMSClick"  HorizontalAlignment="Center" Margin="10,10,10,10"/>
                     </StackPanel>
-
-                    <TextBox x:Name="smsBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
-
-                    <Button Content="Send SMS" Click="SMSClick"  HorizontalAlignment="Center"/>
-
                 </StackPanel>
 
             </PivotItem>
@@ -172,33 +168,22 @@
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Send an Email to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
+                        <TextBlock Text="Send a group Email to " Margin="0,0,5,20" FontWeight="Bold" FontSize="24" />
                         <TextBlock Text="{Binding mufirstName}" FontSize="24" FontWeight="Bold" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-
-                        <TextBlock Text="Email Address: " VerticalAlignment="Center"  FontSize="24" FontWeight="SemiBold" Margin="0, 10, 10 , 10"/>
-                        <Button x:Name="fieldSelector2" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-
-                            <Button.Flyout>
-                                <ListPickerFlyout x:Name="FieldList2"  ItemsPicked="ListPickerFlyout_ItemsPicked" />
-                            </Button.Flyout>
-
-                        </Button>
-
                     </StackPanel>
 
 
                     <TextBox x:Name="emailSubject" PlaceholderText="Enter subject.." TextWrapping="Wrap"/>
-                    <TextBox x:Name="emailBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
+                    <TextBox x:Name="emailBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="300" Margin="0,0,-0.333,0"/>
 
-                    <!--<Button Content="Calendar" Click="Calendar_Click" HorizontalAlignment="Center" />-->
-                    <!--<Button Content="Email" Click="EmailClick" HorizontalAlignment="Center" />-->
-
-
-                    <Button Content="Send Email" Click="EmailClick"  HorizontalAlignment="Center"/>
-
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button x:Name="AddressButton" Content="Addresses" Margin="10,10,10,10" Click="AddressButton_Click">
+                            <Button.Flyout>
+                                <ListPickerFlyout x:Name="AddressPicker" ItemsPicked="AddressPicker_ItemsPicked"/>
+                            </Button.Flyout>
+                        </Button>
+                        <Button Content="Send Email" Click="EmailClick"  HorizontalAlignment="Center" Margin="10,10,10,10"/>
+                    </StackPanel>
                 </StackPanel>
 
             </PivotItem>
@@ -206,5 +191,29 @@
 
         </Pivot>
 
+
+        <Grid x:Name="ContactDetailsBox" Visibility="Collapsed" Grid.Row="1">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="#363951" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="Name" Text="Test Test"/>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock x:Name="EmailSelection" Text="Primary Email" ></TextBlock>
+                            
+                        </StackPanel>
+                    </StackPanel>
+                    <Button HorizontalAlignment="Center" x:Name="Closebackup" Margin="5" Click="Closebackup_Click" >close</Button>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

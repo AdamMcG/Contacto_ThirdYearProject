@@ -92,24 +92,38 @@ namespace Contacto.View
             var chatmesg = new ChatMessage();
 
             chatmesg.Body = smsBody.Text;
+            
+
+            foreach (Contact c in myGroup.contactList)
+            {
+                chatmesg.Recipients.Add(c.muprimary_contact_num);
+
+            }
+
+      
 
             await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(chatmesg);
 
         }
 
         
-        private void ListPickerFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
-        {
-            string selection = (string)sender.SelectedItem;
-
-            fieldSelector.Content = selection;
-
-        }
-
+         
         private async void createEmail()
         {
             var email = new EmailMessage();
-            
+
+            EmailRecipient toadd = new EmailRecipient();
+
+            foreach (Contact c in myGroup.contactList)
+            {
+
+                toadd.Address = c.muprimary_email_address;
+                toadd.Name = c.mufirstName + " " + c.mulastName;
+
+                email.To.Add(toadd);
+            }
+
+
             await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(email);
         }
 
@@ -141,7 +155,7 @@ namespace Contacto.View
             ContentArea.SelectedIndex = 1;
         }
 
-        private void HeaderImg3_Tapped(object sender, TappedEventHandler e)
+        private void HeaderImg3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentArea.SelectedIndex = 2;
 
@@ -244,7 +258,49 @@ namespace Contacto.View
             }
         }
 
-        
+        private void AddressPicker_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+        }
+
+        private void AddressButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> addresses = new List<string>();
+
+            foreach (Contact c in myGroup.contactList)
+            {
+                string toAdd = c.mufirstName + " " + c.mulastName + ":\n " + c.muprimary_email_address;
+                addresses.Add(toAdd);
+            }
+
+            AddressPicker.ItemsSource = addresses;
+            AddressPicker.ShowAt(sender as FrameworkElement);
+
+
+        }
+
+
+        private void NumbersPicker_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
+        }
+
+        private void NumbersButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> Numbers = new List<string>();
+
+            foreach (Contact c in myGroup.contactList)
+            {
+                string toAdd = c.mufirstName + " " + c.mulastName + ":\n " + c.muprimary_contact_num;
+                Numbers.Add(toAdd);
+            }
+
+            NumbersPicker.ItemsSource = Numbers;
+            NumbersPicker.ShowAt(sender as FrameworkElement);
+
+
+        }
+
 
     }   
 }

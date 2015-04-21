@@ -54,6 +54,7 @@ namespace Contacto.View
         {
 
             defaultViewModel.pullFromJson();
+            defaultViewModel.InitalizeGroups();
             fieldCounter = defaultViewModel.listOfContacts.Count;
             indexLocation = defaultViewModel.listOfContacts.Count - 1;
 
@@ -70,6 +71,7 @@ namespace Contacto.View
         {
 
             defaultViewModel.removeFromList(myContact);
+            defaultViewModel.RefreshGroups(myContact);
             defaultViewModel.addtocontactlist(myContact);
             defaultViewModel.createNewContactList();
 

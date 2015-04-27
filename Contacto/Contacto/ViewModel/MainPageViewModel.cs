@@ -29,8 +29,8 @@ namespace Contacto.ViewModel
         string groupFile;
         string name = "contacts.json";
         string name2 = "groups.json";
-
-        private ObservableCollection<Backup> backup = new ObservableCollection<Backup>();
+        IMobileServiceTable<Backup> todoTable = App.Contacto4Client.GetTable<Backup>();
+        public ObservableCollection<Backup> backup = new ObservableCollection<Backup>();
         public ObservableCollection<Backup> myBackup
         {
             get { return backup; }
@@ -108,20 +108,30 @@ namespace Contacto.ViewModel
             }
         }
 
-
+        public async void deletingABackup(int index)
+        {
+            try
+            {
+                int a = myBackup.Count();
+                Backup test = myBackup.ElementAt<Backup>(index);
+                await todoTable.DeleteAsync(test);
+                myBackup.Remove(test);
+                NotifyPropertyChanged("myBackup");
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
         public async void Fillbackup()
         {
-            IMobileServiceTable<Backup> todoTable = App.Contacto4Client.GetTable<Backup>();
+            
             //myBackup = new ObservableCollection<Backup>(await App.Contacto4Client.GetTable<Backup>().ToListAsync());
             List<Backup> items = await todoTable.Where(Backup => Backup.itemID == GetDeviceID()).ToListAsync(); 
             //await todoTable.DeleteAsync(items.ElementAt(0));
-            myBackup = new ObservableCollection<Backup>(items); 
+            myBackup = new ObservableCollection<Backup>(items);
 
-   //         List<TodoItem> items = await todoTable
-   //.Where(todoItem => todoItem.Complete == false)
-   //.ToListAsync();
-
-            
+           
         }
         public void getBackUpitems(int index)
         {

@@ -327,7 +327,7 @@ namespace Contacto
                await Task.Delay(200);
                Frame.Navigate(typeof(MainPage));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 string toShow = "All fields must be unique";

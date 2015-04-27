@@ -72,7 +72,14 @@
         <DataTemplate x:Key="backupTemplate">
             <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" 
-                        VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" >
+                        VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" 
+                            DoubleTapped="backup_DoubleTapped">
+                    <FlyoutBase.AttachedFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Delete Backup" Click="MenuFlyoutItem_Click_backup"/>
+                           
+                        </MenuFlyout>
+                    </FlyoutBase.AttachedFlyout>
                     <TextBlock Text="{Binding title, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="SemiBold" 
         			Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"
         			TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
@@ -160,7 +167,10 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cloud Backups" VerticalAlignment="Top" Margin="10, 10, 10, 10" FontSize="44"/>
                     </StackPanel>
-                    <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="22" Width="367.661"  ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  ItemTemplate="{ThemeResource backupTemplate}" Margin="10,10,10,10" Height="360" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+                    <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="22" Width="367.661"  IsHoldingEnabled="True" IsDoubleTapEnabled="True"
+                              ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  
+                              ItemTemplate="{ThemeResource backupTemplate}" ItemsSource="{Binding myBackup, Mode=TwoWay}"
+                              Margin="10,10,10,10" Height="360" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
                 </StackPanel>
             </PivotItem>
 
@@ -234,26 +244,6 @@
                         </Button>
                         <Button x:Name="NoButton" Margin="5" Content="Cancel" Click="NoButton_Click" />
                     </StackPanel>
-                </StackPanel>
-            </Border>
-        </Grid>
-        <Grid x:Name="Backupbox" Visibility="Collapsed" Grid.Row="1">
-            <Grid Background="Black" Opacity="0.5"/>
-            <Border
-            MinWidth="250"
-            Background="#363951" 
-            BorderBrush="Black" 
-            BorderThickness="1" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center">
-                <StackPanel>
-
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="Download" Margin="5" Content="download" Click="Download_Click">
-                        </Button>
-                        <Button x:Name="upload" Margin="5" Content="upload" Click="upload_Click" />
-                    </StackPanel>
-                    <Button HorizontalAlignment="Center" x:Name="Closebackup" Margin="5" Click="Closebackup_Click" >close</Button>
                 </StackPanel>
             </Border>
         </Grid>

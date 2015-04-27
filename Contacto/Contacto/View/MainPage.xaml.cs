@@ -20,6 +20,8 @@ using Contacto.Common;
 using Windows.ApplicationModel.Resources;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using System.Net.NetworkInformation;
+using Windows.Networking.Connectivity;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Contacto
@@ -35,6 +37,7 @@ namespace Contacto
 
         bool singletap = true;
         bool singletapGroups = true;
+        bool singletapbackup = true;
         public MainPage()
         {
 
@@ -69,8 +72,6 @@ namespace Contacto
             this.DataContext = myMain;
             BackupListView.ItemsSource = myMain.myBackup;
             ContactListView.ItemsSource = myMain.listOfContacts;
-
-
         }
 
 
@@ -509,24 +510,68 @@ namespace Contacto
             }
         }
 
-        private void backup_Click(object sender, RoutedEventArgs e)
+        public void backupCommandHandler(IUICommand commandLabel)
         {
-            Backupbox.Visibility = Visibility.Visible;
-            
+            var Actions = commandLabel.Label;
+            switch (Actions)
+            {
+                case "Reset":
+                    int index = BackupListView.SelectedIndex;
+                    myMain.getBackUpitems(index);
+                    break;
+                    case "yes":
+                    int index2 = BackupListView.SelectedIndex;
+                    deleteBackup(index2);
+                    break;
+                case "no":
+                    break;
+                case "Download":
+                    Download_Click();
+                    break;
+                case "Upload":
+                    upload_Click();
+                    break;
+                case "Close":
+                    break;
+            }
         }
 
-        private void Closebackup_Click(object sender, RoutedEventArgs e)
+        public void deleteBackup(int index)
         {
-            Backupbox.Visibility = Visibility.Collapsed;
+            int a = BackupListView.SelectedIndex;
+           
+            myMain.deletingABackup(index);
         }
 
-        private void upload_Click(object sender, RoutedEventArgs e)
+        private async void backupOpen()
         {
-            testTheCloud();
-            Backupbox.Visibility = Visibility.Collapsed;
+            try
+            {
+                string dialog = " upload your contacts or download an old set?";
+                MessageDialog messageDialog = new MessageDialog(dialog, "Backup Your Contacts");
+
+                messageDialog.Commands.Add(new UICommand("Download", new UICommandInvokedHandler(backupCommandHandler)));
+                messageDialog.Commands.Add(new UICommand("Upload", new UICommandInvokedHandler(backupCommandHandler)));
+               
+                await messageDialog.ShowAsync();
+                await Task.Delay(200);
+            }
+            catch (Exception)
+            { ToString(); }
         }
 
-        private void testTheCloud()
+        private  void backup_Click(object sender, RoutedEventArgs e)
+        {
+            backupOpen();
+        }
+
+        private void upload_Click()
+        {
+           uploadToCloud();
+           
+        }
+
+        private void uploadToCloud()
         {
             try
             {
@@ -537,20 +582,91 @@ namespace Contacto
             { e.ToString(); }
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e)
+        private async void Download_Click()
         {
-            myMain.Fillbackup();
-            Frame.Navigate(typeof(backupSuccess));
-            Backupbox.Visibility = Visibility.Collapsed;
+            try
+            {
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    myMain.Fillbackup();
+                    string dialog = "Backup Successful!";
+                    MessageDialog messageDialog = new MessageDialog(dialog);
+
+                    messageDialog.Commands.Add(new UICommand("Okay", new UICommandInvokedHandler(CommandHandlers)));
+                    await messageDialog.ShowAsync();
+                    Frame.Navigate(typeof(MainPage));
+                    await Task.Delay(200);
+                }
+                else
+                {
+                    string dialog = "Network Connection is unavailable";
+                    MessageDialog messageDialog = new MessageDialog(dialog, "");
+
+                    messageDialog.Commands.Add(new UICommand("Okay", new UICommandInvokedHandler(CommandHandlers)));
+                    await messageDialog.ShowAsync();
+                }
+            }
+            catch (Exception)
+            {
+                string dialog = "Something has gone wrong";
+                MessageDialog messageDialog = new MessageDialog(dialog, "");
+
+                messageDialog.Commands.Add(new UICommand("Ok", new UICommandInvokedHandler(CommandHandlers)));
+
+               messageDialog.ShowAsync();
+            }
         }
 
-        private void backup_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            int index = BackupListView.SelectedIndex;
-            myMain.getBackUpitems(index);
-            
+        private async void backup_Tapped(object sender, TappedRoutedEventArgs e)
+        { 
+            this.singletapbackup = true;
+            await Task.Delay(200);
+            if (this.singletapbackup)
+            {
+                try
+                {
+                    string dialog = "Are you sure you want to reset your backup?";
+                    MessageDialog messageDialog = new MessageDialog(dialog, "Reset Backup");
+
+                    messageDialog.Commands.Add(new UICommand("Reset", new UICommandInvokedHandler(backupCommandHandler)));
+                    messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(backupCommandHandler)));
+                   await messageDialog.ShowAsync();
+                   
+                }
+                catch (Exception)
+                { }
+            }            
         }
 
- 
+
+
+        public object NetworkInformation_NetworkStatusChanged { get; set; }
+
+        private async void MenuFlyoutItem_Click_backup(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageDialog messageDialog = new MessageDialog("do you wish to delete this backup?");
+
+                messageDialog.Commands.Add(new UICommand("yes", new UICommandInvokedHandler(backupCommandHandler)));
+                messageDialog.Commands.Add(new UICommand("no", new UICommandInvokedHandler(backupCommandHandler)));
+                await messageDialog.ShowAsync();
+            }
+            catch (Exception)
+            {
+                string dialog = "Last Backup; Cannot delete";
+                MessageDialog messageDialog = new MessageDialog(dialog, "");
+
+                messageDialog.Commands.Add(new UICommand("Close", new UICommandInvokedHandler(backupCommandHandler)));
+                messageDialog.ShowAsync();
+            }
+        }
+
+        private void backup_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            this.singletapbackup = false;
+
+            FlyoutBase.GetAttachedFlyout(sender as FrameworkElement).ShowAt(sender as FrameworkElement);
+        }
     }
 }

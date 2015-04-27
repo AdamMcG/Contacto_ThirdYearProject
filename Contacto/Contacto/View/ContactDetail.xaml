@@ -152,7 +152,6 @@
                     
                     
                     <StackPanel Orientation="Vertical">
-                        
                         <TextBlock Text="Contact Number: "  FontSize="20"  Margin="0,0,0,10"/>
                         <TextBlock Text="{Binding muprimary_contact_num}" FontSize="20"  />
                     </StackPanel>
@@ -174,7 +173,6 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-
                         <TextBlock Text="Email Address: "  FontSize="20"  Margin="0,0,0,10"/>
                         <TextBlock Text="{Binding muprimary_email_address}" FontSize="20"  />
 
@@ -183,8 +181,6 @@
 
                     <TextBox x:Name="emailSubject" PlaceholderText="Enter subject.." TextWrapping="Wrap"/>
                     <TextBox x:Name="emailBody" PlaceholderText="Enter body..." TextWrapping="Wrap"  Height="235" Margin="0,0,-0.333,0"/>
-
-
                     <Button Content="Send Email" Click="EmailClick"  HorizontalAlignment="Center"/>
 
                 </StackPanel>
@@ -230,7 +226,5 @@
             
             
         </Pivot>
-
-
-    </Grid>
+</Grid>
 </Page>

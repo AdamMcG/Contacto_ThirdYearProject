@@ -47,6 +47,7 @@ namespace Contacto
 
             ContactListView.ItemsSource = myMain.listOfContacts;
 
+
             HeaderIcon1.Style = HeaderStyleSelected;
             HeaderIcon2.Style = HeaderStyleUnselected;
             HeaderIcon3.Style = HeaderStyleUnselected;
@@ -77,13 +78,11 @@ namespace Contacto
 
         private void HeaderImg1_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
             ContentArea.SelectedIndex = 0;
         }
 
         private void HeaderImg2_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
             ContentArea.SelectedIndex = 1;
         }
 
@@ -138,7 +137,6 @@ namespace Contacto
             }
             else if (ContentArea.SelectedIndex == 2)
             {
-
                 HeaderIcon1.Style = HeaderStyleUnselected;
                 HeaderIcon2.Style = HeaderStyleUnselected;
                 HeaderIcon3.Style = HeaderStyleSelected;
@@ -571,12 +569,21 @@ namespace Contacto
            
         }
 
-        private void uploadToCloud()
+        private async void uploadToCloud()
         {
             try
             {
-                myMain.insertItem();
 
+                string dialog1 = "Backup Uploading...";
+                MessageDialog messageDialog1 = new MessageDialog(dialog1);
+                await messageDialog1.ShowAsync();
+                Task t = myMain.insertItem();
+                await t;
+                string dialog = "Backup Successful";
+                MessageDialog messageDialog = new MessageDialog(dialog);
+                await messageDialog.ShowAsync();
+
+                
             }
             catch (Exception e)
             { e.ToString(); }
@@ -588,7 +595,12 @@ namespace Contacto
             {
                 if (NetworkInterface.GetIsNetworkAvailable())
                 {
-                    myMain.Fillbackup();
+
+                    string dialog1 = "Backup Downloading...";
+                    MessageDialog messageDialog1 = new MessageDialog(dialog1);
+                    await messageDialog1.ShowAsync();
+                    Task t = myMain.Fillbackup();
+                    await t;
                     string dialog = "Backup Successful!";
                     MessageDialog messageDialog = new MessageDialog(dialog);
 

@@ -67,7 +67,7 @@ namespace Contacto.ViewModel
 
         }
 
-        private async void SerialiseNewList()
+        private async Task SerialiseNewList()
         {
             string name = "contacts.json";
             ObservableCollection<Contact> list = listOfContacts;
@@ -88,10 +88,11 @@ namespace Contacto.ViewModel
                 }
                 text.Dispose();
             }
+
         }
 
-        public void createNewContactList()
-        { SerialiseNewList(); }
+        public async Task createNewContactList()
+        { await SerialiseNewList(); }
 
 
         public void openAppointmentCalendar()

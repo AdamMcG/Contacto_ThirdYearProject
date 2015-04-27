@@ -70,6 +70,8 @@ namespace Contacto.View
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
 
+
+
             defaultViewModel.removeFromList(myContact);
             defaultViewModel.RefreshGroups(myContact);
             defaultViewModel.addtocontactlist(myContact);

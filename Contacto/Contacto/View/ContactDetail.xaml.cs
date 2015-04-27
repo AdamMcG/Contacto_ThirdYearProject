@@ -19,6 +19,7 @@ using Windows.ApplicationModel.Appointments;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Chat;
 using Windows.ApplicationModel.Email;
+using System.Threading.Tasks;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -154,7 +155,7 @@ namespace Contacto.View
 
 
 
-        private void YesButton_Click(object sender, RoutedEventArgs e)
+        private async void YesButton_Click(object sender, RoutedEventArgs e)
         {
 
             if (DefaultFields.SelectedIndex != -1)
@@ -171,10 +172,11 @@ namespace Contacto.View
 
             defaultViewModel.removeFromList(myContact);
             defaultViewModel.addtocontactlist(myContact);
-            defaultViewModel.createNewContactList();
+            Task t =  defaultViewModel.createNewContactList();
+            await t;
 
             Frame.Navigate(typeof(ContactDetail), myContact);
-
+            
 
         }
 

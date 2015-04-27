@@ -24,7 +24,14 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
-            <AppBarButton Icon="Up" Label="Update Group" Click="updateButton_Click"/>
+            <AppBarButton Icon="Add" Label="Add Contact">
+
+
+                <AppBarButton.Flyout >
+                    <ListPickerFlyout x:Name="AddContactList" ItemsPicked="AddContactList_ItemsPicked" />
+                </AppBarButton.Flyout>
+
+            </AppBarButton>
             <AppBarButton Icon="Back" Label="Back" Click="exit"/>
             <AppBarButton Icon="Calendar" Label=" Add appointment" Click="Calendar_Click"/>
         </CommandBar>

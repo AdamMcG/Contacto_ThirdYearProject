@@ -68,7 +68,7 @@ namespace Contacto.ViewModel
         {
         }
 
-        public async void insertItem()
+        public async Task insertItem()
         {
             await insertBackupItem(); 
         }
@@ -88,7 +88,7 @@ namespace Contacto.ViewModel
         }
 
 
-        private async System.Threading.Tasks.Task insertBackupItem()
+        private async Task insertBackupItem()
         {
             try{
 
@@ -123,7 +123,7 @@ namespace Contacto.ViewModel
                 e.ToString();
             }
         }
-        public async void Fillbackup()
+        public async Task Fillbackup()
         {
             
             //myBackup = new ObservableCollection<Backup>(await App.Contacto4Client.GetTable<Backup>().ToListAsync());

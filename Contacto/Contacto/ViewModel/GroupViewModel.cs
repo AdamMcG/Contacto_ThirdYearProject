@@ -61,9 +61,9 @@ namespace Contacto.ViewModel
 
 
 
-       public void initaliseGroup()
-       { initalizeGroupsJson(); }
-       private async void initalizeGroupsJson()
+       public async Task initaliseGroup()
+       { await initalizeGroupsJson(); }
+       private async Task initalizeGroupsJson()
        {
            List<Group> list = new List<Group>();
            try
@@ -103,7 +103,7 @@ namespace Contacto.ViewModel
        }
 
    
-       private async void SerialisingGroupsWithJsonNetAsync()
+       private async Task SerialisingGroupsWithJsonNetAsync()
        {
 
            string name = "groups.json";
@@ -129,18 +129,18 @@ namespace Contacto.ViewModel
            }
        }
 
-       public void serailizeGroups()
+       public async Task serailizeGroups()
        {
-           SerialisingGroupsWithJsonNetAsync();
+           await SerialisingGroupsWithJsonNetAsync();
 
        }
 
-       public void fillcontactList()
+       public async Task fillcontactList()
        {
-           pullFromList();
+          await pullFromList();
        }
 
-       private async void pullFromList()
+       private async Task pullFromList()
        {
            ObservableCollection<Contact> list = new ObservableCollection<Contact>();
            try

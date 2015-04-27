@@ -193,7 +193,7 @@
                     <TextBlock Margin="10" Text="Default Contact Details:" FontSize="24" FontWeight="Bold" />
 
                     <TextBlock Text="Default Contact No:" FontSize="24"/>
-                    <TextBlock Text="{Binding muprimary_contact_num}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
+                    <TextBlock Text="{Binding muprimary_contact_num, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
                     
                     <Button x:Name="PhoneButton" Content="Change Phone" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -204,7 +204,7 @@
                     </Button>
 
                     <TextBlock Text="Default Email Address:" FontSize="24"  />
-                    <TextBlock Text="{Binding muprimary_email_address}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
+                    <TextBlock Text="{Binding muprimary_email_address, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="24" Margin="10" />
                     <Button x:Name="EmailButton" Content="Email" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
                         <Button.Flyout>

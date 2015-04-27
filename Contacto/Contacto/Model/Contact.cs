@@ -37,7 +37,17 @@ namespace Contacto.Model
         {
 
             get { return primary_contact_num; }
-            set { primary_contact_num = value; }
+            set {
+                if (value != primary_contact_num){
+                
+                    primary_contact_num = value;
+                    NotifyPropertyChanged("primary_contact_num");
+                
+               }
+            
+            
+            
+            }
             
         }
 
@@ -46,7 +56,10 @@ namespace Contacto.Model
         {
 
             get { return primary_email_address; }
-            set { primary_email_address = value;  }
+            set { primary_email_address = value;
+                  NotifyPropertyChanged("primary_email_address");
+
+            }
         }
 
 
@@ -122,12 +135,14 @@ namespace Contacto.Model
 
         public void fillDynamicFields()
         {
+
             for (int i = 0; i < customFields.Count; i++)
             {
                 DynamicFields myfields = new DynamicFields();
                 myfields.muKey = muCustomFields.ElementAt(i).Key;
                 myfields.muValue = muCustomFields.ElementAt(i).Value;
 
+                
                 Dynamic.Add(myfields);
                 NotifyPropertyChanged("Dynamic");
             }

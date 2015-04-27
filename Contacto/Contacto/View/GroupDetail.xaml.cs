@@ -31,6 +31,8 @@ namespace Contacto.View
     {
         public Group myGroup { get; set; }
         bool singletap = true;
+        List<string> globalContactNames = new List<string>();
+        List<Contact> ContactsToUse;
         GroupViewModel groupVM = new GroupViewModel();
 
 
@@ -46,14 +48,24 @@ namespace Contacto.View
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             myGroup = (Group)e.Parameter;
 
 
-            groupVM.fillcontactList();
+            Task t = groupVM.fillcontactList();
+            await t;
+
+            Task t2 = groupVM.initaliseGroup();
 
             this.DataContext = myGroup;
+
+
+            initalizeContacts();
+
+
+
+            AddContactList.ItemsSource = globalContactNames;
             listofContacts.ItemsSource = myGroup.contactList;
 
             
@@ -64,6 +76,41 @@ namespace Contacto.View
         {
 
             Frame.Navigate(typeof(MainPage));
+        }
+        
+
+        private async void fillContacts()
+        {
+            Task t = groupVM.fillcontactList();
+            await t;
+
+        }
+
+        private void initalizeContacts()
+        {
+
+            ContactsToUse = groupVM.globalContacts.ToList<Contact>();
+
+            int index = 0;
+            foreach (Contact c in myGroup.contactList){
+
+                if (c == ContactsToUse.ElementAt<Contact>(index))
+                {
+                    ContactsToUse.Remove(c);
+
+                }
+
+            }
+
+
+            for (int i = 0; i < ContactsToUse.Count; i++)
+            {
+
+                globalContactNames.Add(ContactsToUse.ElementAt<Contact>(i).mufirstName + " " + ContactsToUse.ElementAt<Contact>(i).mulastName);
+
+            }
+
+
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
@@ -239,7 +286,7 @@ namespace Contacto.View
         }
 
 
-        public void CommandHandlers(IUICommand commandLabel)
+        public async void CommandHandlers(IUICommand commandLabel)
         {
 
             var Actions = commandLabel.Label;
@@ -251,7 +298,8 @@ namespace Contacto.View
                     Contact temp = (Contact)listofContacts.SelectedItem;
                     myGroup.contactList.Remove(temp);
                     groupVM.addGroup(myGroup);
-                    groupVM.serailizeGroups();
+                    Task t = groupVM.serailizeGroups();
+                    await t;
                     break;
                 case "No":
                     break;
@@ -299,6 +347,20 @@ namespace Contacto.View
             NumbersPicker.ItemsSource = Numbers;
             NumbersPicker.ShowAt(sender as FrameworkElement);
 
+
+        }
+
+        private async void AddContactList_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+            int itemIndex = AddContactList.SelectedIndex;
+            Contact toAdd = groupVM.globalContacts.ElementAt<Contact>(itemIndex);
+
+            myGroup.contactList.Add(toAdd);
+            groupVM.addGroup(myGroup);
+            initalizeContacts();
+            
+            Task t = groupVM.serailizeGroups();
+            await t;
 
         }
 

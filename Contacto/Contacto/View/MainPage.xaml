@@ -12,6 +12,19 @@
 
     <Page.Resources>
 
+        
+        <Style TargetType="ProgressRing" x:Key="ShowLoadingRing" x:Name="ShowLoadingRing" >
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="IsEnabled" Value="True"/>
+        </Style>
+
+
+        <Style TargetType="ProgressRing" x:Key="CollapseLoadingRing" x:Name="CollapseLoadingRing">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+
+
         <Style TargetType="Path" x:Key="HeaderStyleUnselected" x:Name="HeaderStyleUnselected">
             <Setter Property="Fill" Value="#FF838192" />
         </Style>
@@ -73,7 +86,7 @@
             <Border BorderBrush="#363951"  BorderThickness="0, 1, 0, 1">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" 
                         VerticalAlignment="Bottom"  Width="400" Margin="0,0,0,0" 
-                            DoubleTapped="backup_DoubleTapped">
+                            DoubleTapped="backup_DoubleTapped" Tapped="backup_Tapped" Background="#0C0B15">
                     <FlyoutBase.AttachedFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem Text="Delete Backup" Click="MenuFlyoutItem_Click_backup"/>
@@ -99,7 +112,7 @@
             <AppBarButton x:Name ="addContact"  Icon="AddFriend" Label="Add Contact" Click="AppBarButton_Click"/>
             <AppBarButton x:Name ="addGroup" Icon="People" Label="Create Group" Click="addGroup_Click"/>
             <AppBarButton x:Name="findContact" Icon="Find" Label="Find Contact" Click="findContact_Click"/>
-            <AppBarButton x:Name="AddBackup" Icon="Folder" Label="Backup Contacts" Click="backup_Click"/>
+             <AppBarButton x:Name="AddBackup" Icon="Folder" Label="Backup Contacts" Click="backup_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -157,18 +170,18 @@
                 </Canvas>
             </StackPanel>
         </StackPanel>
-        
-        
+
+
         <Pivot x:Name="ContentArea" Margin="0,99,0,0" HorizontalAlignment="Left" Width="400" Background="#0C0B15" Grid.RowSpan="2" SelectionChanged="ContentArea_SelectionChanged">
 
-
+            
             <PivotItem x:Name="firstPage" IsHoldingEnabled="True" Margin="0,-24,0,0"  >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" >
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cloud Backups" VerticalAlignment="Top" Margin="10, 10, 10, 10" FontSize="44"/>
                     </StackPanel>
                     <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="22" Width="367.661"  IsHoldingEnabled="True" IsDoubleTapEnabled="True"
-                              ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" Tapped="backup_Tapped" x:Name="BackupListView"  
+                              ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled" x:Name="BackupListView"  
                               ItemTemplate="{ThemeResource backupTemplate}" ItemsSource="{Binding myBackup, Mode=TwoWay}"
                               Margin="10,10,10,10" Height="360" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
                 </StackPanel>
@@ -247,5 +260,6 @@
                 </StackPanel>
             </Border>
         </Grid>
+
     </Grid>
 </Page>

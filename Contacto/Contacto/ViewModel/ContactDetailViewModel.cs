@@ -36,10 +36,10 @@ namespace Contacto.ViewModel
         }
 
 
-        public void pullFromJson()
-        { pullFromList(); }
+        public async Task pullFromJson()
+        { await pullFromList(); }
 
-        private async void pullFromList()
+        private async Task pullFromList()
         {
             ObservableCollection<Contact> list = new ObservableCollection<Contact>();
             try

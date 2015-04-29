@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -67,7 +68,7 @@ namespace Contacto.View
 
         }
 
-        private void updateButton_Click(object sender, RoutedEventArgs e)
+        private async void updateButton_Click(object sender, RoutedEventArgs e)
         {
 
 
@@ -75,14 +76,25 @@ namespace Contacto.View
             defaultViewModel.removeFromList(myContact);
             defaultViewModel.RefreshGroups(myContact);
             defaultViewModel.addtocontactlist(myContact);
-            defaultViewModel.createNewContactList();
+            foreach (var item in defaultViewModel.listOfContacts)
+            {
+                item.deleteDuplicates();
+            }
+            Task t = defaultViewModel.createNewContactList();
+            await t;
 
             Frame.Navigate(typeof(ContactDetail), myContact);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 2);
+
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ContactDetail), originalContact);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 2);
+
         }
 
         
@@ -95,7 +107,10 @@ namespace Contacto.View
 
 
                 myContact.muCustomFields.Add(selection, "");
-                myContact.fillDynamicFields();
+                Contacto.Model.Contact.DynamicFields d = new Contact.DynamicFields();
+                d.muKey = selection;
+                d.muValue = "";
+                myContact.Dynamic.Add(d);
                 myContact.deleteDuplicates();
 
 
@@ -167,7 +182,7 @@ namespace Contacto.View
                         {
 
                             myContact.muCustomFields.Remove(keyToRemove);
-                            myContact.dynamicProperty.RemoveAt(index);
+                            myContact.Dynamic.RemoveAt(index);
                             myContact.deleteDuplicates();
 
 
@@ -198,7 +213,12 @@ namespace Contacto.View
 
 
             myContact.muCustomFields.Add(input, "");
-            myContact.fillDynamicFields();
+
+            Contacto.Model.Contact.DynamicFields d = new Contact.DynamicFields();
+            d.muKey = input;
+            d.muValue = "";
+            myContact.Dynamic.Add(d);
+            
             myContact.deleteDuplicates();
 
 

@@ -2,6 +2,7 @@
 using Contacto.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -11,6 +12,7 @@ using Windows.ApplicationModel.Chat;
 using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,9 +32,10 @@ namespace Contacto.View
     public sealed partial class GroupDetail : Page
     {
         public Group myGroup { get; set; }
+        Group originalGroup;
         bool singletap = true;
         List<string> globalContactNames = new List<string>();
-        List<Contact> ContactsToUse;
+        public List<Contact> ContactsToUse {get; set; }
         GroupViewModel groupVM = new GroupViewModel();
 
 
@@ -51,12 +54,14 @@ namespace Contacto.View
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             myGroup = (Group)e.Parameter;
+            originalGroup = myGroup;
 
 
             Task t = groupVM.fillcontactList();
             await t;
 
             Task t2 = groupVM.initaliseGroup();
+            await t2;
 
             this.DataContext = myGroup;
 
@@ -65,14 +70,13 @@ namespace Contacto.View
 
 
 
-            AddContactList.ItemsSource = globalContactNames;
             listofContacts.ItemsSource = myGroup.contactList;
 
             
 
         }
 
-                public void exit(object sender, RoutedEventArgs e)
+        public void exit(object sender, RoutedEventArgs e)
         {
 
             Frame.Navigate(typeof(MainPage));
@@ -91,35 +95,31 @@ namespace Contacto.View
 
             ContactsToUse = groupVM.globalContacts.ToList<Contact>();
 
-            int index = 0;
-            foreach (Contact c in myGroup.contactList){
-
-                if (c == ContactsToUse.ElementAt<Contact>(index))
+            for (int i = 0; i < ContactsToUse.Count; i++)
+            {
+                for (int j = 0; j < myGroup.contactList.Count; j++)
                 {
-                    ContactsToUse.Remove(c);
+                    if (ContactsToUse.ElementAt(i).uniqueContactID == myGroup.contactList.ElementAt(j).uniqueContactID)
+                    {
+                        ContactsToUse.RemoveAt(i);
+
+                    }
 
                 }
 
+
             }
 
 
-            for (int i = 0; i < ContactsToUse.Count; i++)
+            foreach (Contact c in ContactsToUse)
             {
-
-                globalContactNames.Add(ContactsToUse.ElementAt<Contact>(i).mufirstName + " " + ContactsToUse.ElementAt<Contact>(i).mulastName);
-
+                globalContactNames.Add(c.mufirstName + " " + c.mulastName);
             }
 
-
+            AddContactList.ItemsSource = globalContactNames;
         }
 
-        private void updateButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            
-            
-        }
-
+        
         private async void createAppointment()
         {
             var appointment = new Appointment();
@@ -294,12 +294,16 @@ namespace Contacto.View
             {
                 case "Yes":
 
-                    groupVM.removeGroup(myGroup);
-                    Contact temp = (Contact)listofContacts.SelectedItem;
-                    myGroup.contactList.Remove(temp);
-                    groupVM.addGroup(myGroup);
-                    Task t = groupVM.serailizeGroups();
-                    await t;
+                        groupVM.removeGroup(myGroup.uniqueGroupID);
+                        Contact temp = (Contact)listofContacts.SelectedItem;
+                        myGroup.contactList.Remove(temp);
+                        groupVM.addGroup(myGroup);
+                        Task t = groupVM.serailizeGroups();
+                        await t;
+
+                        Frame.Navigate(typeof(GroupDetail), myGroup);
+                        Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+                    
                     break;
                 case "No":
                     break;
@@ -352,18 +356,22 @@ namespace Contacto.View
 
         private async void AddContactList_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
+
+
+            groupVM.removeGroup(myGroup.uniqueGroupID);            
+
             int itemIndex = AddContactList.SelectedIndex;
-            Contact toAdd = groupVM.globalContacts.ElementAt<Contact>(itemIndex);
+            Contact toAdd = ContactsToUse.ElementAt<Contact>(itemIndex);
 
             myGroup.contactList.Add(toAdd);
             groupVM.addGroup(myGroup);
-            initalizeContacts();
-            
-            Task t = groupVM.serailizeGroups();
-            await t;
 
+            Task t2 = groupVM.serailizeGroups();
+            await t2;
+
+            Frame.Navigate(typeof(GroupDetail), myGroup);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
         }
-
 
     }   
 }

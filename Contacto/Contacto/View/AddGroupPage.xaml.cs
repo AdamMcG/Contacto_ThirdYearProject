@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -39,11 +40,13 @@ namespace Contacto.View
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.DataContext = defaultview;
-            defaultview.fillcontactList();
-            defaultview.initaliseGroup();
+            Task t =  defaultview.fillcontactList();
+            await t;
+            t = defaultview.initaliseGroup();
+            await t;
         }
 
 
@@ -55,7 +58,7 @@ namespace Contacto.View
             Frame.Navigate(typeof(MainPage));
         }
         
-        private void AddGroup(object sender, RoutedEventArgs e)
+        private async void AddGroup(object sender, RoutedEventArgs e)
         {
 
             defaultview.groupName = myTextBox.Text;
@@ -69,18 +72,11 @@ namespace Contacto.View
                 defaultview.localContacts.Add((Contact)temp);
             }
             defaultview.addGroup();
-            defaultview.serailizeGroups();
-
-                // defaultview.groupName = myTextBox.Text;
-                // List<int> testing = new List<int>();
-                //int a = ToAddToGroups.SelectedIndex;
-                //testing.Add(a);
-                // for (int i = 0; i < testing.Count; i++)
-                // {
-                //     defaultview.localContacts.Add(defaultview.globalContacts.ElementAt(testing.ElementAt(i)));
-                // }
-                //defaultview.addGroup();
-           Frame.Navigate(typeof(MainPage));
+            Task t = defaultview.serailizeGroups();
+            await t;
+               
+            
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

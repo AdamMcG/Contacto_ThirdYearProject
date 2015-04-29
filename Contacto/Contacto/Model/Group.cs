@@ -18,15 +18,21 @@ namespace Contacto.Model
     public class Group: INotifyPropertyChanged
     {
         public Group(){
-            muGroup = 2;
-            myGroupName = "Sheniqua";
+
+            string ID = Guid.NewGuid().ToString();
+
+            _uniqueGroupID = ID;
+
         }
 
-        private int uniqueGroupID;
-        public int muGroup{ 
-        get {return uniqueGroupID;}
-        set { uniqueGroupID = value; }
+
+        private string _uniqueGroupID;
+        public string uniqueGroupID
+        {
+            get { return _uniqueGroupID; }
+            set { _uniqueGroupID = value; }
         }
+
         private string groupName;
         public string myGroupName{
         get { return groupName; }

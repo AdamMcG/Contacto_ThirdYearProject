@@ -176,7 +176,7 @@ namespace Contacto.ViewModel
         }
 
         //This is serialising a list and adding to the json file. 
-        private async void SerialiseNewList(){
+        private async Task SerialiseNewList(){
             string name = "contacts.json";
             ObservableCollection<Contact> list = listOfContacts;
             // Changed to serialze the List
@@ -196,8 +196,8 @@ namespace Contacto.ViewModel
             }
         }
 
-        public void createNewContactList()
-        { SerialiseNewList(); }
+        public async Task createNewContactList()
+        { await SerialiseNewList(); }
 
 
 

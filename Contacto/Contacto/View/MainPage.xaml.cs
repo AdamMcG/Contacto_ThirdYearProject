@@ -625,7 +625,7 @@ namespace Contacto
 
                 messageDialog.Commands.Add(new UICommand("Ok", new UICommandInvokedHandler(CommandHandlers)));
 
-               messageDialog.ShowAsync();
+                messageDialog.ShowAsync();
             }
         }
 

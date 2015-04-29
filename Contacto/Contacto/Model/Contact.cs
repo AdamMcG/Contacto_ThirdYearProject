@@ -71,7 +71,7 @@ namespace Contacto.Model
         }
 
     
-
+        
         public class DynamicFields : INotifyPropertyChanged
         {
             public DynamicFields()
@@ -119,33 +119,46 @@ namespace Contacto.Model
         public ObservableCollection<DynamicFields> dynamicProperty
         {
             get { return this.Dynamic; }
+            set { this.Dynamic = value; }
         }
 
         public void deleteDuplicates()
         {
-            for (int i = 0; i < Dynamic.Count; i++)
+            try
             {
-                for (int j = 1; j < Dynamic.Count; j++)
-                {
-                    if (Dynamic.ElementAt(i).muKey == Dynamic.ElementAt(j).muKey && j != i)
-                        Dynamic.RemoveAt(j);
+               for (int i = 0; i < Dynamic.Count; i++)
+               {
+                   for (int j = 0; j < Dynamic.Count; j++)
+                   {
+                       if (Dynamic.ElementAt(i).muKey == Dynamic.ElementAt(j).muKey && j != i)
+                           Dynamic.RemoveAt(j);
+                    }
                 }
+            }catch(Exception ex){
+                ex.ToString();
+            
             }
         }
 
         public void fillDynamicFields()
         {
 
-            for (int i = 0; i < customFields.Count; i++)
-            {
-                DynamicFields myfields = new DynamicFields();
-                myfields.muKey = muCustomFields.ElementAt(i).Key;
-                myfields.muValue = muCustomFields.ElementAt(i).Value;
+            Dynamic.Clear();
 
-                
-                Dynamic.Add(myfields);
+            foreach (var temp in customFields)
+            {
+
+                DynamicFields myFields = new DynamicFields();
+
+                myFields.muKey = temp.Key;
+                myFields.muValue = temp.Value;
+
+                Dynamic.Add(myFields);
                 NotifyPropertyChanged("Dynamic");
+            
             }
+
+
 
         }
 

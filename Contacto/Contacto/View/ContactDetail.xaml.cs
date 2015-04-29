@@ -40,9 +40,12 @@ namespace Contacto.View
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            defaultViewModel.pullFromJson();
+            Task t = defaultViewModel.pullFromJson();
+            await t;
+
+
             myContact = (Contact)e.Parameter;
             myContact.deleteDuplicates();
 

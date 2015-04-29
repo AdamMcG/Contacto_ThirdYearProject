@@ -16,9 +16,9 @@ namespace Contacto.ViewModel
     class GroupViewModel: INotifyPropertyChanged
     {
         private ObservableCollection<Group> Group = new ObservableCollection<Group>();
-        public ObservableCollection<Group> myGroup{ get { return Group; } }
+        public ObservableCollection<Group> myGroup { get { return Group; } set { Group = value; } }
         private ObservableCollection<Contact> globalListOfContacts = new ObservableCollection<Contact>();
-        public ObservableCollection<Contact> globalContacts{ get { return globalListOfContacts; } }
+        public ObservableCollection<Contact> globalContacts { get { return globalListOfContacts; } set { globalListOfContacts = value; } }
         private ObservableCollection<Contact> localListOfContactsForGroups = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> localContacts
         { get { return localListOfContactsForGroups; }
@@ -53,8 +53,22 @@ namespace Contacto.ViewModel
 
        public void removeGroup(Group toRemove)
        {
-
            myGroup.Remove(toRemove);
+       }
+
+
+       public void removeGroup(string idToRemove)
+       {
+
+           for (int i = 0; i < myGroup.Count; i++)
+           {
+               if (myGroup.ElementAt(i).uniqueGroupID == idToRemove)
+               {
+                   myGroup.RemoveAt(i);
+
+               }
+
+           }
 
        }
 

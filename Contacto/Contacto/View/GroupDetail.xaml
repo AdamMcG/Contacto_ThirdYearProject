@@ -28,7 +28,7 @@
 
 
                 <AppBarButton.Flyout >
-                    <ListPickerFlyout x:Name="AddContactList" ItemsPicked="AddContactList_ItemsPicked" />
+                    <ListPickerFlyout x:Name="AddContactList" ItemsPicked="AddContactList_ItemsPicked"/>
                 </AppBarButton.Flyout>
 
             </AppBarButton>

@@ -256,7 +256,6 @@ namespace Contacto
                         newContact.muCustomFields.Add(s, t);
                 }
 
-                newContact.fillDynamicFields();
 
                 if (newContact.muCustomFields.Keys.Contains<string>("Email Address"))
                 {
@@ -320,11 +319,13 @@ namespace Contacto
                 }
 
 
+               newContact.fillDynamicFields();
+
 
                AddViewModel.addtocontactlist(newContact);
-               AddViewModel.createNewContactList();
+               Task t2 = AddViewModel.createNewContactList();
+               await t2;
 
-               await Task.Delay(200);
                Frame.Navigate(typeof(MainPage));
             }
             catch (Exception)
